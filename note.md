@@ -101,4 +101,22 @@ https://learn.microsoft.com/zh-cn/azure/app-service/configure-common?tabs=portal
 
 ## Path mapping
 
+### 将 URL 路径映射到目录
+
 默认情况下，应用服务从应用代码的根目录启动应用。 但某些 Web 框架不在根目录下启动。 例如，Laravel 在 public 子目录中启动。 例如，可在 http://contoso.com/public 中访问此类应用，但你通常需要改为将 http://contoso.com 定向到 public 目录。 如果应用的启动文件位于其他文件夹中，或者存储库包含多个应用程序，你可以编辑或添加虚拟应用程序和目录。
+
+### 配置处理程序映射
+
+对于 Windows 应用，可以自定义 IIS 处理程序映射和虚拟应用程序与目录。 使用处理程序映射可以添加自定义脚本处理程序用于处理特定文件扩展名的请求。
+
+# inbound and outbound IP address
+
+https://learn.microsoft.com/zh-cn/azure/app-service/overview-inbound-outbound-ips
+
+在 Azure App Service 中，入站和出站 IP 地址与你的应用程序与外部通信时使用的 IP 地址相关。这些 IP 地址与特定的 App Service 实例关联，而且可能会因为应用服务计划（App Service Plan）的规模和配置而变化。
+
+## 入站 IP 地址
+概念： 入站 IP 地址是指外部请求到达你的应用程序时使用的 IP 地址。这主要与应用服务的 HTTP 请求相关。
+
+## 出站 IP 地址
+概念： 出站 IP 地址是指你的应用程序用于发起对外部服务的网络请求时使用的 IP 地址。
