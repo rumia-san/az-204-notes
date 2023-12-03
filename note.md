@@ -120,3 +120,23 @@ https://learn.microsoft.com/zh-cn/azure/app-service/overview-inbound-outbound-ip
 
 ## 出站 IP 地址
 概念： 出站 IP 地址是指你的应用程序用于发起对外部服务的网络请求时使用的 IP 地址。
+
+# Scale
+
+## autoscale
+
+https://learn.microsoft.com/zh-cn/azure/azure-monitor/autoscale/autoscale-get-started?toc=%2Fazure%2Fapp-service%2Ftoc.json
+
+Azure 应用服务计划（App Service Plan）提供了自动缩放的功能，允许根据应用程序的负载和需求动态调整应用服务的规模。以下是配置 App Service Plan 自动缩放的一般步骤：
+
+选择应用服务计划： 进入 Azure 门户，导航到你的 App Service 计划。在左侧菜单中选择“缩放”。
+
+配置缩放规则： 在缩放选项卡中，你可以配置自动缩放规则。主要的配置包括：
+
+指标（Metric）： 选择一个或多个性能指标，例如 CPU 使用率、内存使用率、请求数等，作为触发自动缩放的依据。
+操作符和阈值： 定义触发缩放的条件。例如，你可以设置 CPU 使用率大于某个阈值时触发扩展。
+缩放方向： 选择“扩展”（Scale Out）或“缩减”（Scale In）。
+实例计数： 指定在触发缩放时应添加或删除的实例数。
+高级配置（可选）： 在高级配置中，你可以进一步定义缩放的行为，例如冷却期间（Cooldown），即在上一次缩放操作完成后的等待时间，以避免频繁的缩放。
+
+保存并应用： 配置完缩放规则后，记得点击“保存”并在需要时点击“应用”以使更改生效。
