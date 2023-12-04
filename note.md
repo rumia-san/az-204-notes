@@ -341,3 +341,40 @@ https://learn.microsoft.com/zh-cn/azure/storage/common/storage-redundancy#locall
 * Geo-zone-redundant storage
 地域区域冗余存储 (GZRS) 将冗余跨可用性区域提供的高可用性与异地复制提供的区域中断保护相结合。 将跨主要区域中的三个 Azure 可用性区域复制 GZRS 存储帐户中的数据，并将其复制到次要地理区域，以防御区域灾难。 Microsoft 建议对需要最大程度的一致性、耐用性和可用性、卓越性能和灾难恢复复原能力的应用程序使用 GZRS。
 * 启用 RA-GRS 或 RA-GZRS 后，次要区域可用于读取访问，因此你可以预先测试应用程序，以确保在发生服务中断时可以从次要区域正确读取数据。 
+
+## access tier
+
+https://learn.microsoft.com/zh-cn/azure/storage/blobs/access-tiers-online-manage?tabs=azure-portal
+
+### Hot Access Tier（热访问层）：
+
+用途： 适用于频繁访问的数据，如经常读取或写入的数据。
+成本： Hot Access Tier 的存储成本较高，但读取和写入操作的费用较低。
+访问成本： 适用于频繁的读取和写入操作。
+
+### Cool Access Tier（冷访问层）：
+
+用途： 适用于较少访问的数据，需要存储在 Azure Blob 存储中，但访问不频繁。
+成本： Cool Access Tier 的存储成本相对较低，但读取和写入操作的费用较高。
+访问成本： 适用于不经常访问但需要在 Azure Blob 存储中保留的数据。
+
+### Archive Access Tier（归档访问层）：
+
+用途： 适用于极少被访问的数据，需要以极低的存储成本长期保留的数据。
+成本： Archive Access Tier 提供最低的存储成本，但读取操作的费用较高。
+访问成本： 适用于存储需求很低、几乎不需要读取的数据。
+
+## lifecycle management
+
+https://learn.microsoft.com/zh-cn/azure/storage/blobs/lifecycle-management-policy-configure?tabs=azure-portal
+
+Azure 存储生命周期管理可提供基于规则的策略，用于将 blob 数据转移到最适合的访问层，或在数据生命周期结束时使数据过期。 生命周期策略作用于基础 blob，并且可以选择作用于 blob 的版本还是快照。 有关生命周期管理策略的详细信息，请参阅通过自动管理数据生命周期来优化成本。
+
+生命周期管理策略由一个或多个规则组成，这些规则定义了一组需根据要满足的条件执行的操作。 对于基础 blob，可以选择检查以下条件之一：
+
+自创建 blob 以来经过的天数。
+自上次修改 blob 以来经过的天数。
+自上次访问 blob 以来经过的天数。 若要在操作中使用此条件，应当先启用上次访问时间跟踪（可选）。
+当所选条件为 true 时，管理策略将执行指定操作。 例如，如果已经定义一项操作（将 30 天内未经修改的 blob 从热层移至冷层），则生命周期管理策略将会在自上次对该 blob 执行写入操作过去 30 天后移动此 blob。
+
+对于 blob 快照或版本，所要检查的条件是自创建快照或版本以来经过的天数。
