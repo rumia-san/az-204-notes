@@ -302,3 +302,42 @@ Durable Functions 原生支持此模式，可以简化甚至消除为了与长�
 使用普通无状态函数尝试实现此模式的棘手之处在于，并发控制会成为一项巨大的挑战。 你不仅需要考虑到多个线程会同时修改相同的数据，而还要考虑如何确保聚合器每次仅在一个 VM 上运行。
 
 可以使用持久实体轻松地将此模式实现为单一函数。
+
+# Blob Storage
+
+https://learn.microsoft.com/zh-cn/azure/storage/blobs/storage-blobs-introduction
+
+Azure Blob 存储是 Microsoft 提供的适用于云的对象存储解决方案。 Blob 存储最适合存储巨量的非结构化数据。 非结构化数据是不遵循特定数据模型或定义的数据（如文本或二进制数据）。
+
+## 层次
+
+存储帐户
+存储帐户中的容器
+容器中的 Blob
+
+存储帐户在 Azure 中为数据提供唯一的命名空间。 存储在 Azure 存储中的每个对象都有一个地址，其中包含唯一的帐户名称。 帐户名称与 Blob 存储终结点的组合构成了存储帐户中对象的基址。
+
+例如，如果存储帐户名为 mystorageaccount，则 Blob 存储的默认终结点为：
+http://mystorageaccount.blob.core.windows.net
+
+容器对一组 blob 进行组织，类似于文件系统中的目录。 一个存储帐户可以包含无限数量的容器，一个容器可以存储无限数量的 Blob。
+
+## Blob 类型
+
+Azure 存储支持三种类型的 Blob：
+
+* 块 Blob 存储文本和二进制数据。块 Blob 由可以分别管理的数据块构成。 块 blob 最多可存储约 190.7 TiB。
+* 与块 Blob 一样，追加 Blob 也由块构成，但针对追加操作进行了优化。 追加 Blob 非常适用于诸如记录来自虚拟机的数据之类的场景。
+* 页 Blob 用于存储最大 8 TiB 的随机访问文件。 页 blob 存储虚拟硬盘 (VHD) 文件并作为 Azure 虚拟机的磁盘。 有关页 Blob 的更多信息，请参阅 Azure 页 Blob 概述
+
+## 冗余 Redundancy
+
+https://learn.microsoft.com/zh-cn/azure/storage/common/storage-redundancy#locally-redundant-storage
+
+* 本地冗余存储 (LRS) 在主要区域中的单个物理位置同步复制数据三次。 LRS 是成本最低的复制选项，但不建议对需要高可用性或持续性的应用程序使用此选项。
+* 区域冗余存储 (ZRS) 跨主要区域中的三个 Azure 可用性区域同步复制数据。 对于需要高可用性的应用程序，Microsoft 建议在主要区域中使用 ZRS，并复制到次要区域。
+* Geo-redundant storage
+异地冗余存储 (GRS) 使用 LRS 在主要区域中的单个物理位置内同步复制数据三次。 然后，它将数据异步复制到距离主要区域数百英里以外的次要区域中的单个物理位置。 GRS 在一年中提供至少 99.99999999999999%（16 个 9）的存储资源持久性。
+* Geo-zone-redundant storage
+地域区域冗余存储 (GZRS) 将冗余跨可用性区域提供的高可用性与异地复制提供的区域中断保护相结合。 将跨主要区域中的三个 Azure 可用性区域复制 GZRS 存储帐户中的数据，并将其复制到次要地理区域，以防御区域灾难。 Microsoft 建议对需要最大程度的一致性、耐用性和可用性、卓越性能和灾难恢复复原能力的应用程序使用 GZRS。
+* 启用 RA-GRS 或 RA-GZRS 后，次要区域可用于读取访问，因此你可以预先测试应用程序，以确保在发生服务中断时可以从次要区域正确读取数据。 
