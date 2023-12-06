@@ -454,3 +454,24 @@ https://learn.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview
 
 managed
 unmanaged
+
+# Resource Manager
+
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview
+
+Azure Resource Manager is the deployment and management service for Azure. It provides a management layer that enables you to create, update, and delete resources in your Azure account. You use management features, like access control, locks, and tags, to secure and organize your resources after deployment.
+
+
+Azure Resource Manager（ARM）是 Microsoft Azure 中用于管理和组织云资源的托管服务。ARM 提供了一种统一的方式来部署、管理和监视 Azure 资源，使用户能够以一致的方式定义和部署复杂的云解决方案。
+
+在 AWS 中，与 Azure Resource Manager（ARM）相对应的服务是 AWS CloudFormation。这两个服务都是云服务提供商为了简化和自动化基础设施的定义、部署和管理而提供的工具。
+
+## Terminology
+If you're new to Azure Resource Manager, there are some terms you might not be familiar with.
+
+* resource - 可通过 Azure 获取的可管理项。 资源的示例包括虚拟机、存储帐户、Web 应用、数据库和虚拟网络。 资源组、订阅、管理组和标记也是资源的示例。
+* resource group - 一个容器，用于保存 Azure 解决方案的相关资源。 资源组包括你想要作为一个组进行管理的那些资源。 根据最适合组织的情况来决定哪些资源属于哪个资源组。 
+* resource provider - 提供 Azure 资源的服务。 例如，Microsoft.Compute 就是一个常见的资源提供程序，它提供虚拟机资源。 Microsoft.Storage 也是一个常见的资源提供程序。
+* declarative syntax -  一种语法，允许声明“以下是我想要创建的项目”，而不需要编写一系列编程命令来进行创建。 ARM 模板和 Bicep 文件是声明性语法的示例。 在这些文件中，可以定义要部署到 Azure 的基础结构的属性。
+* ARM template - 一个 JavaScript 对象表示法 (JSON) 文件，用于定义一个或多个要部署到资源组、订阅、管理组或租户的资源。 使用模板能够以一致方式反复部署资源。 请参阅模板部署概述。
+* Bicep file - 以声明方式部署 Azure 资源的文件。 Bicep 是一种语言，旨在为 Azure 中的基础结构即代码解决方案提供最佳创作体验。 请参阅 Bicep 概述。
