@@ -443,3 +443,14 @@ Cosmos DB 将数据分布到多个物理分区中，以实现水平扩展。
 Cosmos DB 提供了能够在多个分区上执行并行查询的能力。
 分区键的选择对于查询性能至关重要。合理选择分区键可以最大程度地减少跨分区查询的需求。
 通过合理选择分区键，你可以实现数据的均匀分布，避免热点问题，并实现 Cosmos DB 的水平扩展能力。分区键的选择应该根据你的应用程序的查询模式和数据访问模式来进行优化，以确保性能最优。需要注意的是，在一次应用程序的生命周期中，分区键的更改是不容易的，因此在设计时需要谨慎考虑。
+
+# Virtual machine
+
+https://learn.microsoft.com/en-us/azure/virtual-machines/overview
+
+## disk
+
+https://learn.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview
+
+managed
+unmanaged
