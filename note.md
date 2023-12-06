@@ -378,3 +378,41 @@ Azure 存储生命周期管理可提供基于规则的策略，用于将 blob �
 当所选条件为 true 时，管理策略将执行指定操作。 例如，如果已经定义一项操作（将 30 天内未经修改的 blob 从热层移至冷层），则生命周期管理策略将会在自上次对该 blob 执行写入操作过去 30 天后移动此 blob。
 
 对于 blob 快照或版本，所要检查的条件是自创建快照或版本以来经过的天数。
+
+# Cosmos DB
+
+Azure Cosmos DB 是一个完全托管的 NoSQL 和关系数据库，适用于新式应用开发，包括 AI、数字商业、物联网、预订管理和其他类型的解决方案的开发。 Azure Cosmos DB 提供个位数的毫秒响应时间、自动和即时可伸缩性，并可在任何规模下保证速度。 SLA 支持的可用性和企业级安全性可确保业务连续性。
+
+由于以下原因，应用开发速度更快、更高效：
+
+* 在全球任何位置提供统包式多区域数据分布
+* 开源 API
+* 适用于常用语言的 SDK。
+* 用于支持检索扩充生成的 AI 数据库功能，如本机矢量搜索或与 Azure AI 服务的无缝集成
+
+作为一项完全托管的服务，Azure Cosmos DB 使用自动管理、更新和修补，使你无需进行数据库管理。 它还通过经济高效的无服务器和自动缩放选项处理容量管理，这些选项可响应应用程序的需求，使容量与需求相匹配。
+
+## Consistency levels
+
+https://learn.microsoft.com/en-us/azure/cosmos-db/consistency-levels
+
+目前市场上大多数商业用途的分布式 NoSQL 数据库只能提供非常一致性和最终一致性。 Azure Cosmos DB 提供五个妥善定义的级别。 按最强到最弱的顺序，级别分别为：
+
+* Strong
+* Bounded staleness
+* Session
+* Consistent prefix
+* Eventual
+
+越往下，越高可用，但是一致性弱
+越往上，一致性越强
+
+## API
+
+https://learn.microsoft.com/en-us/azure/cosmos-db/choose-api
+
+Azure Cosmos DB offers multiple database APIs, which include NoSQL, MongoDB, PostgreSQL, Cassandra, Gremlin, and Table.
+
+## Request Units
+
+对一个 1 KB 的项目执行点读取（按 ID 和分区键值提取单个项目）的费用即为 1 个请求单位（或 1 RU）。 以类似方式为其他所有数据库操作分配 RU 成本。 不管使用哪个 API 来与 Azure Cosmos DB 容器交互，RU 都会计量使用该 API 的实际成本。 无论数据库操作是写入、点读取还是查询，都始终以 RU 来计量成本。
