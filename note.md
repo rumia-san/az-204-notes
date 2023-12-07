@@ -475,3 +475,48 @@ If you're new to Azure Resource Manager, there are some terms you might not be f
 * declarative syntax -  一种语法，允许声明“以下是我想要创建的项目”，而不需要编写一系列编程命令来进行创建。 ARM 模板和 Bicep 文件是声明性语法的示例。 在这些文件中，可以定义要部署到 Azure 的基础结构的属性。
 * ARM template - 一个 JavaScript 对象表示法 (JSON) 文件，用于定义一个或多个要部署到资源组、订阅、管理组或租户的资源。 使用模板能够以一致方式反复部署资源。 请参阅模板部署概述。
 * Bicep file - 以声明方式部署 Azure 资源的文件。 Bicep 是一种语言，旨在为 Azure 中的基础结构即代码解决方案提供最佳创作体验。 请参阅 Bicep 概述。
+
+# Azure Container Registry (ACR)
+
+https://learn.microsoft.com/en-us/azure/container-registry/
+
+Azure Container Registry allows you to build, store, and manage container images and artifacts in a private registry for all types of container deployments.
+
+# Azure Container Instances (ACI)
+
+https://learn.microsoft.com/en-us/azure/container-instances/
+
+## Container groups
+
+https://learn.microsoft.com/zh-cn/azure/container-instances/container-instances-container-groups?source=recommendations
+
+The top-level resource in Azure Container Instances is the container group. 
+容器组是安排在同一主机上的容器集合。 容器组中的容器共享生命周期、资源、本地网络和存储卷。 它与 Kubernetes 中的 Pod 这一概念相似。
+
+# Identity Platform
+
+https://learn.microsoft.com/zh-cn/entra/identity-platform/v2-overview
+
+Azure Identity Platform 是 Azure 提供的一套身份验证和授权服务，用于在云中构建安全的身份验证和访问控制解决方案。它提供了各种身份验证和身份管理工具，以满足开发者和组织的安全需求。
+
+Azure Active Directory（Azure AD）： Azure AD 是 Azure 身份验证和授权服务的核心。它是一种云身份服务，用于管理和保护身份信息，支持多租户、单租户和混合部署模式。
+
+ADAL 是 Azure Active Directory Authentication Library 的缩写。它是一组用于在应用程序中实现身份验证的库，专门设计用于与 Azure Active Directory (Azure AD) 进行集成。ADAL 提供了一些客户端库，开发者可以在各种平台和编程语言中使用它们，以便在应用程序中进行身份验证和获取访问令牌。
+
+## Register an application
+
+"Register an application" 是指在 Azure Active Directory（Azure AD）中注册一个应用程序。这个过程涉及到创建一个应用程序的标识，以便它可以与 Azure AD 进行集成并获取必要的身份验证和授权凭证。在 Azure AD 中注册应用程序是连接应用程序与 Azure AD 并获取访问资源的关键步骤。
+
+https://learn.microsoft.com/en-us/entra/identity-platform/application-model
+
+要使标识提供者知道某个用户有权访问特定的应用，必须同时将该用户和应用程序注册到标识提供者。 将应用程序注册到 Microsoft Entra ID 时，需要提供应用程序的标识配置，使其能够与 Microsoft 标识平台集成。 
+
+## Service Principals
+
+在 AWS 中，与 Azure 中的 Service Principals 相对应的概念主要是 IAM 用户和 IAM 角色。
+
+https://learn.microsoft.com/zh-cn/entra/identity-platform/app-objects-and-service-principals?tabs=browser
+
+在 Azure Active Directory（Azure AD）中，Service Principal 是一种安全标识，用于在非交互式的身份验证场景中代表一个应用程序。它是应用程序（或服务）在 Azure AD 中的身份，允许应用程序与 Azure 资源进行身份验证和授权，而无需用户的直接参与。
+
+注册/更新应用程序时，会为该租户同时创建/更新应用程序对象和相应的服务主体对象。 应用程序对象可全局（在关联的应用程序已获授予访问权限的所有租户中）定义应用程序的标识配置，并可作为模板来派生出其对应的服务主体对象，以便在运行时于本地（在特定租户）使用。
