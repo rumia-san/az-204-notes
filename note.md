@@ -520,3 +520,37 @@ https://learn.microsoft.com/zh-cn/entra/identity-platform/app-objects-and-servic
 在 Azure Active Directory（Azure AD）中，Service Principal 是一种安全标识，用于在非交互式的身份验证场景中代表一个应用程序。它是应用程序（或服务）在 Azure AD 中的身份，允许应用程序与 Azure 资源进行身份验证和授权，而无需用户的直接参与。
 
 注册/更新应用程序时，会为该租户同时创建/更新应用程序对象和相应的服务主体对象。 应用程序对象可全局（在关联的应用程序已获授予访问权限的所有租户中）定义应用程序的标识配置，并可作为模板来派生出其对应的服务主体对象，以便在运行时于本地（在特定租户）使用。
+
+# Microsoft Graph
+
+Microsoft Graph 是一组 Microsoft 365 服务的 API 统一终结点，使开发者能够以一种一致的方式访问和与 Microsoft 365 中的多种服务和数据进行交互。Microsoft Graph 提供了对用户、组织、邮件、日历、文件、任务等资源的访问，以及对许多其他 Microsoft 365 服务的支持。
+
+# Azure Key Vault
+
+Azure Key Vault 是 Microsoft Azure 中的一项托管服务，用于安全地存储和管理敏感信息，如密码、密钥、证书等。Azure Key Vault 提供了一种安全的方式，使应用程序和服务能够访问这些敏感数据，而无需直接存储它们。这有助于提高安全性，降低对敏感信息的滥用和泄露的风险。
+
+# Azure API Management
+
+Azure API Management 是 Microsoft Azure 提供的一项托管服务，用于简化和集中管理 API 的创建、发布、维护和保护。通过 API Management，开发者可以更轻松地构建、部署和监视 API，并确保其可用性、安全性和可扩展性。
+
+以下是 Azure API Management 的一些关键特点和功能：
+
+API 的创建和设计： 提供 API 的设计工具，可以定义 API 的结构、请求和响应格式，并进行 API 的版本控制。
+
+API 的发布和管理： 管理 API 的生命周期，包括创建、发布、版本控制和废弃。可以将多个版本的 API 同时发布，并为每个 API 提供详细的元数据。
+
+安全性和授权： 提供对 API 的访问控制和身份验证功能。支持 OAuth、JWT 等标准身份验证和授权协议。可以定义 API 的访问策略，确保只有授权的应用程序和用户能够访问 API。
+
+性能和可伸缩性： 提供缓存、限流和负载均衡等性能和可伸缩性功能，确保 API 可以处理高流量和大规模的请求。
+
+分析和监视： 提供实时监视、分析和报告功能，以了解 API 的使用情况、性能和问题。可以集成 Azure Monitor、Application Insights 等工具。
+
+开发者门户： 提供开发者门户，使开发者能够注册、了解 API、获取访问令牌、查看文档并进行测试。
+
+API 转换和集成： 支持在 API Management 中执行请求和响应的转换，包括映射、重写和转码。可以与 Azure Functions、Logic Apps 等服务集成。
+
+API 版本控制： 提供版本控制功能，允许同时支持多个 API 版本，确保对现有客户端的向后兼容性。
+
+开放式标准支持： 支持开放 API 标准，如 OpenAPI (Swagger) 和 WSDL，以便更容易集成和交互。
+
+Azure API Management 是构建和管理现代应用程序中不可或缺的一部分，特别是在微服务架构、云原生开发和跨多个平台的 API 集成中。通过使用 API Management，组织可以更好地控制和优化其 API 生态系统。
