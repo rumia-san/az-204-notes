@@ -554,3 +554,96 @@ API 版本控制： 提供版本控制功能，允许同时支持多个 API 版�
 开放式标准支持： 支持开放 API 标准，如 OpenAPI (Swagger) 和 WSDL，以便更容易集成和交互。
 
 Azure API Management 是构建和管理现代应用程序中不可或缺的一部分，特别是在微服务架构、云原生开发和跨多个平台的 API 集成中。通过使用 API Management，组织可以更好地控制和优化其 API 生态系统。
+
+# Azure Event Grid
+
+在 AWS 中，与 Azure Event Grid 相对应的服务是 Amazon EventBridge
+
+https://learn.microsoft.com/en-us/azure/event-grid/overview
+
+Azure Event Grid 是 Azure 云平台上的一项事件处理服务，用于简化和统一事件处理的方式。它提供了一种可扩展的、基于发布/订阅模型的事件系统，允许各种 Azure 服务、第三方服务以及自定义应用程序在事件发生时发布、处理和订阅事件。
+
+## Event type filtering
+
+https://learn.microsoft.com/en-us/azure/event-grid/namespace-event-filtering
+
+默认情况下，事件源的所有事件类型都将发送到终结点。 可以决定仅将某些事件类型发送到终结点。 例如，可以收到有关资源更新的通知，但不会收到删除等其他操作的通知。 在这种情况下，按 Microsoft.Resources.ResourceWriteSuccess 事件类型进行筛选。 提供包含事件类型的数组或指定 All 以获取事件源的所有事件类型。
+
+## event domain
+
+https://learn.microsoft.com/zh-cn/azure/event-grid/event-domains?tabs=event-grid-event-schema
+
+# Azure Event Hubs
+
+在 AWS 中，与 Azure Event Hubs 相对应的服务是 Amazon Kinesis。
+
+https://learn.microsoft.com/zh-cn/azure/event-hubs/event-hubs-features
+
+Azure Event Hubs 是一个大规模、实时的数据流式传输平台，用于接收和处理大量的事件数据。它是 Azure 中的一项托管服务，特别适用于构建大规模、高吞吐量的实时事件处理应用程序。
+
+## partition
+
+在 Azure Event Hubs 中，"分区"（Partition）是一个关键的概念。分区是 Event Hubs 数据流的基本单位，用于实现水平扩展和提高并发性。每个 Event Hub 都可以有多个分区，每个分区是一个独立的、有序的事件流。
+
+## capture
+
+使用事件中心捕获，可以自动捕获事件中心的流式处理数据，并将其保存到所选 Blob 存储帐户或 Azure Data Lake 存储帐户。 可以从 Azure 门户启用捕获，并指定大小上限和时间范围以执行捕获。 使用事件中心捕获，用户可以指定自己的 Azure Blob 存储帐户和容器或 Azure Data Lake 存储帐户（其中之一用于存储捕获的数据）。 捕获的数据以 Apache Avro 格式编写。
+
+# Azure Service Bus
+
+Azure Service Bus 是 Azure 提供的一项云原生的消息传递服务，用于在分布式应用程序中实现可靠的异步通信。它支持多种消息传递模式，包括队列（Queue）和主题（Topic），以便在应用程序、服务和系统之间传递消息。
+
+在 AWS 中，与 Azure Service Bus 相对应的服务是 Amazon Simple Queue Service (SQS) 和 Amazon Simple Notification Service (SNS)。
+
+## 对比
+
+Azure Event Grid 和 Azure Service Bus 是两个不同的事件处理服务，它们在设计和使用上有一些显著的区别。以下是它们的主要区别：
+
+发布/订阅模型 vs 点对点通信：
+
+Azure Event Grid： 提供了发布/订阅模型，其中事件源可以发布事件，而订阅者可以选择订阅感兴趣的事件类型。支持广泛的 Azure 服务、第三方服务和自定义应用程序作为事件源。
+Azure Service Bus： 包括队列和主题两种模型，队列使用点对点通信模型，其中每个消息只能由一个接收者处理。主题使用发布/订阅模型，支持多个订阅者独立订阅消息。
+事件类型和结构：
+
+Azure Event Grid： 非常适用于处理事件类型相对简单的场景，例如资源变更、系统状态更改等。事件可以是任意 JSON 对象。
+Azure Service Bus： 更适合处理结构化的消息和复杂的业务逻辑，消息可以是 XML、JSON 或二进制格式。
+事件处理方式：
+
+Azure Event Grid： 事件处理是异步的，支持 WebHook、Azure Functions、逻辑应用等方式，以响应事件。
+Azure Service Bus： 既支持同步接收消息，也支持异步消息处理，例如通过消息处理函数（Message Handler）。
+目标服务：
+
+Azure Event Grid： 主要用于云原生场景，支持广泛的 Azure 服务集成，也可以与自定义应用程序和第三方服务集成。
+Azure Service Bus： 适用于各种企业集成和应用程序通信场景，可与不同技术栈的应用程序进行集成。
+延迟和保留期：
+
+Azure Event Grid： 提供低延迟的事件传递，事件没有显式的保留期。
+Azure Service Bus： 提供较低的延迟，并且支持设置消息的保留期，消息在队列中保留的时间有限。
+目标环境：
+
+Azure Event Grid： 适用于构建现代、事件驱动的应用程序和微服务架构。
+Azure Service Bus： 适用于传统企业集成、消息队列和可靠通信的场景。
+选择使用 Azure Event Grid 还是 Azure Service Bus 取决于你的具体需求和使用场景。如果你需要处理大量简单事件，构建松耦合的系统，可以考虑使用 Azure Event Grid。如果你需要更多的消息传递模式和结构化的消息处理，可以选择 Azure Service Bus。
+
+# Azure Queue Storage
+
+https://learn.microsoft.com/zh-cn/azure/storage/queues/storage-queues-introduction
+
+Azure 队列存储是一项可存储大量消息的服务。 可以使用 HTTP 或 HTTPS 通过经验证的调用从世界任何位置访问消息。 队列消息大小最大可为 64 KB。 一个队列可以包含数百万条消息，直至达到存储帐户的总容量限值。 队列通常用于创建要异步处理的积压工作 (backlog)，就像 Web-Queue-Worker 体系结构样式中的那样。
+
+在 AWS 中，与 Azure Queue Storage 相对应的服务是 Amazon Simple Queue Service (SQS)。Amazon SQS 是一项托管的消息队列服务，允许分布式组件和微服务之间进行可靠的、异步的消息传递。
+
+URL 格式：可使用以下 URL 格式对队列进行寻址：
+
+https://<storage account>.queue.core.windows.net/<queue>
+
+可使用以下 URL 访问示意图中的某个队列：
+
+https://myaccount.queue.core.windows.net/images-to-download
+
+存储帐户： 对 Azure 存储进行的所有访问都要通过存储帐户完成。 有关存储帐户容量的信息，请参阅标准存储帐户的可伸缩性和性能目标。
+
+队列：一个队列包含一组消息。 队列名称必须全部小写。 有关命名队列的信息，请参阅命名队列和元数据。
+
+消息： 一条消息（无论哪种格式）的最大大小为 64 KB。 在 2017-07-29 以前的版本中，允许的最大生存时间为 7 天。 在 2017-07-29 或更高版本中，最大生存时间可以是任何正数，或者是 -1（表示消息不会过期）。 如果省略此参数，则默认的生存时间为 7 天。
+
