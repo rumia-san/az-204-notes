@@ -1996,4 +1996,288 @@ The one invalid input does not cause the function to fail, therefore Completed.
 
 ---
 
+81
+
+You are developing an Azure Durable Function to manage an online ordering process.
+The process must call an external API to gather product discount information.
+You need to implement the Azure Durable Function.
+Which Azure Durable Function types should you use? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Orchestrator
+	B. Entity
+	C. Client
+	D. Activity
+
+A and D:
+https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-types-features-overview#activity-functions
+Activity functions are frequently used to make network calls or run CPU intensive operations. An activity function can also return data back to the orchestrator function.
+
+你需要使用 Azure Durable Function 来实现在线订购流程的管理，其中包括调用外部 API 获取产品折扣信息。在这种情况下，你应该使用以下 Azure Durable Function 类型：
+
+A. Orchestrator（协调器）：协调器定义工作流的控制流程，并可以调用其他函数。
+
+D. Activity（活动）：活动是工作流中执行实际工作的函数，例如调用外部 API 获取产品折扣信息。
+因此，正确答案是 A. Orchestrator 和 D. Activity。
+
+---
+
+82
+
+DRAG DROP -
+You are authoring a set of nested Azure Resource Manager templates to deploy multiple Azure resources.
+The templates must be tested before deployment and must follow recommended practices.
+You need to validate and test the templates before deployment.
+Which tools should you use? To answer, drag the appropriate tools to the correct requirements. Each tool may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![82-1](./img/82-1.png)
+
+![82-2](./img/82-2.png)
+
+The Azure Resource Manager template (ARM template) test toolkit checks whether your template uses recommended practices.
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/test-toolkit
+
+Before deploying an Azure Resource Manager template (ARM template), you can preview the changes that will happen. Azure Resource Manager provides the what-if operation to let you see how resources will change if you deploy the template. The what-if operation doesn't make any changes to existing resources. Instead, it predicts the changes if the specified template is deployed.
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-what-if?tabs=azure-powershell
+
+---
+
+83
+
+You develop Azure Durable Functions to manage vehicle loans.
+
+The loan process includes multiple actions that must be run in a specified order. One of the actions includes a customer credit check process, which may require multiple days to process.
+
+You need to implement Azure Durable Functions for the loan process.
+
+Which Azure Durable Functions type should you use?
+
+	A. orchestrator
+	B. client
+	C. entity
+	D. activity
+
+Correct Answer: A
+
+因为是单选所以选A
+
+---
+
+84
+
+HOTSPOT
+
+You are developing an Azure Function app.
+
+All functions in the app meet the following requirements:
+
+• Run until either a successful run or until 10 run attempts occur.
+• Ensure that there are at least 20 seconds between attempts for up to 15 minutes.
+
+You need to configure the host.json file.
+
+How should you complete the code segment? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![84-1](./img/84-1.png)
+
+![84-2](./img/84-2.png)
+
+Answer seems correct.
+
+Did some research about exponential backoff:
+The "exponential backoff" retry strategy is a technique for retrying failed operations in a manner that avoids overloading the system being accessed. It works by increasing the amount of time that is waited between each retry attempt, using an exponential function to calculate the wait time.
+
+For example, with a coefficient of 2.0 and an initial retry interval of 1 second, the wait times between retries might be 1 second, 2 seconds, 4 seconds, 8 seconds, and so on. This allows the system being accessed to recover from any failures or load spikes before the next retry attempt is made, reducing the likelihood of further failures.
+
+---
+
+85
+
+You develop Azure Web Apps for a commercial diving company. Regulations require that all divers fill out a health questionnaire every 15 days after each diving job starts.
+
+You need to configure the Azure Web Apps so that the instance count scales up when divers are filling out the questionnaire and scales down after they are complete.
+
+You need to configure autoscaling.
+
+What are two possible auto scaling configurations to achieve this goal? Each correct answer presents a complete solution.
+
+NOTE: Each correct selection is worth one point.
+
+	A. Recurrence profile
+	B. CPU usage-based autoscaling
+	C. Fixed date profile
+	D. Predictive autoscaling
+
+BD 不确定
+
+I think it should
+B. CPU usage-based autoscaling
+D. Predictive autoscaling
+
+A. Recurrence profile is used to schedule the scaling of resources at specific times or dates, but it does not meet the requirement to scale up when divers are filling out the questionnaire and scale down after they are complete. It only triggers scaling based on a set schedule, not based on actual usage.
+
+C. Fixed date profile is used to specify the number of instances at a specific date and time, but it also does not meet the requirement to dynamically scale based on actual usage. It only sets a fixed number of instances and does not adjust based on changing workloads.
+
+Predictive autoscale - Support is only available for virtual machine scale sets.
+D is incorrect options
+A - Recurrence profile is correct because you can specify every 15 days.
+
+---
+
+86
+
+HOTSPOT
+
+You are developing an online game that allows players to vote for their favorite photo that illustrates a word. The game is built by using Azure Functions and uses durable entities to track the vote count.
+
+The voting window is 30 seconds. You must minimize latency.
+
+You need to implement the Azure Function for voting.
+
+How should you complete the code? To answer, select the appropriate options in the answer area.
+
+![86-1](./img/86-1.png)
+
+![86-2](./img/86-2.png)
+
+Answer is correct: https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-dotnet-entities
+
+---
+
+87
+
+HOTSPOT
+
+You have an App Service plan named asp1 based on the Free pricing tier.
+
+You plan to use asp1 to implement an Azure Function app with a queue trigger. Your solution must minimize cost.
+
+You need to identify the configuration options that will meet the requirements.
+
+Which value should you configure? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![87-1](./img/87-1.png)
+
+![87-2](./img/87-2.png)
+
+不确定
+
+Always On and Continuous Deployment are not supported on the Free tier plans.
+Answer: Managed Identity & Basic
+
+1. Always on
+If you run on an App Service plan, you should enable the Always on setting so that your function app runs correctly. On an App Service plan, the functions runtime goes idle after a few minutes of inactivity, so only HTTP triggers will "wake up" your functions. The Always on setting is available only on an App Service plan. On a Consumption plan, the platform activates function apps automatically.
+Even with Always On enabled, the execution timeout for individual functions is controlled by the functionTimeout setting in the host.json project file.
+
+2. Basic
+The dedicated App Service plans supported for function app hosting include Basic, Standard, Premium, and Isolated SKUs. Free and Shared tier App Service plans aren't supported by Azure Functions. Basic is the correct answer since it is cheaper than Standard.
+
+https://learn.microsoft.com/en-us/azure/azure-functions/dedicated-plan
+
+---
+
+88
+
+DRAG DROP
+
+You are developing several microservices to run on Azure Container Apps.
+
+The microservices must allow HTTPS access by using a custom domain.
+
+You need to configure the custom domain in Azure Container Apps.
+
+In which order should you perform the actions? To answer, move all actions from the list of actions to the answer area and arrange them in the correct order.
+
+![88-1](./img/88-1.png)
+
+![88-2](./img/88-2.png)
+
+1. Enable ingress: Enable ingress for the Azure Container Apps. This allows external traffic to reach the microservices.
+2. Add the custom domain name: Add the custom domain name that you want to use for HTTPS access to your Azure Container Apps.
+3. Add DNS records to the domain provider: After adding the custom domain name in Azure Container Apps, you need to add the required DNS records (such as CNAME or A records) to your domain provider's DNS settings. This step is essential for directing traffic from the custom domain to your Azure Container Apps.
+4. Validate the custom domain name (after adding the dns records to the provider): After adding the DNS records to the domain provider, you need to validate the custom domain name in Azure Container Apps. This step ensures that the DNS records are correctly configured and the domain is pointing to your Azure Container Apps.
+5. Bind the certificate (only enabled after finishing the validation): Once the custom domain name is validated, you can bind the SSL/TLS certificate to enable HTTPS access for the custom domain.
+
+---
+
+89
+
+You are developing several microservices to run on Azure Container Apps. External HTTP ingress traffic has been enabled for the microservices.
+
+The microservices must be deployed to the same virtual network and write logs to the same Log Analytics workspace.
+
+You need to deploy the microservices.
+
+What should you do?
+
+	A. Enable single revision mode.
+	B. Use a separate environment for each container.
+	C. Use a private container registry image and single image for all containers.
+	D. Use a single environment for all containers.
+	E. Enable multiple revision mode.
+
+D
+
+D. Use a single environment for all containers.
+
+Explanation:
+
+Using a single environment for all containers can help in managing multiple microservices within the same context, which may include deploying them to the same virtual network and configuring them to write logs to the same Log Analytics workspace.
+The concept of "environment" in this context could refer to a shared Azure Container Apps instance or a broader resource group or Azure region where the microservices are deployed and managed together.
+
+为了在 Azure Container Apps 上部署多个微服务，并确保它们部署到相同的虚拟网络并将日志写入相同的 Log Analytics 工作区，你可以采取以下步骤：
+
+D. 使用单个环境（Use a single environment for all containers）：确保所有微服务都使用相同的环境，以便它们能够共享相同的虚拟网络和 Log Analytics 工作区。
+
+因此，正确的答案是：
+
+D. 使用单个环境（Use a single environment for all containers）。
+
+---
+
+90
+
+HOTSPOT
+
+You are developing several microservices to run on Azure Container Apps. External HTTP ingress traffic has been enabled for the microservices.
+
+A deployed microservice must be updated to allow users to test new features. You have the following requirements:
+
+• Enable and maintain a single URL for the updated microservice to provide to test users.
+• Update the microservice that corresponds to the current microservice version.
+
+You need to configure Azure Container Apps.
+
+Which features should you configure? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![90-1](./img/90-1.png)
+
+![90-2](./img/90-2.png)
+
+1. Revision Label
+Labels are useful for testing new revisions. For example, when you want to give access to a set of test users, you can give them the label's URL. Then when you want to move your users to a different revision, you can move the label to that revision.
+
+2. Revision Mode:
+The revision mode controls whether only a single revision or multiple revisions of your container app can be simultaneously active. You can set your app's revision mode from your container app's Revision management page in the Azure portal, using Azure CLI commands, or in the ARM template.
+
+https://learn.microsoft.com/en-us/azure/container-apps/revisions
+
+
+在 Azure Container Apps 中，Revision Label 和 Revision Mode 是与多容器环境版本控制相关的概念：
+
+Revision Label（版本标签）： 是指在环境中标识特定版本的标签。可以将 Revision Label 视为环境中不同版本的唯一标识符。每次对环境的更改都会创建一个新的 Revision Label。
+
+Revision Mode（版本模式）： 定义了多容器环境中如何处理不同版本的容器。Azure Container Apps 提供两种 Revision Mode：
+
+Single (单一)： 所有容器实例都使用相同的 Revision Label，因此它们部署相同版本的容器。
+Multiple (多个)： 不同的容器实例可以使用不同的 Revision Label，因此可以在同一环境中部署多个版本的容器。
+在使用 Azure Container Apps 时，通过这些概念，你可以更灵活地管理和更新你的容器环境中的微服务。
 
