@@ -1733,6 +1733,267 @@ WEBSITE_WARMUP_PATH: A relative path on the site that should be pinged whenever 
 
 ---
 
+71
 
+You create the following PowerShell script:
+
+![71-1](./img/71-1.png)
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+
+![71-2](./img/71-2.png)
+
+![71-3](./img/71-3.png)
+
+Box 1: No -
+The AzScheduledQueryRuleSource is Heartbeat, not CPU.
+
+Box 2: Yes -
+The AzScheduledQueryRuleSource is Heartbeat!
+Note: New-AzScheduledQueryRuleTriggerCondition creates an object of type Trigger Condition. This object is to be passed to the command that creates Alerting
+Action object.
+
+Box 3: No -
+The schedule is 60 minutes, not two hours.
+-FrequencyInMinutes: The alert frequency.
+-TimeWindowInMinutes: The alert time window
+The New-AzAscheduledQueryRuleSchedule command creates an object of type Schedule. This object is to be passed to the command that creates Log Alert
+Rule.
+Reference:
+https://docs.microsoft.com/en-us/powershell/module/az.monitor/new-azscheduledqueryrule https://docs.microsoft.com/en-us/powershell/module/az.monitor/new-azscheduledqueryruletriggercondition
+
+
+I agree.
+No
+Yes
+No
+
+---
+
+72
+
+DRAG DROP -
+You are developing an Azure Function app.
+The app must meet the following requirements:
+✑ Enable developers to write the functions by using the Rust language.
+✑ Declaratively connect to an Azure Blob Storage account.
+You need to implement the app.
+Which Azure Function app features should you use? To answer, drag the appropriate features to the correct requirements. Each feature may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![72-1](./img/72-1.png)
+
+Box 1: Custom handler
+Custom handlers can be used to create functions in any language or runtime by running an HTTP server process, for example Go or Rust.
+
+Box 2: extension bundles
+is needed to support the bindings and triggers that you use
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-custom-handlers?WT.mc_id=thomasmaurer-blog-thmaure#bindings-support
+
+https://learn.microsoft.com/en-us/azure/azure-functions/functions-custom-handlers
+- With custom handlers, you can use triggers and input and output bindings via extension bundles.
+So: Custom Handler and Extension bundles.
+Azure Functions 中的 Extension Bundles 是一种机制，用于在 Azure Functions 应用程序中包含一组常见的 Azure Functions 扩展。这些扩展包括与常见的绑定（如 Blob 存储、Azure Cosmos DB、Event Hubs 等）和触发器（如 HTTP 触发器、定时触发器等）相关的功能。通过使用 Extension Bundles，可以将扩展捆绑到应用程序中，而不是在每个函数中单独引用。
+
+---
+
+73
+
+HOTSPOT -
+You are developing an ASP.NET Core web application. You plan to deploy the application to Azure Web App for Containers.
+The application needs to store runtime diagnostic data that **must be persisted across application restarts**. You have the following code:
+
+![73-1](./img/73-1.jpg)
+
+
+You need to configure the application settings so that diagnostic data is stored as required.
+How should you configure the web app's settings? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![73-2](./img/73-2.jpg)
+
+![73-3](./img/73-3.jpg)
+
+I think the printed image is creating confusion. The correct answers (according to the image) are:
+WEBSITES_ENABLE_APP_SERVICE_STORAGE=true
+DIAGDATA=/home
+
+Box 1: If WEBSITES_ENABLE_APP_SERVICE_STORAGE
+If WEBSITES_ENABLE_APP_SERVICE_STORAGE setting is unspecified or set to true, the /home/ directory will be shared across scale instances, and files written will persist across restarts
+
+Box 2: /home
+
+Reference:
+https://docs.microsoft.com/en-us/azure/app-service/containers/app-service-linux-faq
+
+---
+
+74
+
+You are developing a web app that is protected by Azure Web Application Firewall (WAF). All traffic to the web app is routed through an Azure Application
+Gateway instance that is used by multiple web apps. The web app address is contoso.azurewebsites.net.
+All traffic must be secured with SSL. The Azure Application Gateway instance is used by multiple web apps.
+You need to configure the Azure Application Gateway for the web app.
+Which two actions should you perform? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+
+	A. In the Azure Application Gateway's HTTP setting, enable the Use for App service setting.
+	B. Convert the web app to run in an Azure App service environment (ASE).
+	C. Add an authentication certificate for contoso.azurewebsites.net to the Azure Application Gateway.
+	D. In the Azure Application Gateway's HTTP setting, set the value of the Override backend path option to contoso22.azurewebsites.net.
+
+AD 不确定
+
+D: The ability to specify a host override is defined in the HTTP settings and can be applied to any back-end pool during rule creation.
+The ability to derive the host name from the IP or FQDN of the back-end pool members. HTTP settings also provide an option to dynamically pick the host name from a back-end pool member's FQDN if configured with the option to derive host name from an individual back-end pool member.
+
+A (not C): SSL termination and end to end SSL with multi-tenant services.
+In case of end to end SSL, trusted Azure services such as Azure App service web apps do not require whitelisting the backends in the application gateway.
+
+Therefore, there is no need to add any authentication certificates.
+
+![74](./img/74.jpg)
+
+---
+
+75
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop a software as a service (SaaS) offering to manage photographs. Users upload photos to a web service which then stores the photos in Azure Storage Blob storage. The storage account type is General-purpose V2.
+When photos are uploaded, they must be processed to produce and save a mobile-friendly version of the image. The process to produce a mobile-friendly version of the image must start in less than one minute.
+You need to design the process that starts the photo processing.
+Solution: Use the Azure Blob Storage change feed to trigger photo processing.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: B
+
+Change feed is for audit logging.
+
+---
+
+76
+
+You are developing a web application that runs as an Azure Web App. The web application stores data in Azure SQL Database and stores files in an Azure Storage account. The web application makes HTTP requests to external services as part of normal operations.
+The web application is instrumented with Application Insights. The external services are OpenTelemetry compliant.
+You need to ensure that the customer ID of the signed in user is associated with all operations throughout the overall system.
+What should you do?
+
+	A. Add the customer ID for the signed in user to the CorrelationContext in the web application
+	B. On the current SpanContext, set the TraceId to the customer ID for the signed in user
+	C. Set the header Ocp-Apim-Trace to the customer ID for the signed in user
+	D. Create a new SpanContext with the TraceFlags value set to the customer ID for the signed in user
+
+Correct Answer: A 
+
+A SpanContext represents the portion of a Span which must be serialized and propagated along side of a Baggage.
+https://open-telemetry.github.io/opentelemetry-js-api/interfaces/spancontext.html
+
+
+正确的答案是 A. 将登录用户的客户ID添加到Web应用程序中的CorrelationContext。
+
+解释：
+
+A. 在Web应用程序中的CorrelationContext中添加登录用户的客户ID是一种常见的做法，用于确保在整个系统中的所有操作都与相应用户的上下文相关联。这有助于在调试和分析跨系统操作时保持上下文一致性。
+
+B. 在当前的SpanContext中设置TraceId为登录用户的客户ID不是推荐的做法。TraceId通常是唯一标识整个跟踪，而不是用户ID。
+
+C. 设置Ocp-Apim-Trace头部为登录用户的客户ID不是与Application Insights和OpenTelemetry兼容的标准做法。这不是用于关联用户ID的正式方法。
+
+D. 创建一个新的SpanContext，并将TraceFlags值设置为登录用户的客户ID，也不是正确的做法。TraceFlags通常用于表示调试和追踪的标志，而不是关联用户ID。
+
+因此，选项 A 是最符合要求的选项。
+
+---
+
+77
+
+HOTSPOT
+
+You are developing an Azure Function App. You develop code by using a language that is not supported by the Azure Function App host. The code language supports HTTP primitives.
+You must deploy the code to a production Azure Function App environment.
+You need to configure the app for deployment.
+Which configuration values should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![77-1](./img/77-1.png)
+
+answer is wrong: if you pick docker container you cant specify stack and version,
+So ill go with
+
+	1. Code
+	2. Custom Handler
+	3. custom (only option when you pick Custom Handler)
+
+---
+
+78
+
+DRAG DROP
+You provision virtual machines (VMs) as development environments.
+One VM does not start. The VM is stuck in a Windows update process. You attach the OS disk for the affected VM to a recovery VM.
+You need to correct the issue.
+In which order should you perform the actions? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![78-1](./img/78-1.jpg)
+
+![78-2](./img/78-2.jpg)
+
+Correct.
+
+All steps are listed here - https://docs.microsoft.com/en-us/troubleshoot/azure/virtual-machines/troubleshoot-stuck-updating-boot-error
+
+---
+
+79
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop an HTTP triggered Azure Function app to process Azure Storage blob data. The app is triggered using an output binding on the blob.
+The app continues to time out after four minutes. The app must process the blob data.
+You need to ensure the app does not time out and processes the blob data.
+Solution: Update the functionTimeout property of the host.json project file to 10 minutes.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: B
+
+Regardless of the function app timeout setting, 230 seconds is the maximum amount of time that an HTTP triggered function can take to respond to a request. https://learn.microsoft.com/en-us/azure/azure-functions/functions-scale#timeout
+
+---
+
+80
+
+You are developing an Azure Durable Function based application that processes a list of input values. The application is monitored using a console application that retrieves JSON data from an Azure Function diagnostic endpoint.
+During processing a single instance of invalid input does not cause the function to fail. Invalid input must be available to the monitoring application.
+You need to implement the Azure Durable Function and the monitoring console application.
+How should you complete the code segments? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![80-1](./img/80-1.jpg)
+
+![80-2](./img/80-2.jpg)
+
+不确定
+
+```
+SetOutput()
+== Completed
+result.output
+```
+The function needs to return the one invalid input, so you could use either SetOutput or SetCustomStatus, but custom status is not available after the function completes.
+The one invalid input does not cause the function to fail, therefore Completed.
+
+---
 
 
