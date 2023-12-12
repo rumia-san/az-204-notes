@@ -24,7 +24,7 @@ You are preparing to create the necessary components to achieve your goal.
 Which of the following should you create to achieve your goal? Answer by dragging the correct option from the list to the answer area.
 Select and Place:
 
-[2.jpg](./img/2.jpg)
+![2.jpg](./img/2.jpg)
 
 Key Vault + Access Policy.
 
@@ -136,7 +136,7 @@ You decide to deploy a function app.
 Which of the following should you configure the function app to use? Answer by dragging the correct options from the list to the answer area.
 Select and Place:
 
-[8.jpg](./img/8.jpg)
+![8.jpg](./img/8.jpg)
 
 Correct awnser:
 
@@ -278,11 +278,11 @@ Which three settings should you configure? To answer, select the appropriate set
 NOTE: Each correct selection is worth one point.
 Hot Area:
 
-[13-1.png](./img/13-1.png)
+![13-1.png](./img/13-1.png)
 
 Correct awnser:
 
-[13-2.png](./img/13-2.png)
+![13-2.png](./img/13-2.png)
 
 Box 1:
 The conditional access policy must be applied or assigned to Users and Groups.
@@ -338,9 +338,9 @@ Which command should you use? To answer, select the appropriate settings in the 
 NOTE: Each correct selection is worth one point.
 Hot Area:
 
-[](./img/16-1.jpg)
+![](./img/16-1.jpg)
 
-[](./img/16-2.jpg)
+![](./img/16-2.jpg)
 
 https://docs.microsoft.com/sv-se/cli/azure/monitor/metrics/alert
 
@@ -422,4 +422,777 @@ Reference:
 https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/monitoring-autoscale-get-started https://azure.microsoft.com/en-us/pricing/details/app-service/plans/
 
 Tier D1 is a basically shared app service plan, so we need to move standard or premium plan to enable auto scaling. As we need to provide low cost solution, then standard plan will be best for this approach
+
+---
+
+Question #21
+
+Your company's Azure subscription includes an Azure Log Analytics workspace.
+Your company has a hundred on-premises servers that run either Windows Server 2012 R2 or Windows Server 2016, and is linked to the Azure Log Analytics workspace. The Azure Log Analytics workspace is set up to gather performance counters associated with security from these linked servers.
+You must configure alerts based on the information gathered by the Azure Log Analytics workspace.
+You have to make sure that alert rules allow for dimensions, and that alert creation time should be kept to a minimum. Furthermore, a single alert notification must be created when the alert is created and when the alert is resolved.
+You need to make use of the necessary signal type when creating the alert rules.
+Which of the following is the option you should use?
+
+	A. The Activity log signal type.
+	B. The Application Log signal type.
+	C. The Metric signal type.
+	D. The Audit Log signal type.
+
+Correct Answer: C
+
+https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-metric-logs#configuring-metric-alert-for-logs
+
+C is correct. "Metric Alerts are stateful - only notifying once when alert is fired and once when alert is resolved; as opposed to Log alerts, which are stateless and keep firing at every interval if the alert condition is met."
+
+在配置 Azure Log Analytics workspace 的警报规则时，根据题意，你需要确保警报规则允许使用维度，同时最小化警报的创建时间，且在创建和解决警报时只生成单个通知。
+
+正确的选项是：
+
+C. The Metric signal type（指标信号类型）
+
+Metric signal type 允许你基于性能计数器等指标生成警报规则，并且通常用于监视和报警。这种信号类型支持维度（Dimensions），使你能够更精细地定义和配置警报规则，同时确保在创建和解决警报时只生成单个通知。
+
+---
+
+Question #22
+
+You are developing a .NET Core MVC application that allows customers to research independent holiday accommodation providers.
+You want to implement Azure Search to allow the application to search the index by using various criteria to locate documents related to accommodation.
+You want the application to allow customers to search the index by using regular expressions.
+What should you do?
+
+	A. Configure the SearchMode property of the SearchParameters class.
+	B. Configure the QueryType property of the SearchParameters class.
+	C. Configure the Facets property of the SearchParameters class.
+	D. Configure the Filter property of the SearchParameters class.
+
+Correct Answer: B
+
+要在 .NET Core MVC 应用程序中使用 Azure Search，以便允许按照各种标准搜索索引，包括使用正则表达式搜索文档，你应该：
+
+B. 配置 SearchParameters 类的 QueryType 属性。
+
+QueryType 属性可用于指定查询的类型。对于支持 Lucene 查询语法的 Azure Search 索引，将 QueryType 设置为 SearchQueryType.Full 可以让你使用正则表达式等高级查询。这样，你可以更灵活地定义搜索条件以匹配索引中的文档。
+
+---
+
+Question #23
+
+You are a developer at your company.
+You need to update the definitions for an existing Logic App.
+What should you use?
+
+	A. the Enterprise Integration Pack (EIP)
+	B. the Logic App Code View
+	C. the API Connections
+	D. the Logic Apps Designer
+
+Correct Answer: B
+
+这题似乎不再是考试范围之内的题目了
+
+B. Logic App Code View
+
+Logic App Code View 允许你直接编辑 Logic App 的底层工作流定义（以 JSON 格式表示）。这提供了一种详细和精确修改 Logic App 行为的方式。对于那些熟悉 JSON 并希望对 Logic App 结构和行为进行细粒度控制的开发人员来说，Logic App Code View 是一个有价值的工具。
+
+---
+
+Question #24
+
+Note: The question is included in a number of questions that depicts the identical set-up. However, every question has a distinctive result. Establish if the solution satisfies the requirements.
+You are developing a solution for a public facing API.
+The API back end is hosted in an Azure App Service instance. You have implemented a RESTful service for the API back end.
+You must configure back-end authentication for the API Management service instance.
+Solution: You configure Basic gateway credentials for the Azure resource.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: B 不确定
+
+There are two components we're interested in:
+a. APIM, and
+b. App Service (resource)
+
+The App Service doesn't support basic-auth at all; though APIM does. The tricky part is the word "resource" which is App Service.
+
+不符合目标。
+
+仅为 Azure 资源配置基本网关凭据本身并不足以为 API Management 服务实例配置后端身份验证。在 API Management 的上下文中，后端身份验证通常涉及配置托管在 Azure App Service 中的 API 的必要身份验证设置，这可能包括 API 密钥、OAuth 或其他身份验证机制。
+
+要实现 API Management 服务实例的后端身份验证，你需要为 Azure App Service 中托管的底层 API 配置适当的身份验证设置。Azure 资源的基本网关凭据通常与管理访问相关，不直接解决 API 的后端身份验证需求。
+
+To achieve back-end authentication for the API Management service instance, you need to configure the appropriate authentication settings for the underlying API hosted in the Azure App Service. Basic gateway credentials for the Azure resource are generally related to administrative access and do not directly address the back-end authentication requirements for the API.
+
+---
+
+Question #25
+
+Note: The question is included in a number of questions that depicts the identical set-up. However, every question has a distinctive result. Establish if the solution satisfies the requirements.
+You are developing a solution for a public facing API.
+The API back end is hosted in an Azure App Service instance. You have implemented a RESTful service for the API back end.
+You must configure back-end authentication for the API Management service instance.
+Solution: You configure Client cert gateway credentials for the HTTP(s) endpoint.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: A 不确定
+
+This is scenario questions.
+If backend is accepts HTTP(S)
+Then Basic AUTH or Certificate will work.
+so Client Certificate + HTTP(s) YES
+
+配置 HTTP(s) 终结点的客户端证书网关凭据是为 API Management 服务实例配置后端身份验证的一种有效方式。通过使用客户端证书，你可以确保只有具有有效证书的请求才能够访问你的 API 后端。这提供了额外的安全性层，确保只有经过授权的客户端可以调用 API。因此，这个解决方案满足目标。
+
+---
+
+Question #26
+
+Note: The question is included in a number of questions that depicts the identical set-up. However, every question has a distinctive result. Establish if the solution satisfies the requirements.
+You are developing a solution for a public facing API.
+The API back end is hosted in an Azure App Service instance. You have implemented a RESTful service for the API back end.
+You must configure back-end authentication for the API Management service instance.
+Solution: You configure Basic gateway credentials for the HTTP(s) endpoint.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+A 不确定
+
+This is scenario questions.
+If backend is accepts HTTP(S)
+Then Basic AUTH or Certificate will work.
+so Basic + HTTPS Yes
+
+Target: "Azure Logic App" or "HTTP(s) endpoint"
+Gateway credentials: "None" or "Basic" or "Client cert"
+
+https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-mutual-certificates#configure-an-api-to-use-client-certificate-for-gateway-authentication
+
+---
+
+Question #27
+Note: The question is included in a number of questions that depicts the identical set-up. However, every question has a distinctive result. Establish if the solution satisfies the requirements.
+You are developing a solution for a public facing API.
+The API back end is hosted in an Azure App Service instance. You have implemented a RESTful service for the API back end.
+You must configure back-end authentication for the API Management service instance.
+Solution: You configure Client cert gateway credentials for the Azure resource.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B 不确定
+
+This is scenario questions.
+If backend is accepts HTTP(S)
+Then Basic AUTH or Certificate will work.
+so Certificate + Azure Resource NO
+https://www.youtube.com/watch?v=HQ0U7lwP93o
+
+---
+
+Question #28
+
+You are developing a .NET Core MVC application that allows customers to research independent holiday accommodation providers.
+You want to implement Azure Search to allow the application to search the index by using various criteria to locate documents related to accommodation venues.
+You want the application to list holiday accommodation venues that fall within a specific price range and are within a specified distance to an airport.
+What should you do?
+
+	A. Configure the SearchMode property of the SearchParameters class.
+	B. Configure the QueryType property of the SearchParameters class.
+	C. Configure the Facets property of the SearchParameters class.
+	D. Configure the Filter property of the SearchParameters class.
+
+Correct Answer: D
+
+你应该：
+
+D. 配置 SearchParameters 类的 Filter 属性。
+
+Filter 属性用于指定搜索结果的筛选条件，你可以使用它来限制在特定价格范围内和指定距离内的搜索结果。通过配置 Filter 属性，你可以实现根据价格和距离来筛选和显示符合条件的度假住宿场所。
+
+---
+
+Question #29
+
+You are a developer at your company.
+You need to edit the workflows for an existing Logic App.
+What should you use?
+
+	A. the Enterprise Integration Pack (EIP)
+	B. the Logic App Code View
+	C. the API Connections
+	D. the Logic Apps Designer
+
+Correct Answer: D
+
+不确定，但是我觉得workflow用designer比较好改
+
+---
+
+Question #30
+
+DRAG DROP -
+You are a developer for a company that provides a bookings management service in the tourism industry. You are implementing Azure Search for the tour agencies listed in your company's solution.
+You create the index in Azure Search. You now need to use the Azure Search .NET SDK to import the relevant data into the Azure Search service.
+Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of actions from left to right and arrange them in the correct order.
+
+Select and Place:
+
+	Create a DataSource instance and set its Container property to the DataContainer.
+	Create an IndexBatch that contains the documents which must be added.
+	Set the DataSources property of the SearchServiceClient.
+	Create a SearchlndexClient object to connect to the search index.
+	Call the Documents.Index method of the SearchindexClient and pass the IndexBatch
+	Call the Documents.Suggest method of the SearchindexClient and pass the DataSource
+
+Answer:
+
+	Create a SearchlndexClient object to connect to the search index.
+	Create an IndexBatch that contains the documents which must be added.
+	Call the Documents.Index method of the SearchindexClient and pass the IndexBatch
+
+注：Azure search is out of scope for AZ-204
+
+---
+
+Question #31
+
+You are developing an application that applies a set of governance policies for internal and external services, as well as for applications.
+You develop a stateful ASP.NET Core 2.1 web application named PolicyApp and deploy it to an Azure App Service Web App. The PolicyApp reacts to events from
+Azure Event Grid and performs policy actions based on those events.
+You have the following requirements:
+✑ Authentication events must be used to monitor users when they sign in and sign out.
+✑ All authentication events must be processed by PolicyApp.
+✑ Sign outs must be processed as fast as possible.
+What should you do?
+
+	A. Create a new Azure Event Grid subscription for all authentication events. Use the subscription to process sign-out events.
+	B. Create a separate Azure Event Grid handler for sign-in and sign-out events.
+	C. Create separate Azure Event Grid topics and subscriptions for sign-in and sign-out events.
+	D. Add a subject prefix to sign-out events. Create an Azure Event Grid subscription. Configure the subscription to use the subjectBeginsWith filter.
+
+Correct Answer: C 不确定
+
+Only C is mentioned both topic and subscription, which are two critical parts for event grid, so I will go C, anyway, this question is very poorly worded
+
+根据给定的要求，你应该选择：
+
+C. 为登录和登出事件创建单独的 Azure Event Grid 主题和订阅。
+
+这种方法允许你为登录和登出事件分别创建专用主题，提供更好的分离和处理每种事件类型的灵活性。通过拥有单独的主题，你可以为每种事件类型创建订阅，确保 PolicyApp 处理登录和登出的身份验证事件。
+
+选项 A 可能是一个有效的方法，但它没有提供所需的分离和灵活性。选项 B 不是理想的选择，因为它暗示使用单个处理程序处理登录和登出事件。选项 D 引入了使用主题前缀过滤的复杂性，而单独的主题提供了一种更清晰和可维护的解决方案。
+
+---
+
+Question #32
+
+HOTSPOT -
+You are developing a C++ application that compiles to a native application named process.exe. The application accepts images as input and returns images in one of the following image formats: GIF, PNG, or JPEG.
+You must deploy the application as an Azure Function.
+You need to configure the function and host json files.
+How should you complete the json files? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+
+![](./img/32-1.png)
+
+![](./img/32-2.png)
+
+**the last one should be true**
+
+- Your Azure Function will be a custom handler since Azure Functions doesn't directly support C++ as a runtime.
+- enableForwardingHttpRequest is set to true to allow the custom handler to receive the HTTP request data
+
+In the function.json file, enableForwardingHttpRequest should be set to true for the Azure Function to accept HTTP requests and forward them to the C++ application for processing.
+
+This is because the C++ application is compiled as a native application and cannot directly receive HTTP requests. By setting enableForwardingHttpRequest to true, the Azure Function acts as a proxy and forwards incoming HTTP requests to the C++ application.
+
+---
+
+Question #33
+
+HOTSPOT
+
+You are developing an Azure Static Web app that contains training materials for a tool company. Each tool’s training material is contained in a static web page that is linked from the tool’s publicly available description page.
+
+A user must be authenticated using Azure AD prior to viewing training.
+
+You need to ensure that the user can view training material pages after authentication.
+
+How should you complete the configuration file? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![](./img/33-1.png)
+
+![](./img/33-2.png)
+
+Got on 9/25/2023
+responseoverrides
+401
+aad
+.referrer
+
+---
+
+Question #34
+
+HOTSPOT
+
+You are authoring a set of nested Azure Resource Manager templates to deploy Azure resources. You author an Azure Resource Manager template named mainTemplate.json that contains the following linked templates: linkedTemplate1.json, linkedTemplate2.json.
+
+You add parameters to a parameters template file named mainTemplate.parameters,json. You save all templates on a local device in the C:\templates\ folder.
+
+You have the following requirements:
+
+• Store the templates in Azure for later deployment.
+• Enable versioning of the templates.
+• Manage access to the templates by using Azure RBAC.
+• Ensure that users have read-only access to the templates.
+• Allow users to deploy the templates.
+
+You need to store the templates in Azure.
+
+How should you complete the command? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![](./img/34-1.png)
+
+![](./img/34-2.png)
+
+correct
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs-create-linked?tabs=azure-cli
+
+---
+
+Question #35
+
+HOTSPOT
+
+You are developing a service where customers can report news events from a browser using Azure Web PubSub. The service is implemented as an Azure Function App that uses the JSON WebSocket subprotocol to receive news events.
+
+You need to implement the bindings for the Azure Function App.
+
+How should you configure the binding? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![](./img/35-1.png)
+
+![](./img/35-2.png)
+
+Given answer is correct.
+https://learn.microsoft.com/en-us/azure/azure-web-pubsub/reference-functions-bindings?tabs=javascript
+
+---
+
+Question #36
+
+HOTSPOT
+
+You are building a software-as-a-service (SaaS) application that analyzes DNA data that will run on Azure virtual machines (VMs) in an availability zone. The data is stored on managed disks attached to the VM. The performance of the analysis is determined by the speed of the disk attached to the VM.
+
+You have the following requirements:
+
+• The application must be able to quickly revert to the previous day’s data if a systemic error is detected.
+• The application must minimize downtime in the case of an Azure datacenter outage.
+
+You need to provision the managed disk for the VM to maximize performance while meeting the requirements.
+
+Which type of Azure Managed Disk should you use? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![](./img/36-1.png)
+
+Wrong answer: Managed disk doesn't support GRS
+
+Ans: Premium SSD and ZRS
+They are asking for high performance workloads which is supported by Premium tier https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types
+Also they are asking for zone redundancy (if datacenter goes down, NOT region outage). Also managed disk doesn't support GRS https://learn.microsoft.com/en-us/azure/virtual-machines/disks-redundancy
+
+Locally Redundant Storage (LRS):
+
+* 冗余级别： 数据在同一区域的多个存储节点上进行三次复制。
+* 故障转移范围： 限于同一 Azure 区域。
+* 成本： 相对较低，是较为经济的选项。
+* 应用场景： 适用于对数据冗余要求不高，但仍希望在同一区域内获得某种程度的冗余和可靠性。
+
+Geo-Redundant Storage (GRS):
+
+* 冗余级别： 数据在主区域内进行 LRS 复制，同时异步复制到辅助区域。
+* 故障转移范围： 跨 Azure 区域。
+* 成本： 相对较高，因为提供了跨区域的冗余。
+* 应用场景： 适用于对数据要求较高的冗余，希望在主要区域发生故障时能够迅速切换到辅助区域。
+
+Zone-Redundant Storage (ZRS):
+
+* 冗余级别： 数据在同一区域的不同可用性区域内进行复制。
+* 故障转移范围： 限于同一 Azure 区域，但是可以跨多个可用性区域。
+* 成本： 介于 LRS 和 GRS 之间。
+* 应用场景： 适用于要求高可用性且能够抵御单一可用性区域故障的情况。
+
+WHEN THEY SAY 'Azure datacenter outage' they are implying a data center within a region which is hosted in one of the region's three zones. That alone gives it away that its ZRS with P-SSD.
+
+---
+
+Question #37
+
+HOTSPOT
+
+You are developing an application that includes two Docker containers.
+
+The application must meet the following requirements:
+
+• The containers must not run as root.
+• The containers must be deployed to Azure Container Instances by using a YAML file.
+• The containers must share a lifecycle, resources, local network, and storage volume.
+• The storage volume must persist through container crashes.
+• The storage volume must be deployed on stop or restart of the containers.
+
+You need to configure Azure Container Instances for the application.
+
+Which configuration values should you use? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![](./img/37-1.png)
+
+Ans: Container group, EmptyDir
+
+Container group is the only logical answer that can have shared lifecycle https://learn.microsoft.com/en-us/azure/container-instances/container-instances-container-groups?source=recommendations#what-is-a-container-group
+Azure files need root permission
+Secret is for secrets and read-only
+EmtyDir can persist through crash and redeployed on stop and restart
+https://learn.microsoft.com/en-us/azure/container-instances/container-instances-volume-emptydir#emptydir-volume
+Cloned Git Repo also does the job but it needs more details like Git URL and stuff which are not mentioned to be available in the question
+
+---
+
+38
+
+HOTSPOT -
+
+You are implementing a software as a service (SaaS) ASP.NET Core web service that will run as an Azure Web App. The web service will use an on-premises
+SQL Server database for storage. The web service also includes a WebJob that processes data updates. Four customers will use the web service.
+✑ Each instance of the WebJob processes data for a single customer and must run as a singleton instance.
+✑ Each deployment must be tested by using deployment slots prior to serving production data.
+✑ Azure costs must be minimized.
+✑ Azure resources must be located in an isolated network.
+You need to configure the App Service plan for the Web App.
+How should you configure the App Service plan? To answer, select the appropriate settings in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![](./img/38-1.jpg)
+
+![](./img/38-2.jpg)
+
+Box 1: 4
+There are four customers that use this service, and each instance of the WebJob processes data for a single customer and must run as a singleton instance. So, the number of VM should be 4. WebJobs is a feature of Azure App Service that enables you to run a program or script in the same instance as a web app. Like running background tasks.
+
+Box 2: Isolated
+Azure resources must be located in an isolated network .
+In the Isolated tier, the App Service Environment defines the number of isolated workers that run your apps, and each worker is charged. In addition, there's a flat Stamp Fee for the running the App Service Environment itself. Isolated: This tier runs dedicated Azure VMs on dedicated Azure Virtual Networks. It provides network isolation on top of compute isolation to your apps. It provides the maximum scale-out capabilities.
+
+---
+
+39
+
+DRAG DROP -
+You are a developer for a software as a service (SaaS) company that uses an Azure Function to process orders. The Azure Function currently runs on an Azure
+Function app that is triggered by an Azure Storage queue.
+You are preparing to migrate the Azure Function to Kubernetes using Kubernetes-based Event Driven Autoscaling (KEDA).
+You need to configure Kubernetes Custom Resource Definitions (CRD) for the Azure Function.
+Which CRDs should you configure? To answer, drag the appropriate CRD types to the correct locations. Each CRD type may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![](./img/39-1.jpg)
+
+![](./img/39-2.jpg)
+
+Box 1: Deployment
+To deploy Azure Functions to Kubernetes use the func kubernetes deploy command has several attributes that directly control how our app scales, once it is deployed to Kubernetes.
+
+Box 2: ScaledObject
+With --polling-interval, we can control the interval used by KEDA to check Azure Service Bus Queue for messages.
+
+Box 3: Secret
+Store connection strings in Kubernetes Secrets.
+
+---
+
+40
+
+HOTSPOT -
+You are creating a CLI script that creates an Azure web app and related services in Azure App Service. The web app uses the following variables:
+
+![](./img/40-1.png)
+
+You need to automatically deploy code from GitHub to the newly created web app.
+How should you complete the script? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![](./img/40-2.jpg)
+
+![](./img/40-3.jpg)
+
+Given answer is correct, got this on my test yesterday
+
+---
+
+41
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop a software as a service (SaaS) offering to manage photographs. Users upload photos to a web service which then stores the photos in Azure
+Storage Blob storage. The storage account type is General-purpose V2.
+When photos are uploaded, they must be processed to produce and save a mobile-friendly version of the image. The process to produce a mobile-friendly version of the image must start in less than one minute.
+You need to design the process that starts the photo processing.
+Solution: Trigger the photo processing from Blob storage events.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B 不确定
+
+Hi All,
+The answer (B) is correct. Because, the trick is in the "less than one minute" detail.
+You can read about "..10-minute delay in processing new blobs.." in "3-Minimizing latency" description.
+Microsoft says: ".....Use Event Grid instead of the Blob storage trigger for the following scenarios:"
+1-Blob-only storage accounts: Blob-only storage accounts are supported for blob input and output bindings but not for blob triggers.
+2-High-scale: High scale can be loosely defined as containers that have more than 100,000 blobs in them or storage accounts that have more than 100 blob updates per second.
+3-Minimizing latency: If your function app is on the Consumption plan, there can be up to a ##10-minute delay in processing new blobs## if a function app has gone idle. To avoid this latency, you can switch to an App Service plan with Always On enabled. You can also use an Event Grid trigger with your Blob storage account. For an example, see the Event Grid tutorial.
+
+REFENCE: https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=csharp#event-grid-trigger
+
+I wish you a good day.
+
+---
+
+42
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop and deploy an Azure App Service API app to a Windows-hosted deployment slot named Development. You create additional deployment slots named Testing and Production. You enable auto swap on the Production deployment slot.
+You need to ensure that scripts run and resources are available before a swap operation occurs.
+Solution: Update the web.config file to include the applicationInitialization configuration element. Specify custom initialization actions to run the scripts.
+Does the solution meet the goal?
+
+	A. No
+	B. Yes
+
+B
+
+This should work:
+https://docs.microsoft.com/en-us/azure/app-service/deploy-staging-slots#specify-custom-warm-up
+
+解决方案中的方法是更新 web.config 文件以包含 applicationInitialization 配置元素，并指定要运行脚本的自定义初始化操作。这样可以确保在执行交换操作之前运行脚本并准备资源，从而满足要求。
+
+---
+
+43
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop and deploy an Azure App Service API app to a Windows-hosted deployment slot named Development. You create additional deployment slots named Testing and Production. You enable auto swap on the Production deployment slot.
+You need to ensure that scripts run and resources are available before a swap operation occurs.
+Solution: Enable auto swap for the Testing slot. Deploy the app to the Testing slot.
+Does the solution meet the goal?
+
+	A. No
+	B. Yes
+
+A
+
+I vote A, No, because for me the solution is updating the web.config file to include the applicationInitialization configuration element.
+
+---
+
+44
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop and deploy an Azure App Service API app to a Windows-hosted deployment slot named Development. You create additional deployment slots named Testing and Production. You enable auto swap on the Production deployment slot.
+You need to ensure that scripts run and resources are available before a swap operation occurs.
+Solution: Disable auto swap. Update the app with a method named statuscheck to run the scripts. Re-enable auto swap and deploy the app to the Production slot.
+Does the solution meet the goal?
+
+	A. No
+	B. Yes
+
+A
+
+Ok, my bad autoswap has to be configured on the Staging Slot. So "You enable auto swap on the Production deployment slot." is not what you would do. Answer is A (NO).
+
+---
+
+45
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+
+You develop a software as a service (SaaS) offering to manage photographs. Users upload photos to a web service which then stores the photos in Azure Storage Blob storage. The storage account type is General-purpose V2.
+When photos are uploaded, they must be processed to produce and save a mobile-friendly version of the image. The process to produce a mobile-friendly version of the image must start in less than one minute.
+You need to design the process that starts the photo processing.
+Solution: Convert the Azure Storage account to a BlockBlobStorage storage account.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: B
+
+不符合目标。
+
+将 Azure 存储帐户转换为 BlockBlobStorage 存储帐户与在一分钟内启动照片处理的目标不直接相关。存储帐户类型本身并不确定启动照片处理的方式。
+
+为了实现目标，你应该考虑使用具有 Blob 存储触发器或事件网格的 Azure Functions，在上传新照片到 Blob 存储时触发照片处理。配置适当的基于事件的机制将确保在上传照片后尽快启动照片处理，而不管存储帐户类型如何。
+
+---
+
+46
+
+HOTSPOT -
+You are developing an Azure Web App. You configure TLS mutual authentication for the web app.
+You need to validate the client certificate in the web app. To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![](./img/46-1.jpg)
+
+![](./img/46-2.jpg)
+
+Box 1: HTTP request header
+If you are using ASP.NET and configure your app to use client certificate authentication, the certificate will be available through the HttpRequest.ClientCertificate property.
+
+Box 2: Base64
+For other application stacks, the client cert will be available in your app through a base64 encoded value in the "X-ARR-ClientCert" request header. Your application can create a certificate from this value and then use it for authentication and authorization purposes in your application.
+
+Reference:
+
+https://docs.microsoft.com/en-us/azure/app-service/app-service-web-configure-tls-mutual-auth
+
+---
+
+47
+
+DRAG DROP -
+You are developing a Docker/Go using Azure App Service Web App for Containers. You plan to run the container in an App Service on Linux. You identify a
+Docker container image to use.
+None of your current resource groups reside in a location that supports Linux. You must minimize the number of resource groups required.
+You need to create the application and perform an initial deployment.
+Which three Azure CLI commands should you use to develop the solution? To answer, move the appropriate commands from the list of commands to the answer area and arrange them in the correct order.
+Select and Place:
+
+![](./img/47-1.png)
+
+![](./img/47-2.png)
+
+Within the same resource group, you can't mix Windows and Linux apps in the same region.
+https://docs.microsoft.com/en-us/azure/app-service/overview#app-service-on-linux
+"None of your current resource groups reside in a location that supports Linux"
+So you have to create new resource group. Answer is correct.
+
+---
+
+48
+
+DRAG DROP -
+Fourth Coffee has an ASP.NET Core web app that runs in Docker. The app is mapped to the www.fourthcoffee.com domain.
+Fourth Coffee is migrating this application to Azure.
+You need to provision an App Service Web App to host this docker image and map the custom domain to the App Service web app.
+A resource group named FourthCoffeePublicWebResourceGroup has been created in the WestUS region that contains an App Service Plan named
+AppServiceLinuxDockerPlan.
+Which order should the CLI commands be used to develop the solution? To answer, move all of the Azure CLI commands from the list of commands to the answer area and arrange them in the correct order.
+Select and Place:
+
+![](./img/48-1.jpg)
+
+![](./img/48-2.jpg)
+
+1. /bin/bash
+2. az webpp create
+3.  config container set
+4.  config hostname add
+
+
+Step 1: #bin/bash -
+The appName is used when the webapp-name is created in step 2.
+
+Step 2: az webapp create -
+Create a web app. In the Cloud Shell, create a web app in the myAppServicePlan App Service plan with the az webapp create command.
+
+Step 3: az webapp config container set
+In Create a web app, you specified an image on Docker Hub in the az webapp create command. This is good enough for a public image. To use a private image, you need to configure your Docker account ID and password in your Azure web app.
+
+Step 4: az webapp config hostname add
+The webapp-name is used when the webapp is created in step 2.
+In the Cloud Shell, follow the az webapp create command with az webapp config container set.
+
+---
+
+49
+
+DRAG DROP -
+You are developing a serverless Java application on Azure. You create a new Azure Key Vault to work with secrets from a new Azure Functions application.
+The application must meet the following requirements:
+✑ Reference the Azure Key Vault without requiring any changes to the Java code.
+✑ Dynamically add and remove instances of the Azure Functions host based on the number of incoming application events.
+✑ Ensure that instances are perpetually warm to avoid any cold starts.
+✑ Connect to a VNet.
+✑ Authentication to the Azure Key Vault instance must be removed if the Azure Function application is deleted.
+You need to grant the Azure Functions application access to the Azure Key Vault.
+Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![](./img/49-1.png)
+
+1. create Premium plan Type (Consumption X)
+2. create system-assigned  (user-assigned X)
+3. create an access policy in Azure Key Vault
+
+I agree with you.
+1. Premium plan (avoid any cold starts and connect to a VNet)
+Overview of plans here: https://docs.microsoft.com/th-th/azure/azure-functions/functions-scale
+2. create system-assigned => "A system-assigned identity is tied to your application and is deleted if your app is deleted."
+3. create an access policy
+https://docs.microsoft.com/en-us/azure/app-service/app-service-key-vault-references?toc=%2Fazure%2Fazure-functions%2Ftoc.json&tabs=azure-cli
+
+---
+
+50
+
+You develop a website. You plan to host the website in Azure. You expect the website to experience high traffic volumes after it is published.
+You must ensure that the website remains available and responsive while minimizing cost.
+You need to deploy the website.
+What should you do?
+
+	A. Deploy the website to a virtual machine. Configure the virtual machine to automatically scale when the CPU load is high.
+	B. Deploy the website to an App Service that uses the Shared service tier. Configure the App Service plan to automatically scale when the CPU load is high.
+	C. Deploy the website to a virtual machine. Configure a Scale Set to increase the virtual machine instance count when the CPU load is high.
+	D. Deploy the website to an App Service that uses the Standard service tier. Configure the App Service plan to automatically scale when the CPU load is high.
+
+Correct Answer: D
+
+Windows Azure Web Sites (WAWS) offers 3 modes: Standard, Free, and Shared.
+Standard mode carries an enterprise-grade SLA (Service Level Agreement) of 99.9% monthly, even for sites with just one instance.
+Standard mode runs on dedicated instances, making it different from the other ways to buy Windows Azure Web Sites.
+Incorrect Answers:
+B: Shared and Free modes do not offer the scaling flexibility of Standard, and they have some important limits.
+Shared mode, just as the name states, also uses shared Compute resources, and also has a CPU limit. So, while neither Free nor Shared is likely to be the best choice for your production environment due to these limits.
+
+To ensure that the website remains available and responsive while minimizing cost, you should deploy the website to an App Service that uses the Standard service tier and configure the App Service plan to automatically scale when the CPU load is high. This way, the website can handle high traffic volumes by automatically scaling the number of instances of the website, reducing the risk of the website becoming unavailable due to high traffic.
 
