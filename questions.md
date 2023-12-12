@@ -974,7 +974,7 @@ You can read about "..10-minute delay in processing new blobs.." in "3-Minimizin
 Microsoft says: ".....Use Event Grid instead of the Blob storage trigger for the following scenarios:"
 1-Blob-only storage accounts: Blob-only storage accounts are supported for blob input and output bindings but not for blob triggers.
 2-High-scale: High scale can be loosely defined as containers that have more than 100,000 blobs in them or storage accounts that have more than 100 blob updates per second.
-3-Minimizing latency: If your function app is on the Consumption plan, there can be up to a ##10-minute delay in processing new blobs## if a function app has gone idle. To avoid this latency, you can switch to an App Service plan with Always On enabled. You can also use an Event Grid trigger with your Blob storage account. For an example, see the Event Grid tutorial.
+3-Minimizing latency: If your function app is on the Consumption plan, there can be up to a **10-minute delay in processing new blobs** if a function app has gone idle. To avoid this latency, you can switch to an App Service plan with Always On enabled. You can also use an Event Grid trigger with your Blob storage account. For an example, see the Event Grid tutorial.
 
 REFENCE: https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=csharp#event-grid-trigger
 
@@ -1195,4 +1195,267 @@ B: Shared and Free modes do not offer the scaling flexibility of Standard, and t
 Shared mode, just as the name states, also uses shared Compute resources, and also has a CPU limit. So, while neither Free nor Shared is likely to be the best choice for your production environment due to these limits.
 
 To ensure that the website remains available and responsive while minimizing cost, you should deploy the website to an App Service that uses the Standard service tier and configure the App Service plan to automatically scale when the CPU load is high. This way, the website can handle high traffic volumes by automatically scaling the number of instances of the website, reducing the risk of the website becoming unavailable due to high traffic.
+
+---
+
+51
+
+HOTSPOT
+A company is developing a Java web app. The web app code is hosted in a GitHub repository located at https://github.com/Contoso/webapp.
+The web app must be evaluated before it is moved to production. You must deploy the initial code release to a deployment slot named staging.
+You need to create the web app and deploy the code.
+How should you complete the commands? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![](./img/51-1.png)
+
+![](./img/51-2.png)
+
+Box 1: group -
+Create a resource group.
+az group create --location westeurope --name myResourceGroup
+
+Box 2: appservice plan -
+Create an App Service plan in STANDARD tier (minimum required by deployment slots). az appservice plan create --name $webappname --resource-group myResourceGroup --sku S1
+
+Box 3: webapp -
+Create a web app.
+az webapp create --name $webappname --resource-group myResourceGroup \
+--plan $webappname
+
+Box 4: webapp deployment slot -
+Create a deployment slot with the name "staging".
+az webapp deployment slot create --name $webappname --resource-group myResourceGroup \
+--slot staging
+
+Box 5: webapp deployment source -
+Deploy sample code to "staging" slot from GitHub.
+az webapp deployment source config --name $webappname --resource-group myResourceGroup \
+--slot staging --repo-url $gitrepo --branch master --manual-integration
+Reference:
+https://docs.microsoft.com/en-us/azure/app-service/scripts/cli-deploy-staging-environment
+
+Given answer is correct.
+
+---
+
+52
+
+HOTSPOT
+You have a web service that is used to pay for food deliveries. The web service uses Azure Cosmos DB as the data store.
+You plan to add a new feature that allows users to set a tip amount. The new feature requires that a property named tip on the document in Cosmos DB must be present and contain a numeric value.
+There are many existing websites and mobile apps that use the web service that will not be updated to set the tip property for some time.
+How should you complete the trigger?
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![](./img/52-1.png)
+
+![](./img/52-2.png)
+
+**Right answer in second drop down is the first one (..."tip" in i...)**
+
+Similiar example can be found on https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-write-stored-procedures-triggers-udfs
+
+1. getRequest
+2. (!"tip" in i)
+3. setBody
+
+---
+
+53
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop an HTTP triggered Azure Function app to process Azure Storage blob data. The app is triggered using an output binding on the blob.
+The app continues to time out after four minutes. The app must process the blob data.
+You need to ensure the app does not time out and processes the blob data.
+Solution: Use the Durable Function async pattern to process the blob data.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+A. Yes
+
+"230 seconds is the maximum amount of time[...] For longer processing times, consider using the DURABLE FUNCTIONS ASYNC PATTERN[...]"
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale#timeout
+
+A. Yes
+
+使用 Durable Functions 异步模式是一种解决函数运行时间限制问题的方法。Durable Functions 允许你创建长时间运行的工作流，通过将任务分解为可暂停和恢复的状态，以避免 HTTP 触发的 Azure Function 在默认的运行时间内超时。
+
+因此，使用 Durable Functions 异步模式来处理 Blob 数据是一个符合目标的解决方案。
+
+---
+
+54
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop an HTTP triggered Azure Function app to process Azure Storage blob data. The app is triggered using an output binding on the blob.
+The app continues to time out after four minutes. The app must process the blob data.
+You need to ensure the app does not time out and processes the blob data.
+Solution: Pass the HTTP trigger payload into an Azure Service Bus queue to be processed by a queue trigger function and return an immediate HTTP success response.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: A 不确定
+
+https://docs.microsoft.com/en-us/azure/azure-functions/performance-reliability#avoid-long-running-functions
+
+> You can pass the HTTP trigger payload into a queue to be processed by a queue trigger function. This approach lets you defer the actual work and return an immediate response.
+
+---
+
+55
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop an HTTP triggered Azure Function app to process Azure Storage blob data. The app is triggered using an output binding on the blob.
+The app continues to time out after four minutes. The app must process the blob data.
+You need to ensure the app does not time out and processes the blob data.
+Solution: Configure the app to use an App Service hosting plan and enable the Always On setting.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: B
+
+No is the answer, but the reason is the timeout being raised by HTTP layer from the Azure Load Balancer, not the App layer that at least it gives 5 minutes for the cheapest type, Consumption, so however you enhance the app layer, the http layer Azure Load Balance will not wait more than 230 second and will reply it as timeout. Use the durable function pattern to poll the status for completion will be the easiest solution, else avoid the http layer like service bus will work too.
+
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale
+
+> Regardless of the function app timeout setting, 230 seconds is the maximum amount of time that an HTTP triggered function can take to respond to a request. This is because of the default idle timeout of Azure Load Balancer. For longer processing times, consider using the Durable Functions async pattern or defer the actual work and return an immediate response.
+
+---
+
+56
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop a software as a service (SaaS) offering to manage photographs. Users upload photos to a web service which then stores the photos in Azure Storage Blob storage. The storage account type is General-purpose V2.
+When photos are uploaded, they must be processed to produce and save a mobile-friendly version of the image. The process to produce a mobile-friendly version of the image must start in less than one minute.
+You need to design the process that starts the photo processing.
+Solution: Move photo processing to an Azure Function triggered from the blob upload.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+A 不确定
+
+The answer is correct, but it should have also mentioned that the function app must not be on a consumption plan. because in that case, it might take up to 10 minutes to process the event.
+
+---
+
+57
+
+You are developing an application that uses Azure Blob storage.
+The application must read the transaction logs of all the changes that occur to the blobs and the blob metadata in the storage account for auditing purposes. The changes must be in the order in which they occurred, include only create, update, delete, and copy operations and be retained for compliance reasons.
+You need to process the transaction logs asynchronously.
+What should you do?
+
+	A. Process all Azure Blob storage events by using Azure Event Grid with a subscriber Azure Function app.
+	B. Enable the change feed on the storage account and process all changes for available events.
+	C. Process all Azure Storage Analytics logs for successful blob events.
+	D. Use the Azure Monitor HTTP Data Collector API and scan the request body for successful blob events.
+
+Correct Answer: B
+
+https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed
+
+启用存储帐户上的更改 feed 并处理所有可用事件是一个符合要求的解决方案。更改 feed 提供了对 Blob 存储中 blob 创建、更新、删除和复制操作的有序记录。通过启用更改 feed，可以异步处理这些更改以进行审核，并满足合规性要求。
+
+---
+
+58
+
+DRAG DROP
+You plan to create a Docker image that runs an ASP.NET Core application named ContosoApp. You have a setup script named setupScript.ps1 and a series of application files including ContosoApp.dll.
+You need to create a Dockerfile document that meets the following requirements:
+✑ Call setupScripts.ps1 when the container is built.
+✑ Run ContosoApp.dll when the container starts.
+The Dockerfile document must be created in the same folder where ContosoApp.dll and setupScript.ps1 are stored.
+Which five commands should you use to develop the solution? To answer, move the appropriate commands from the list of commands to the answer area and arrange them in the correct order.
+Select and Place:
+
+![](./img/58-1.png)
+
+It should be:
+- FROM
+- WORKDIR
+- COPY
+- RUN
+- CMD
+
+Same question on:
+https://www.examtopics.com/discussions/microsoft/view/13131-exam-az-300-topic-3-question-4-discussion/
+
+And:
+https://www.examtopics.com/discussions/microsoft/view/11045-exam-az-203-topic-1-question-7-discussion/
+
+---
+
+59
+
+You are developing an Azure Function App that processes images that are uploaded to an Azure Blob container.
+Images must be processed as quickly as possible after they are uploaded, and the solution must minimize latency. You create code to process images when the Function App is triggered.
+You need to configure the Function App.
+What should you do?
+
+	A. Use an App Service plan. Configure the Function App to use an Azure Blob Storage input trigger.
+	B. Use a Consumption plan. Configure the Function App to use an Azure Blob Storage trigger.
+	C. Use a Consumption plan. Configure the Function App to use a Timer trigger.
+	D. Use an App Service plan. Configure the Function App to use an Azure Blob Storage trigger.
+	E. Use a Consumption plan. Configure the Function App to use an Azure Blob Storage input trigger.
+
+Correct Answer: D
+
+The answer is D. Use an App Service plan. Configure the Function App to use an Azure Blob Storage trigger.
+**Consumption plan can cause a 10-min delay in processing new blobs if a function app has gone idle.** To avoid this latency, you can switch to an App Service plan with Always On enabled.
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=csharp
+
+Consumption Plan（消耗计划）：
+
+计费模型： 消耗计划是一种无服务器计算模型，您根据实际执行函数时消耗的资源支付费用。
+
+App Service Plan（应用服务计划）：
+
+计费模型： 应用服务计划是一种更传统的托管模型，您根据分配的虚拟机资源支付费用，而不考虑实际使用情况。
+
+---
+
+60
+
+HOTSPOT -
+You are configuring a new development environment for a Java application.
+The environment requires a Virtual Machine Scale Set (VMSS), several storage accounts, and networking components.
+The VMSS must not be created until the storage accounts have been successfully created and an associated load balancer and virtual network is configured.
+How should you complete the Azure Resource Manager template? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![](./img/60-1.png)
+
+![](./img/60-2.png)
+
+Box 1: copyIndex
+Notice that the name of each resource includes the copyIndex() function, which returns the current iteration in the loop. copyIndex() is zero-based.
+
+Box 2: copy
+By adding copy loop to the resources section of your template, you can dynamically set the number of resources to deploy. You also avoid having to repeat template syntax.
+
+Box 3: dependsOn
+Within your Azure Resource Manager template (ARM template), the dependsOn element enables you to define one resource as a dependent on one or more resources.
+
+Reference:
+https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/copy-resources
+https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/quick-create-template-windows
+https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/define-resource-dependency
+
 
