@@ -1458,4 +1458,281 @@ https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/copy-res
 https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/quick-create-template-windows
 https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/define-resource-dependency
 
+---
+
+61
+
+HOTSPOT
+You are developing an Azure Function App by using Visual Studio. The app will process orders input by an Azure Web App. The web app places the order information into Azure Queue Storage.
+You need to review the Azure Function App code shown below.
+
+![](./img/61-1.png)
+
+![](./img/61-2.png)
+
+![](./img/61-3.png)
+
+Box 1: No
+It logs the following:
+- ExpirationTime - The time that the message expires.
+- InsertionTime - The time that the message was added to the queue.
+
+Box 2: Yes
+maxDequeueCount: The number of times to try processing a message before moving it to the poison queue. Default value is 5.
+
+Box 3: Yes
+When there are multiple queue messages waiting, the queue trigger retrieves a batch of messages and invokes function instances concurrently to process them. By default, the batch size is 16. When the number being processed gets down to 8, the runtime gets another batch and starts processing those messages. So the maximum number of concurrent messages being processed per function on one virtual machine (VM) is 24.
+
+Box 4: Yes
+[Table("Orders")]ICollector<Order> table bindings
+And in the code it adds the order:
+tableBindings.Add(JsonConvert.DeserializeObject<Object>(myQueueItem.AsString));
+
+---
+
+62
+
+DRAG DROP
+You are developing a solution for a hospital to support the following use cases:
+✑ The most recent patient status details must be retrieved even if multiple users in different locations have updated the patient record.
+✑ Patient health monitoring data retrieved must be the current version or the prior version.
+✑ After a patient is discharged and all charges have been assessed, the patient billing record contains the final charges.
+You provision a Cosmos DB NoSQL database and set the default consistency level for the database account to Strong. You set the value for Indexing Mode to
+Consistent.
+You need to minimize latency and any impact to the availability of the solution. You must override the default consistency level at the query level to meet the required consistency guarantees for the scenarios.
+Which consistency levels should you implement? To answer, drag the appropriate consistency levels to the correct requirements. Each consistency level may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![](./img/62-1.png)
+
+![](./img/62-2.png)
+
+Box 1: Strong
+
+Box 2: Bounded staleness
+
+Box 3: Eventual
+
+Note: Consistent prefix: Updates that are returned contain some prefix of all the updates, with no gaps. Consistent prefix guarantees that reads never see out-of-order writes.
+
+Reference:
+https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels
+
+The most recent patient status details must be retrieved even if multiple users in different locations have updated the patient record.
+
+建议使用 Strong Consistency（强一致性）： 因为需要确保即使多个用户在不同地点更新了患者记录，也能够获取到最新的患者状态详情，这要求保证读取操作具有最新的一致性。
+Patient health monitoring data retrieved must be the current version or the prior version.
+
+建议使用 Bounded Staleness Consistency（有界陈旧一致性）： 由于要求获取患者健康监测数据时可以是当前版本或上一个版本，这表明可以接受一定程度的陈旧，因此使用有界陈旧一致性是一个合理的选择。
+After a patient is discharged and all charges have been assessed, the patient billing record contains the final charges.
+
+建议使用 Eventual Consistency（最终一致性）： 因为在患者出院并评估所有费用后，患者的计费记录包含最终费用，这种情况下，对于计费记录的一致性要求可能没有那么高，可以接受稍有延迟，因此最终一致性是一个适当的选择。
+
+---
+
+63
+
+HOTSPOT -
+You are configuring a development environment for your team. You deploy the latest Visual Studio image from the Azure Marketplace to your Azure subscription.
+The development environment requires several software development kits (SDKs) and third-party components to support application development across the organization. You install and customize the deployed virtual machine (VM) for your development team. The customized VM must be saved to allow provisioning of a new team member development environment.
+You need to save the customized VM for future provisioning.
+Which tools or services should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+
+![](./img/63-1.png)
+
+![](./img/63-2.png)
+
+Box 1: Azure Powershell
+Creating an image directly from the VM ensures that the image includes all of the disks associated with the VM, including the OS disk and any data disks. Before you begin, make sure that you have the latest version of the Azure PowerShell module. You use Sysprep to generalize the virtual machine, then use Azure PowerShell to create the image.
+
+Box 2: Azure Blob Storage
+A VM Image is a collection of metadata and pointers to a set of VHDs (one VHD per disk) stored as page blobs in Azure Storage.
+
+Reference:
+
+https://azure.microsoft.com/en-us/blog/vm-image-blog-post
+
+https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource
+
+---
+
+64
+
+You are preparing to deploy a website to an Azure Web App from a GitHub repository. The website includes static content generated by a script.
+You plan to use the Azure Web App continuous deployment feature.
+You need to run the static generation script before the website starts serving traffic.
+What are two possible ways to achieve this goal? Each correct answer presents a complete solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Add the path to the static content generation tool to WEBSITE_RUN_FROM_PACKAGE setting in the host.json file.
+	B. Add a PreBuild target in the websites csproj project file that runs the static content generation script.
+	C. Create a file named run.cmd in the folder /run that calls a script which generates the static content and deploys the website.
+	D. Create a file named .deployment in the root of the repository that calls a script which generates the static content and deploys the website.
+
+BD 不确定
+
+两种可能的方式来在 Azure Web App 连续部署之前运行静态生成脚本是：
+
+B. 在网站的 csproj 项目文件中添加 PreBuild 目标，运行静态内容生成脚本。
+
+通过在项目文件中添加 PreBuild 目标，可以确保在构建过程中运行静态内容生成脚本。
+D. 在仓库的根目录下创建名为 .deployment 的文件，调用一个脚本来生成静态内容并部署网站。
+
+创建一个名为 .deployment 的文件，其中包含对静态内容生成脚本的调用，这样可以确保在部署时运行该脚本。
+这两个选项都提供了在 Web App 连续部署之前运行静态生成脚本的完整解决方案。
+
+---
+
+65
+
+DRAG DROP
+You are developing an application to use Azure Blob storage. You have configured Azure Blob storage to include change feeds.
+A copy of your storage account must be created in another region. Data must be copied from the current storage account to the new storage account directly between the storage servers.
+You need to create a copy of the storage account in another region and copy the data.
+In which order should you perform the actions? To answer, move all actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![](./img/65-1.jpg)
+
+![](./img/65-2.jpg)
+
+
+I think you first have to export the Resource Manager template before you can create a new template deployment. **So, swap options 1 and 2 from the solution.** In the first link of the solution's text, exporting is also considere as the first step.
+
+	Export
+	Create
+	Modify
+	Deploy
+	AZ copy
+
+---
+
+66
+
+DRAG DROP
+You are preparing to deploy an Azure virtual machine (VM)-based application.
+The VMs that run the application have the following requirements:
+✑ When a VM is provisioned the firewall must be automatically configured before it can access Azure resources.
+✑ Supporting services must be installed by using an Azure PowerShell script that is stored in Azure Storage.
+You need to ensure that the requirements are met.
+Which features should you use? To answer, drag the appropriate features to the correct requirements. Each feature may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![](./img/66-1.jpg)
+
+Box 1: Run Command
+This capability is useful in all scenarios where you want to run a script within a VM. It's one of the only ways to troubleshoot and remediate a VM that doesn't have the RDP or SSH port open, because of improper network or administrative user configuration.
+
+Box 2: Customer Script Extension
+The Custom Script Extension downloads and executes scripts on Azure virtual machines. This extension is useful for post deployment configuration, software installation, or any other configuration or management tasks. Scripts can be downloaded from Azure storage or GitHub, or provided to the Azure portal at extension run time. The Custom Script Extension integrates with Azure Resource Manager templates, and can be run using the Azure CLI, PowerShell, Azure portal, or the Azure Virtual Machine REST API.
+
+---
+
+67
+
+A company is developing a Node.js web app. The web app code is hosted in a GitHub repository located at https://github.com/TailSpinToys/webapp.
+The web app must be reviewed before it is moved to production. You must deploy the initial code release to a deployment slot named review.
+You need to create the web app and deploy the code.
+How should you complete the commands? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![](./img/67-1.jpg)
+
+![](./img/67-2.jpg)
+
+
+Box 1: New-AzResourceGroup
+The New-AzResourceGroup cmdlet creates an Azure resource group.
+
+Box 2: New-AzAppServicePlan
+The New-AzAppServicePlan cmdlet creates an Azure App Service plan in a given location
+
+Box 3: New-AzWebApp
+The New-AzWebApp cmdlet creates an Azure Web App in a given a resource group
+
+Box 4: New-AzWebAppSlot
+The New-AzWebAppSlot cmdlet creates an Azure Web App slot
+
+---
+
+68
+
+HOTSPOT -
+You are developing an application that needs access to an Azure virtual machine (VM).
+The access lifecycle for the application must be associated with the VM service instance.
+You need to enable managed identity for the VM.
+How should you complete the PowerShell segment? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![](./img/68-1.jpg)
+
+![](./img/68-2.jpg)
+
+Box 1: -IdentityType
+-IdentityType: The type of identity used for the virtual machine. Valid values are SystemAssigned, UserAssigned, SystemAssignedUserAssigned, and None.
+
+-IdentityId: Specifies the list of user identities associated with the virtual machine. The user identity references will be ARM resource IDs in the form:
+
+Box 2: $SystemAssigned
+There are two types of managed identities:
+- System-assigned: Some Azure services allow you to enable a managed identity directly on a service instance. When you enable a system-assigned managed identity an identity is created in Azure AD that is tied to the lifecycle of that service instance. So when the resource is deleted, Azure automatically deletes the identity for you. By design, only that Azure resource can use this identity to request tokens from Azure AD.
+- User-assigned: You may also create a managed identity as a standalone Azure resource. You can create a user-assigned managed identity and assign it to one or more instances of an Azure service. In the case of user-assigned managed identities, the identity is managed separately from the resources that use it.
+
+---
+
+69
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop a software as a service (SaaS) offering to manage photographs. Users upload photos to a web service which then stores the photos in Azure
+Storage Blob storage. The storage account type is General-purpose V2.
+When photos are uploaded, they must be processed to produce and save a mobile-friendly version of the image. The process to produce a mobile-friendly version of the image must start in less than one minute.
+You need to design the process that starts the photo processing.
+Solution: Create an Azure Function app that uses the Consumption hosting model and that is triggered from the blob upload.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B
+
+Answer should be "No". **Consumption plan can take up to several minutes** to trigger the function. See note from https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-storage-blob-triggered-function.
+
+"When your function app runs in the default Consumption plan, there may be a delay of up to several minutes between the blob being added or updated and the function being triggered. If you need low latency in your blob triggered functions, consider running your function app in an App Service plan."
+
+---
+
+70
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop and deploy an Azure App Service API app to a Windows-hosted deployment slot named Development. You create additional deployment slots named Testing and Production. You enable auto swap on the Production deployment slot.
+You need to ensure that scripts run and resources are available before a swap operation occurs.
+Solution: Update the app with a method named statuscheck to run the scripts. Update the app settings for the app. Set the
+WEBSITE_SWAP_WARMUP_PING_PATH and WEBSITE_SWAP_WARMUP_PING_STATUSES with a path to the new method and appropriate response codes.
+Does the solution meet the goal?
+
+	A. No
+	B. Yes
+
+B 不确定
+
+Should be YES?
+https://docs.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+
+You can also customize the warm-up behavior with one or both of the following app settings:
+
+WEBSITE_SWAP_WARMUP_PING_PATH: The path to ping to warm up your site. Add this app setting by specifying a custom path that begins with a slash as the value. An example is /statuscheck. The default value is /.
+WEBSITE_SWAP_WARMUP_PING_STATUSES: Valid HTTP response codes for the warm-up operation. Add this app setting with a comma-separated list of HTTP codes. An example is 200,202 . If the returned status code isn't in the list, the warmup and swap operations are stopped. By default, all response codes are valid.
+WEBSITE_WARMUP_PATH: A relative path on the site that should be pinged whenever the site restarts (not only during slot swaps). Example values include /statuscheck or the root path, /.
+
+---
+
+
+
 
