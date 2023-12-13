@@ -2452,7 +2452,7 @@ Hot Area:
 
 ![96-1](./img/96-1.jpg)
 
-![96-2](./img/96-2.png)
+![96-2](./img/96-2.jpg)
 
 Box 1: BoundedStaleness -
 Bounded staleness: The reads are guaranteed to honor the consistent-prefix guarantee. The reads might lag behind writes by at most "K" versions (that is,
@@ -2575,4 +2575,280 @@ Does the solution meet the goal?
 B
 
 It should be EventHub, not EventGrid.
+
+---
+
+101
+
+Question #8Topic 3
+You develop Azure solutions.
+A .NET application needs to receive a message each time an Azure virtual machine finishes processing data. The messages must NOT persist after being processed by the receiving application.
+You need to implement the .NET object that will receive the messages.
+Which object should you use?
+
+	A. QueueClient
+	B. SubscriptionClient
+	C. TopicClient
+	D. CloudQueueClient
+
+Correct Answer: A
+
+Azure.Storage.Queues.QueueClient: .NET v12
+Azure.Storage.Queues.CloudQueueClient: .NET v11 (Legacy)
+
+So, the question is really about what kind of queue message tool you should use. And the key word here is that "message must NOT persist after being processed".
+
+Azure.Storage.Queues.QueueClient supports "At-Most-Once" deliver mode, while Azure.Storage.Queues.CloudQueueClient doesn't.
+
+Reference:
+
+https://docs.microsoft.com/en-us/dotnet/api/azure.storage.queues.queueclient?view=azure-dotnet
+
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.storage.queue.cloudqueueclient?view=azure-dotnet-legacy
+
+---
+
+102
+
+Question #9Topic 3
+DRAG DROP -
+You are maintaining an existing application that uses an Azure Blob GPv1 Premium storage account. Data older than three months is rarely used.
+Data newer than three months must be available immediately. Data older than a year must be saved but does not need to be available immediately.
+You need to configure the account to support a lifecycle management rule that moves blob data to archive storage for data not modified in the last year.
+Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![102-1](./img/102-1.jpg)
+
+不确定
+
+Step 1: Upgrade the storage account to GPv2
+Object storage data tiering between hot, cool, and archive is supported in Blob Storage and General Purpose v2 (GPv2) accounts. General Purpose v1 (GPv1) accounts don't support tiering. You can easily convert your existing GPv1 or Blob Storage accounts to GPv2 accounts through the Azure portal.
+
+Step 2: Create a new GPV2 standard account with default access level to cool
+
+Step 3: Copy the data to be archived to a Standard GPv2 storage account and then delete the data from the original storage account
+
+---
+
+103
+
+Question #10Topic 3
+You develop Azure solutions.
+You must connect to a No-SQL globally-distributed database by using the .NET API.
+You need to create an object to configure and execute requests in the database.
+Which code segment should you use?
+
+	A. new Container(EndpointUri, PrimaryKey);
+	B. new Database(EndpointUri, PrimaryKey);
+	C. new CosmosClient(EndpointUri, PrimaryKey);
+
+Correct Answer: C
+
+
+你需要使用的是：
+
+C. new CosmosClient(EndpointUri, PrimaryKey);
+
+CosmosClient 用于与 Azure Cosmos DB 进行交互，而在这种情况下，你是要连接到一个 No-SQL 全球分布的数据库。
+
+---
+
+104
+
+Question #11Topic 3
+You have an existing Azure storage account that stores large volumes of data across multiple containers.
+You need to copy all data from the existing storage account to a new storage account. The copy process must meet the following requirements:
+✑ Automate data movement.
+✑ Minimize user input required to perform the operation.
+✑ Ensure that the data movement process is recoverable.
+What should you use?
+
+	A. AzCopy
+	B. Azure Storage Explorer
+	C. Azure portal
+	D. .NET Storage Client Library
+
+Correct Answer: A
+
+Answer – AzCopy, The Azcopy tool can be used to copy data from one storage account to another. You can use the tool within automation scripts to ensure the data can be copied automatically.
+
+---
+
+105
+
+Question #12Topic 3
+DRAG DROP -
+You are developing a web service that will run on Azure virtual machines that use Azure Storage. You configure all virtual machines to use managed identities.
+You have the following requirements:
+✑ Secret-based authentication mechanisms are not permitted for accessing an Azure Storage account.
+✑ Must use only Azure Instance Metadata Service endpoints.
+You need to write code to retrieve an access token to access Azure Storage. To answer, drag the appropriate code segments to the correct locations. Each code segment may be used once or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![105-1](./img/105-1.jpg)
+
+![105-2](./img/105-2.jpg)
+
+Box 1: http://169.254.169.254/metadata/identity/oauth2/token
+Sample request using the Azure Instance Metadata Service (IMDS) endpoint (recommended):
+GET 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/' HTTP/1.1 Metadata: true
+
+Box 2: JsonConvert.DeserializeObject<Dictionary<string,string>>(payload);
+Deserialized token response; returning access code.
+
+
+Reference:
+
+https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-use-vm-token
+
+https://docs.microsoft.com/en-us/azure/service-fabric/how-to-managed-identity-service-fabric-app-code
+
+--
+
+106
+
+DRAG DROP -
+You are developing a new page for a website that uses Azure Cosmos DB for data storage. The feature uses documents that have the following format:
+
+```
+{
+	"name": "John",
+	"city": "Seattle"
+}
+```
+
+You must display data for the new page in a specific order. You create the following query for the page:
+
+```
+SELECT *
+FROM Peaple p
+ORDER BY p.name, p.city DESC
+```
+
+You need to configure a Cosmos DB policy to support the query.
+How should you configure the policy? To answer, drag the appropriate JSON segments to the correct locations. Each JSON segment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![106-1](./img/106-1.png)
+
+![106-2](./img/106-2.png)
+
+ORDER BY queries on multiple properties:
+The composite index also supports an ORDER BY clause with the opposite order on all paths.
+
+So I think it's about reversed index to the query. **Answer should be 'ascending'. You cannot support ASC (default), DESC query with DESC, DESC index**
+
+---
+
+107
+
+Question #14Topic 3
+HOTSPOT -
+You are building a traffic monitoring system that monitors traffic along six highways. The system produces time series analysis-based reports for each highway.
+Data from traffic sensors are stored in Azure Event Hub.
+Traffic data is consumed by four departments. Each department has an Azure Web App that displays the time series-based reports and contains a WebJob that processes the incoming data from Event Hub. All Web Apps run on App Service Plans with three instances.
+Data throughput must be maximized. Latency must be minimized.
+You need to implement the Azure Event Hub.
+Which settings should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![107-1](./img/107-1.png)
+
+![107-2](./img/107-2.png)
+
+Partitions relate to producers - and the logical way to partition the incoming data is by the only value you have at that point, the highway name/id. So the selected answer is correct (6 Partitions, by Highway).
+
+People are getting confused by the departments which would actually each be an event consumer with an associated Consumer Group which would have it's own isolated view of each of the highway partitions.
+
+---
+
+108
+
+Question #15Topic 3
+DRAG DROP -
+You are developing a microservices solution. You plan to deploy the solution to a multinode Azure Kubernetes Service (AKS) cluster.
+You need to deploy a solution that includes the following features:
+✑ reverse proxy capabilities
+✑ configurable traffic routing
+✑ TLS termination with a custom certificate
+Which components should you use? To answer, drag the appropriate components to the correct requirements. Each component may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![108-1](./img/108-1.png)
+
+![108-2](./img/108-2.png)
+
+Box 1: Helm
+Helm helps you manage Kubernetes applications — Helm Charts help you define, install, and upgrade even the most complex Kubernetes application. To create the ingress controller, use Helm to install nginx-ingress.
+
+Box 2: Kubectl
+The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters. To find the cluster IP address of a Kubernetes pod, use the kubectl get pod command on your local machine, with the option -o wide .
+
+Box 3: Ingress Controller
+An ingress controller is a piece of software that provides reverse proxy, configurable traffic routing, and TLS termination for Kubernetes services. Kubernetes ingress resources are used to configure the ingress rules and routes for individual Kubernetes services. Using an ingress controller and ingress rules, a single IP address can be used to route traffic to multiple services in a Kubernetes cluster.
+
+---
+
+109
+
+DRAG DROP -
+You are implementing an order processing system. A point of sale application publishes orders to topics in an Azure Service Bus queue. The Label property for the topic includes the following data:
+
+![109-1](./img/109-1.png)
+
+The system has the following requirements for subscriptions:
+
+![109-2](./img/109-2.png)
+
+You need to implement filtering and maximize throughput while evaluating filters.
+Which filter types should you implement? To answer, drag the appropriate filter types to the correct subscriptions. Each filter type may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![109-3](./img/109-3.png)
+
+![109-4](./img/109-4.png)
+
+-Correlation Filter (with the not existing value of any filed to avoid getting any message)
+-SQL filter (as we need to get all high priority AND international orders, but for Correlation filter: A match exists when an arriving message's value for a property is equal to the value specified in the correlation filter and we need not equal)
+-SQL filter
+-SQL filter
+-No Filter
+
+---
+
+110
+
+Question #17Topic 3
+DRAG DROP -
+Your company has several websites that use a company logo image. You use Azure Content Delivery Network (CDN) to store the static image.
+You need to determine the correct process of how the CDN and the Point of Presence (POP) server will distribute the image and list the items in the correct order.
+In which order do the actions occur? To answer, move all actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![110-1](./img/110-1.jpg)
+
+![110-2](./img/110-2.jpg)
+
+Step 1: A user requests the image..
+A user requests a file (also called an asset) by using a URL with a special domain name, such as <endpoint name>.azureedge.net. This name can be an endpoint hostname or a custom domain. The DNS routes the request to the best performing POP location, which is usually the POP that is geographically closest to the user.
+
+Step 2: If no edge servers in the POP have the..
+If no edge servers in the POP have the file in their cache, the POP requests the file from the origin server. The origin server can be an Azure Web App, Azure
+Cloud Service, Azure Storage account, or any publicly accessible web server.
+
+Step 3: The origin server returns the..
+The origin server returns the file to an edge server in the POP.
+An edge server in the POP caches the file and returns the file to the original requestor (Alice). The file remains cached on the edge server in the POP until the time-to-live (TTL) specified by its HTTP headers expires. If the origin server didn't specify a TTL, the default TTL is seven days.
+
+Step 4: Subsequent requests for..
+Additional users can then request the same file by using the same URL that the original user used, and can also be directed to the same POP.
+If the TTL for the file hasn't expired, the POP edge server returns the file directly from the cache. This process results in a faster, more responsive user experience.
+Reference:
+https://docs.microsoft.com/en-us/azure/cdn/cdn-overview
 
