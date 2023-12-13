@@ -2281,3 +2281,298 @@ Single (单一)： 所有容器实例都使用相同的 Revision Label，因此�
 Multiple (多个)： 不同的容器实例可以使用不同的 Revision Label，因此可以在同一环境中部署多个版本的容器。
 在使用 Azure Container Apps 时，通过这些概念，你可以更灵活地管理和更新你的容器环境中的微服务。
 
+---
+
+91
+
+Question #54Topic 2
+HOTSPOT
+
+You plan to develop an Azure Functions app with an HTTP trigger.
+
+The app must support the following requirements:
+
+• Event-driven scaling
+• Ability to use custom Linux images for function execution
+
+You need to identify the app’s hosting plan and the maximum amount of time that the app function can take to respond to incoming requests.
+
+Which configuration setting values should you use? To answer, select the appropriate values in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![91-1](./img/91-1.png)
+
+![91-2](./img/91-2.png)
+
+Correct:
+The Premium plan supports event-driven scaling and allows to use custom Linux images.
+The default timeout for Azure Functions on the Consumption and Premium plans is 5 minutes (300 seconds), and 230 is a good fit.
+
+---
+
+92
+
+HOTSPOT
+
+You develop a Python application for image rendering. The application uses GPU resources to optimize rendering processes.
+
+You have the following requirements:
+
+• The application must be deployed to a Linux container.
+• The container must be stopped when the image rendering is complete.
+• The solution must minimize cost.
+
+You need to deploy the application to Azure.
+
+![92-1](./img/92-1.png)
+
+ACI - Because the GPU usage. Kubernetes can manage ACIs but is not a 'compute target' and it will increment the cost.
+"The container instances in the group can access one or more NVIDIA Tesla GPUs while running container workloads such as CUDA and deep learning applications."
+https://learn.microsoft.com/en-us/azure/container-instances/container-instances-gpu
+
+Restart Policy - To stop the container after the execution (In fact is avoiding to restart it after a succeeded execution)
+"Set an appropriate restart policy for the container instance, depending on whether the command-line specifies a long-running task or a run-once task. For example, a restart policy of Never or OnFailure is recommended for a run-once task."
+https://learn.microsoft.com/en-us/azure/container-instances/container-instances-start-command#command-line-guidelines
+
+---
+
+93
+
+Question #56Topic 2
+HOTSPOT
+
+You plan to develop an Azure Functions app with an Azure Blob Storage trigger. The app will be used infrequently, with a limited duration of individual executions.
+
+The app must meet the following requirements:
+
+• Event-driven scaling
+• Support for deployment slots
+• Minimize costs
+
+You need to identify the hosting plan and the maximum duration when executing the app.
+
+Which configuration setting values should you use? To answer, select the appropriate values in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+
+![93-1](./img/93-1.png)
+
+Right Answer: Premium - 230
+
+Event-Driven requirement:
+Is only souported by Consumption and Premium
+https://learn.microsoft.com/en-us/azure/azure-functions/functions-scale#scale
+
+Slot requirement:
+Is only souported by Dedicated and Premium
+"Function apps running under the Apps Service plan may have multiple slots, while under the Consumption plan only one slot is allowed."
+https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots
+
+Minimize costs:
+Is not relevant because there is just one service plan that meets the previous requirements
+
+---
+
+94
+
+Question #1Topic 3
+HOTSPOT -
+You are developing a solution that uses the Azure Storage Client library for .NET. You have the following code: (Line numbers are included for reference only.)
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![94-1](./img/94-1.jpg)
+
+![94-2](./img/94-2.png)
+
+![94-3](./img/94-3.png)
+
+Box 1: Yes -
+AcquireLeaseAsync does not specify leaseTime.
+leaseTime is a TimeSpan representing the span of time for which to acquire the lease, which will be rounded down to seconds. If null, an infinite lease will be acquired. If not null, this must be 15 to 60 seconds.
+
+Box 2: No -
+The GetBlockBlobReference method just gets a reference to a block blob in this container.
+
+Box 3: Yes -
+The BreakLeaseAsync method initiates an asynchronous operation that breaks the current lease on this container.
+Reference:
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.storage.blob.cloudblobcontainer.acquireleaseasync https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.storage.blob.cloudblobcontainer.getblockblobreference https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.storage.blob.cloudblobcontainer.breakleaseasync
+
+I think the answer is correct:
+
+Optional. Version 2012-02-12 and newer. For a break operation, this is the proposed duration of seconds that the lease should continue before it is broken, between 0 and 60 seconds. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately.
+From: https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
+
+---
+
+95
+
+Question #2Topic 3
+You are building a website that uses Azure Blob storage for data storage. You configure Azure Blob storage lifecycle to move all blobs to the archive tier after 30 days.
+Customers have requested a service-level agreement (SLA) for viewing data older than 30 days.
+You need to document the minimum SLA for data recovery.
+Which SLA should you use?
+
+	A. at least two days
+	B. between one and 15 hours
+	C. at least one day
+	D. between zero and 60 minutes
+
+Correct Answer: B
+
+The archive access tier has the lowest storage cost. But it has higher data retrieval costs compared to the hot and cool tiers. Data in the archive tier can take several hours to retrieve depending on the priority of the rehydration. For small objects, a high priority rehydrate may retrieve the object from archive in under 1 hour.
+Reference:
+https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-storage-tiers?tabs=azure-portal
+
+- Standard priority: The rehydration request will be processed in the order it was received and may take up to 15 hours.
+- High priority: The rehydration request will be prioritized over Standard requests and may finish in under 1 hour for objects under ten GB in size.
+
+---
+
+96
+
+Question #3Topic 3
+HOTSPOT -
+You are developing a ticket reservation system for an airline.
+The storage solution for the application must meet the following requirements:
+✑ Ensure at least 99.99% availability and provide low latency.
+✑ Accept reservations even when localized network outages or other unforeseen failures occur.
+✑ Process reservations in the exact sequence as reservations are submitted to minimize overbooking or selling the same seat to multiple travelers.
+✑ Allow simultaneous and out-of-order reservations with a maximum five-second tolerance window.
+You provision a resource group named airlineResourceGroup in the Azure South-Central US region.
+You need to provision a SQL API Cosmos DB account to support the app.
+How should you complete the Azure CLI commands? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![96-1](./img/96-1.jpg)
+
+![96-2](./img/96-2.png)
+
+Box 1: BoundedStaleness -
+Bounded staleness: The reads are guaranteed to honor the consistent-prefix guarantee. The reads might lag behind writes by at most "K" versions (that is,
+"updates") of an item or by "T" time interval. In other words, when you choose bounded staleness, the "staleness" can be configured in two ways:
+The number of versions (K) of the item
+The time interval (T) by which the reads might lag behind the writes
+Incorrect Answers:
+
+Strong -
+Strong consistency offers a linearizability guarantee. Linearizability refers to serving requests concurrently. The reads are guaranteed to return the most recent committed version of an item. A client never sees an uncommitted or partial write. Users are always guaranteed to read the latest committed write.
+
+Box 2: --enable-automatic-failover true\
+For multi-region Cosmos accounts that are configured with a single-write region, enable automatic-failover by using Azure CLI or Azure portal. After you enable automatic failover, whenever there is a regional disaster, Cosmos DB will automatically failover your account.
+Question: Accept reservations event when localized network outages or other unforeseen failures occur.
+
+Box 3: --locations'southcentralus=0 eastus=1 westus=2
+Need multi-region.
+Reference:
+https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/cosmos-db/manage-with-cli.md
+
+**there is a --max-interval property which is being used with bounded staleness only**
+
+No need to overthink here, max-interval, indicates this must be bounded-slateness, enable-automatic-failover, indicated this must be multi-region
+
+
+---
+
+97
+
+Question #4Topic 3
+HOTSPOT -
+You are preparing to deploy a Python website to an Azure Web App using a container. The solution will use multiple containers in the same container group. The
+Dockerfile that builds the container is as follows:
+
+	FROM python:3
+	ADD website.py
+	CMD [ "python", "./website.py" ]
+
+You build a container by using the following command. The Azure Container Registry instance named images is a private registry.
+
+`docker build -t images.azurecr.io/website:v1.0.0`
+
+The user name and password for the registry is admin.
+The Web App must always run the same version of the website regardless of future builds.
+You need to create an Azure Web App to run the website.
+How should you complete the commands? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![97-1](./img/97-1.jpg)
+
+```
+--sku B1 --is-linux
+--deployment-container-image-name images.azurecr.io/website:v1.0.0
+-- container set --docker-registry-server-url https://images.azurecr.io -u admin -p admin
+```
+
+---
+
+98
+
+Question #5Topic 3
+HOTSPOT -
+You are developing a back-end Azure App Service that scales based on the number of messages contained in a Service Bus queue.
+A rule already exists to scale up the App Service when the average queue length of unprocessed and valid queue messages is greater than 1000.
+You need to add a new rule that will continuously scale down the App Service as long as the scale up condition is not met.
+How should you configure the Scale rule? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![98-1](./img/98-1.jpg)
+
+The correct answers are
+	1) Service bus queue
+	2) Active message count
+	3) Average
+	4) Less than or equal to
+	5) Decrease count by
+
+
+---
+
+99
+
+Question #6Topic 3
+DRAG DROP -
+You have an application that uses Azure Blob storage.
+You need to update the metadata of the blobs.
+Which three methods should you use to develop the solution? To answer, move the appropriate methods from the list of methods to the answer area and arrange them in the correct order.
+Select and Place:
+
+![99-1](./img/99-1.jpg)
+
+Since we're talking about updating the metadata,
+- first we need to fetch it, to populate blob's properties and metadata (we want to update it - without fetching we would just set the new metadata):
+FetchAttributesAsync
+
+- second, we need to manipulate the metadatas to update them and the best fitting is
+Metadata.Add
+
+- third, we have to persist our changes. We can use a method that initiates an asynchronous operation to update the blob's metadata, which is
+SetMetadataAsync
+
+---
+
+100
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure solution to collect point-of-sale (POS) device data from 2,000 stores located throughout the world. A single device can produce
+2 megabytes (MB) of data every 24 hours. Each store location has one to five devices that send data.
+You must store the device data in Azure Blob storage. Device data must be correlated based on a device identifier. Additional stores are expected to open in the future.
+You need to implement a solution to receive the device data.
+Solution: Provision an Azure Event Grid. Configure the machine identifier as the partition key and enable capture.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B
+
+It should be EventHub, not EventGrid.
+
