@@ -3146,5 +3146,309 @@ Lazy（延迟）： 在这个模式下，写入操作不会立即更新索引，
 
 在这个问题中，要求确保索引在创建、更新或删除项时得到同步更新，因此最佳选择是将索引模式设置为 Consistent。
 
+---
+
+121
+
+Question #28Topic 3
+You are developing a .Net web application that stores data in Azure Cosmos DB. The application must use the Core API and allow millions of reads and writes.
+The Azure Cosmos DB account has been created with multiple write regions enabled. The application has been deployed to the East US2 and Central US regions.
+You need to update the application to support multi-region writes.
+What are two possible ways to achieve this goal? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+A. Update the ConnectionPolicy class for the Cosmos client and populate the PreferredLocations property based on the geo-proximity of the application. Most Voted
+B. Update Azure Cosmos DB to use the Strong consistency level. Add indexed properties to the container to indicate region.
+C. Update the ConnectionPolicy class for the Cosmos client and set the UseMultipleWriteLocations property to true. Most Voted
+D. Create and deploy a custom conflict resolution policy.
+E. Update Azure Cosmos DB to use the Session consistency level. Send the SessionToken property value from the FeedResponse object of the write action to the end-user by using a cookie.
+
+
+AC
+
+The goal is
+
+"You need to update the application to support multi-region writes",
+
+that is enable multi-region writes (bool, option C) and add the regions (option A)
+Then you have to apply the Conflict resolution policies.This can be LLW(default, not mentioned) or custom (option D).
+
+Hence : there is only ONE way to to support multi-region writes (both apply C AND A) and there are subsequently TWO ways to apply the Conflict resolution policies (@ SQL) to solve write, update and delete conflicts of which one is mentioned in the question (D).
+To support multi-region writes I would answer A and C , but they have to be set both, not one or the other.
+See https://learn.microsoft.com/en-us/azure/cosmos-db/sql/how-to-multi-master?tabs=api-async and https://learn.microsoft.com/en-us/azure/cosmos-db/conflict-resolution-policies
+
+---
+
+122
+
+Question #29Topic 3
+HOTSPOT -
+You are developing a solution to store documents in Azure Blob storage. Customers upload documents to multiple containers. Documents consist of PDF, CSV,
+Microsoft Office format and plain text files.
+The solution must process millions of documents across hundreds of containers. The solution must meet the following requirements:
+✑ Documents must be categorized by a customer identifier as they are uploaded to the storage account.
+✑ Allow filtering by the customer identifier.
+✑ Allow searching of information contained within a document
+✑ Minimize costs.
+You create and configure a standard general-purpose v2 storage account to support the solution.
+You need to implement the solution.
+What should you implement? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![122-1](./img/122-1.png)
+
+![122-2](./img/122-2.png)
+
+Box 1: Azure Blob index tags -
+As datasets get larger, finding a specific object in a sea of data can be difficult. Blob index tags provide data management and discovery capabilities by using key- value index tag attributes. You can categorize and find objects within a single container or across all containers in your storage account. As data requirements change, objects can be dynamically categorized by updating their index tags. Objects can remain in-place with their current container organization.
+
+Box 2: Azure Cognitive Search -
+Only index tags are automatically indexed and made searchable by the native Blob Storage service. Metadata can't be natively indexed or searched. You must use a separate service such as Azure Search.
+Azure Cognitive Search is the only cloud search service with built-in AI capabilities that enrich all types of information to help you identify and explore relevant content at scale. Use cognitive skills for vision, language, and speech, or use custom machine learning models to uncover insights from all types of content.
+Reference:
+https://docs.microsoft.com/en-us/azure/storage/blobs/storage-manage-find-blobs https://azure.microsoft.com/en-us/services/search/
+
+
+Azure Blob Indexer Tags 和 Azure Cognitive Search 是两个 Azure 服务，它们可以结合使用来实现对 Azure Blob 存储中的内容进行索引和搜索的功能。
+
+Azure Blob Indexer Tags:
+
+功能： Azure Blob Indexer Tags 是 Azure Blob 存储的一项功能，允许你在 Blob 上应用标签（tags）。标签是键值对，可以应用于 Blob、容器或文件系统目录。标签的使用可用于分类、组织和检索 Blob 数据。
+用途： 通过 Blob Indexer Tags，你可以在 Blob 存储中为对象附加元数据，例如对内容的分类、版本、所有者等信息进行标记。这些标签可以提供额外的上下文信息，方便后续的搜索和组织。
+Azure Cognitive Search:
+
+功能： Azure Cognitive Search 是一项强大的搜索即服务（Search-as-a-Service），可以帮助你在大规模的文本数据集中实现全文搜索、分析和信息提取。
+用途： 通过 Azure Cognitive Search，你可以创建全文搜索索引，对文本数据进行索引和搜索。它支持高级搜索功能，如全文搜索、模糊搜索、分析和过滤。还可以通过集成 Azure Blob 存储和其他数据源，将多种类型的数据纳入搜索范围。
+
+---
+
+123
+
+Question #30Topic 3
+HOTSPOT -
+You are developing a web application by using the Azure SDK. The web application accesses data in a zone-redundant BlockBlobStorage storage account.
+The application must determine whether the data has changed since the application last read the data. Update operations must use the latest data changes when writing data to the storage account.
+You need to implement the update operations.
+Which values should you use? To answer, select the appropriate option in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![123-1](./img/123-1.png)
+
+I think it should be:
+- ETag - server returns this tag for a resource to ensure we operate on the same version of the resource in subsequent API calls
+- If-Match - update is processed by the server only if the ETag provided matches the latest resource version ETag
+
+The reason for that is we want to make sure we update the latest version of a resource:
+"Update operations must use the latest data changes when writing"
+So, when using Last-Modified with If-Modified-Since, the operation executes only when another client modifies the resource between our READ and WRITE operations.
+If we wanted to use Last-Modified instead, we would need If-Unmodified-Since instead.
+
+---
+
+124
+
+Question #31Topic 3
+HOTSPOT -
+An organization deploys a blob storage account. Users take multiple snapshots of the blob storage account over time.
+You need to delete all snapshots of the blob storage account. You must not delete the blob storage account itself.
+How should you complete the code segment? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![124-1](./img/124-1.png)
+
+![124-2](./img/124-2.png)
+
+it is DeleteSnapshotsOption.OnlySnapshots but the explanation in the answer is bogus as usual.
+see https://learn.microsoft.com/en-us/dotnet/api/azure.storage.blobs.models.deletesnapshotsoption?view=azure-dotnet
+
+---
+
+125
+
+Question #32Topic 3
+HOTSPOT -
+An organization deploys a blob storage account. Users take multiple snapshots of the blob storage account over time.
+You need to delete all snapshots of the blob storage account. You must not delete the blob storage account itself.
+How should you complete the code segment? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![125-1](./img/125-1.jpg)
+
+![125-2](./img/125-2.jpg)
+
+The answer looks correct and the link proves it:
+Link to exact line with comment:
+https://github.com/Azure/azure-sdk-for-python/blob/main/sdk/storage/azure-storage-blob/samples/blob_samples_common.py#L65
+
+---
+
+126
+
+Question #33Topic 3
+HOTSPOT
+
+You are developing an application that monitors data added to an Azure Blob storage account.
+
+You need to process each change made to the storage account.
+
+How should you complete the code segment? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![126-1](./img/126-1.png)
+
+I've tried the code in VS. Here's some thoughts:
+1. box:
+	- GetChanges() - wrong - var c in the foreach would be BlobChangeFeedEvent which doesn't contain Values property used in ProcessChanges(c.Values) line below
+	- GetChangesAsync - wrong - code won't compile because it would require await foreach loop instead
+	- GetChanges(x).AsPages() - correct - it's the only option to make this code even compile
+	- GetChanges(x).GetEnumerator() - wrong - you cannot use IEnumerator type as foreach source
+2. box:
+	- x = c.ContinuationToken - right - variable x was used as continuationToken parameter in changeFeedClient.GetChanges(x).AsPages() above
+	- c.GetRawResponse().ReasonPhrase - wrong - that does not make sense to use this value as continuation token
+	- x = c.Values.Min - wrong - continuation token is a number not date
+	- x = c.Values.Max - wrong - as above
+
+So to sum up
+	1. changeFeedClient.GetChanges(x).AsPages()
+	2. x = c.ContinuationToken;
+
+You can find more about Continuation Token here:
+https://jessehouwing.net/azure-devops-accessing-apis-with-large-volumes-of-data/
+
+---
+
+127
+
+Question #34Topic 3
+HOTSPOT
+-
+
+You develop an application that sells AI generated images based on user input. You recently started a marketing campaign that displays unique ads every second day.
+
+Sales data is stored in Azure Cosmos DB with the date of each sale being stored in a property named ‘whenFinished’.
+
+The marketing department requires a view that shows the number of sales for each unique ad.
+You need to implement the query for the view.
+
+How should you complete the query? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![127-1](./img/127-1.png)
+
+![127-2](./img/127-2.png)
+
+Correct!
+Can't be DateTimePart as it takes two args only, see https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/query/date-time-functions
+
+---
+
+128
+
+Question #35Topic 3
+HOTSPOT
+-
+
+You implement an Azure solution to include Azure Cosmos DB, the latest Azure Cosmos DB SDK, and the Core (SQL) API. You also implement a change feed processor on a new container instance by using the Azure Functions trigger for Azure Cosmos DB.
+
+A large batch of documents continues to fail when reading one of the documents in the batch. The same batch of documents is continuously retried by the triggered function and a new batch of documents must be read.
+
+You need to implement the change feed processor to read the documents.
+
+Which feature should you implement? To answer, select the appropriate features in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![128-1](./img/128-1.png)
+
+![128-2](./img/128-2.png)
+
+---
+
+129
+
+Question #36Topic 3
+You are developing an application to store business-critical data in Azure Blob storage.
+
+The application must meet the following requirements:
+
+• Data must not be modified or deleted for a user-specified interval.
+• Data must be protected from overwrites and deletes.
+• Data must be written once and allowed to be read many times.
+
+You need to protect the data in the Azure Blob storage account.
+
+Which two actions should you perform? Each correct answer presents part of the solution.
+
+NOTE: Each correct selection is worth one point.
+
+	A. Configure a time-based retention policy for the storage account.
+	B. Create an account shared-access signature (SAS).
+	C. Enable the blob change feed for the storage account.
+	D. Enable version-level immutability support for the storage account.
+	E. Enable point-in-time restore for containers in the storage account.
+	F. Create a service shared-access signature (SAS).
+
+AD
+
+I think the answer should be AD
+
+A. Configure a time-based retention policy for the storage account
+- A time-based retention policy stores blob data in a Write-Once, Read-Many (WORM) format for a specified interval. When a time-based retention policy is set, clients can create and read blobs, but can't modify or delete them. After the retention interval has expired, blobs can be deleted but not overwritten.
+https://learn.microsoft.com/en-us/azure/storage/blobs/immutable-time-based-retention-policy-overview
+
+D. Before you can apply a time-based retention policy to a blob version, you must enable support for version-level immutability.
+https://learn.microsoft.com/en-us/azure/storage/blobs/immutable-policy-configure-version-scope?tabs=azure-portal
+
+
+为了保护 Azure Blob 存储中的数据，以满足指定的要求，您应执行以下两个操作：
+
+为存储帐户启用版本级别的不可变性支持：
+
+这有助于确保在用户指定的时间段内不能修改或删除数据。版本级别的不可变性防止在保留策略中指定的期间内删除或修改 blob。
+为存储帐户配置基于时间的保留策略：
+
+这与版本级别的不可变性相辅相成，通过为数据保留设置基于时间的策略。在保留期间，数据无法修改或删除。
+因此，正确的操作是：
+
+A. 为存储帐户配置基于时间的保留策略。
+D. 为存储帐户启用版本级别的不可变性支持。
+
+---
+
+130
+
+Question #37Topic 3
+You are updating an application that stores data on Azure and uses Azure Cosmos DB for storage. The application stores data in multiple documents associated with a single username.
+
+The application requires the ability to update multiple documents for a username in a single ACID operation.
+
+You need to configure Azure Cosmos DB.
+
+Which two actions should you perform? Each correct answer presents part of the solution.
+
+NOTE: Each correct selection is worth one point.
+
+	A. Create a collection sharded on username to store documents.
+	B. Configure Azure Cosmos DB to use the Gremlin API.
+	C. Create an unsharded collection to store documents.
+	D. Configure Azure Cosmos DB to use the MongoDB API.
+
+Correct Answer: CD 
+
+To update multiple documents for a username in a single ACID operation in Azure Cosmos DB, you need to ensure that the documents are stored in the same logical partition.
+
+To do this, you should perform the following actions:
+
+Create an unsharded collection to store documents. This will ensure that all documents are stored in the same logical partition.
+Configure Azure Cosmos DB to use the MongoDB API. The MongoDB API supports multi-document ACID transactions, which allow you to update multiple documents in a single atomic operation.
+
+---
+
+
 
 
