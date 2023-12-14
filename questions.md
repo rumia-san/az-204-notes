@@ -3449,6 +3449,340 @@ Configure Azure Cosmos DB to use the MongoDB API. The MongoDB API supports multi
 
 ---
 
+131
 
+Question #38Topic 3
+You develop Azure solutions.
+
+You must connect to a No-SQL globally-distributed database by using the .NET API.
+
+You need to create an object to configure and execute requests in the database.
+
+Which code segment should you use?
+
+	A. database_name = 'MyDatabase'
+	database = client.create_database_if_not_exists(id=database_name)
+	B. client = CosmosClient(endpoint, key)
+	C. container_name = 'MyContainer'
+	container = database.create_container_if_not_exists(
+	id=container_name, partition_key=PartitionKey(path="/lastName"), offer_throughput=400 )
+
+Correct Answer: B
+
+---
+
+132
+
+Question #39Topic 3
+You develop a web application that provides access to legal documents that are stored on Azure Blob Storage with version-level immutability policies. Documents are protected with both time-based policies and legal hold policies. All time-based retention policies have the AllowProtectedAppendWrites property enabled.
+
+You have a requirement to prevent the user from attempting to perform operations that would fail only when a legal hold is in effect and when all other policies are expired.
+
+You need to meet the requirement.
+
+Which two operations should you prevent? Each correct answer presents a complete solution.
+
+NOTE: Each correct selection is worth one point.
+
+	A. adding data to documents
+	B. deleting documents
+	C. creating documents
+	D. overwriting existing documents
+
+Correct Answer: BD
+
+The legal hold policies prevent the deletion of the legal documents that are stored on Azure Blob Storage, but they do not prevent other types of operations such as read, write, or update. Therefore, you need to prevent the following two operations that would fail only when a legal hold is in effect and when all other policies are expired:
+
+Delete operation: When a legal hold is in effect and all other policies are expired, attempting to delete the document will fail. Therefore, you should prevent the user from attempting to delete a document.
+
+Overwrite operation: When a legal hold is in effect and all other policies are expired, attempting to overwrite the document with a new version will fail. Therefore, you should prevent the user from attempting to overwrite a document with a new version.
+
+---
+
+133
+
+Question #40Topic 3
+HOTSPOT
+
+You provisioned an Azure Cosmos DB for NoSQL account named account1 with the default consistency level.
+
+You plan to configure the consistency level on a per request basis. The level needs to be set for consistent prefix for read and write operations to account1.
+
+You need to identify the resulting consistency level for read and write operations.
+
+Which levels should you configure? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![133-1](./img/133-1.png)
+
+![133-2](./img/133-2.png)
+
+The Given answer is correct. Only Read Consistency can be set by client. Write stays at server setting which is session by default.
+https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/how-to-manage-consistency?tabs=portal%2Cdotnetv2%2Capi-async#override-the-default-consistency-level
+
+---
+
+134
+
+Question #41Topic 3
+DRAG DROP
+
+
+You are developing an application to store millions of images in Azure blob storage. The images are uploaded to an Azure blob storage container named companyimages contained in an Azure blob storage account named companymedia. The stored images are uploaded with multiple blob index tags across multiple blobs in the container.
+
+You must find all blobs whose tags match a search expression in the container. The search expression must evaluate an index tag named status with a value of final.
+
+You need to construct the GET method request URI.
+
+How should you complete the URI? To answer, drag the appropriate parameters to the correct request URI targets. Each parameter may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+
+![134-1](./img/134-1.png)
+
+![134-2](./img/134-2.png)
+
+Answer is correct!
+
+---
+
+135
+
+Question #42Topic 3
+HOTSPOT
+
+You develop two Python scripts to process data.
+
+The Python scripts must be deployed to two, separate Linux containers running in an Azure Container Instance container group. The containers must access external data by using the Server Message Block (SMB) protocol. Containers in the container group must run only once.
+
+You need to configure the Azure Container Instance.
+
+Which configuration value should you use? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![135-1](./img/135-1.png)
+
+![135-2](./img/135-2.png)
+
+Azure File Share is the only option that supports SMB
+
+---
+
+136
+
+Question #43Topic 3
+HOTSPOT
+
+You are developing a static website hosted on Azure Blob Storage. You create a storage account and enable static website hosting.
+
+The website must support the following requirements:
+
+• Custom domain name
+• Custom header values for all responses
+• Custom SSL certificate
+
+You need to implement the static website.
+
+What should you configure? To answer, select the appropriate values in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![136-1](./img/136-1.png)
+
+![136-2](./img/136-2.png)
+
+Answer seems correct.
+"Static websites have some limitations. For example, If you want to configure headers, you'll have to use Azure Content Delivery Network (Azure CDN)" and " To enable HTTPS, you'll have to use Azure CDN because Azure Storage doesn't yet natively support HTTPS with custom domains"
+
+https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website
+
+---
+
+137
+
+Question #44Topic 3
+You are developing an inventory tracking solution. The solution includes an Azure Function app containing multiple functions triggered by Azure Cosmos DB. You plan to deploy the solution to multiple Azure regions.
+
+The solution must meet the following requirements:
+
+• Item results from Azure Cosmos DS must return the most recent committed version of an item.
+• Items written to Azure Cosmos DB must provide ordering guarantees.
+
+You need to configure the consistency level for the Azure Cosmos DB deployments.
+
+Which consistency level should you use?
+
+	A. consistent prefix
+	B. eventual
+	C. bounded staleness
+	D. strong
+	E. session
+
+D 不确定
+
+I think it's D.
+Strong consistency is not supported for multiple WRITE regions, and I don't see any such requirements in the question. https://learn.microsoft.com/en-us/azure/cosmos-db/high-availability#multiple-write-regions
+
+---
+
+138
+
+Question #45Topic 3
+HOTSPOT
+
+You are developing an application that runs in several customer Azure Kubernetes Service clusters. Within each cluster, a pod runs that collects performance data to be analyzed later. A large amount of data is collected so saving latency must be minimized.
+
+The performance data must be stored so that pod restarts do not impact the stored data. Write latency should be minimized.
+
+You need to configure blob storage.
+
+How should you complete the YAML configuration? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![138-1](./img/138-1.png)
+
+![138-2](./img/138-2.png)
+
+---
+
+139
+
+Question #46Topic 3
+HOTSPOT
+-
+
+
+Case study
+-
+
+This is a case study. Case studies are not timed separately. You can use as much exam time as you would like to complete each case. However, there may be additional case studies and sections on this exam. You must manage your time to ensure that you are able to complete all questions included on this exam in the time provided.
+
+To answer the questions included in a case study, you will need to reference information that is provided in the case study. Case studies might contain exhibits and other resources that provide more information about the scenario that is described in the case study. Each question is independent of the other questions in this case study.
+
+At the end of this case study, a review screen will appear. This screen allows you to review your answers and to make changes before you move to the next section of the exam. After you begin a new section, you cannot return to this section.
+
+
+To start the case study
+-
+To display the first question in this case study, click the Next button. Use the buttons in the left pane to explore the content of the case study before you answer the questions. Clicking these buttons displays information such as business requirements, existing environment, and problem statements. When you are ready to answer a question, click the Question button to return to the question.
+
+
+Background
+-
+
+VanArsdel, Ltd. is a global office supply company. The company is based in Canada and has retail store locations across the world. The company is developing several cloud-based solutions to support their stores, distributors, suppliers, and delivery services.
+
+
+Current environment
+-
+
+
+Corporate website
+-
+
+The company provides a public website located at http://www.vanarsdelltd.com. The website consists of a React JavaScript user interface, HTML, CSS, image assets, and several APIs hosted in Azure Functions.
+
+
+Retail Store Locations
+-
+
+The company supports thousands of store locations globally. Store locations send data every hour to an Azure Blob storage account to support inventory, purchasing and delivery services. Each record includes a location identifier and sales transaction information.
+
+
+Requirements
+-
+
+The application components must meet the following requirements:
+
+
+Corporate website
+-
+
+• Secure the website by using SSL.
+• Minimize costs for data storage and hosting.
+• Implement native GitHub workflows for continuous integration and continuous deployment (CI/CD).
+• Distribute the website content globally for local use.
+• Implement monitoring by using Application Insights and availability web tests including SSL certificate validity and custom header value verification.
+• The website must have 99.95 percent uptime.
+
+
+Retail store locations
+-
+
+• Azure Functions must process data immediately when data is uploaded to Blob storage. Azure Functions must update Azure Cosmos DB by using native SQL language queries.
+• Audit store sale transaction information nightly to validate data, process sales financials, and reconcile inventory.
+
+
+Delivery services
+-
+
+• Store service telemetry data in Azure Cosmos DB by using an Azure Function. Data must include an item id, the delivery vehicle license plate, vehicle package capacity, and current vehicle location coordinates.
+• Store delivery driver profile information in Azure Active Directory (Azure AD) by using an Azure Function called from the corporate website.
+
+
+Inventory services
+-
+
+The company has contracted a third-party to develop an API for inventory processing that requires access to a specific blob within the retail store storage account for three months to
+include read-only access to the data.
+
+
+Security
+-
+
+• All Azure Functions must centralize management and distribution of configuration data for different environments and geographies, encrypted by using a company-provided RSA-HSM key.
+• Authentication and authorization must use Azure AD and services must use managed identities where possible.
+
+
+Issues
+-
+
+
+Retail Store Locations
+-
+
+• You must perform a point-in-time restoration of the retail store location data due to an unexpected and accidental deletion of data.
+• Azure Cosmos DB queries from the Azure Function exhibit high Request Unit (RU) usage and contain multiple, complex queries that exhibit high point read latency for large items as the function app is scaling.
+
+
+You need to implement the delivery service telemetry data.
+
+How should you configure the solution? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![139-1](./img/139-1.png)
+
+![139-2](./img/139-2.png)
+
+不确定
+
+API: "Core (SQL)"
+Partition Key: "Item id"
+
+---
+
+140
+
+Question #47Topic 3
+You create and publish a new Azure App Service web app.
+
+User authentication and authorization must use Azure Active Directory (Azure AD).
+
+You need to configure authentication and authorization.
+
+What should you do first?
+
+	A. Add an identity provider.
+	B. Map an existing custom DNS name.
+	C. Create and configure a new app setting.
+	D. Add a private certificate.
+	E. Create and configure a managed identity.
+
+A- Add an identity provide is correct
+https://learn.microsoft.com/en-us/azure/app-service/scenario-secure-app-authentication-app-service#3-configure-authentication-and-authorization
+
+---
 
 
