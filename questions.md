@@ -2852,3 +2852,299 @@ If the TTL for the file hasn't expired, the POP edge server returns the file dir
 Reference:
 https://docs.microsoft.com/en-us/azure/cdn/cdn-overview
 
+---
+
+111
+
+Question #18Topic 3
+You are developing an Azure Cosmos DB solution by using the Azure Cosmos DB SQL API. The data includes millions of documents. Each document may contain hundreds of properties.
+The properties of the documents do not contain distinct values for partitioning. Azure Cosmos DB must scale individual containers in the database to meet the performance needs of the application by spreading the workload evenly across all partitions over time.
+You need to select a partition key.
+Which two partition keys can you use? Each correct answer presents a complete solution.
+NOTE: Each correct selection is worth one point.
+
+	A. a single property value that does not appear frequently in the documents
+	B. a value containing the collection name
+	C. a single property value that appears frequently in the documents
+	D. a concatenation of multiple property values with a random suffix appended
+	E. a hash suffix appended to a property value
+
+Correct Answer: DE
+
+You can form a partition key by concatenating multiple property values into a single artificial partitionKey property. These keys are referred to as synthetic keys.
+Another possible strategy to distribute the workload more evenly is to append a random number at the end of the partition key value. When you distribute items in this way, you can perform parallel write operations across partitions.
+Note: It's the best practice to have a partition key with many distinct values, such as hundreds or thousands. The goal is to distribute your data and workload evenly across the items associated with these partition key values. If such a property doesn't exist in your data, you can construct a synthetic partition key.
+Reference:
+https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/synthetic-partition-keys
+
+---
+
+112
+
+HOTSPOT -
+You are developing an Azure-hosted e-commerce web application. The application will use Azure Cosmos DB to store sales orders. You are using the latest SDK to manage the sales orders in the database.
+You create a new Azure Cosmos DB instance. You include a valid endpoint and valid authorization key to an appSettings.json file in the code project.
+You are evaluating the following application code: (Line number are included for reference only.)
+
+![112-1](./img/112-1.png)
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![112-2](./img/112-2.jpg)
+
+![112-3](./img/112-3.jpg)
+
+Box 1: Yes
+The createDatabaseIfNotExistsAsync method checks if a database exists, and if it doesn't, create it. (Line 22)
+The Database.CreateContainerAsync method creates a container as an asynchronous operation in the Azure Cosmos service. (Line 23 and 24)
+
+Box 2: Yes
+The CosmosContainer.CreateItemAsync method creates an item as an asynchronous operation in the Azure Cosmos service. (Line 26 and 28)
+
+Box 3: Yes
+The CosmosContainer.CreateItemAsync method creates an item as an asynchronous operation in the Azure Cosmos service. (Line 30)
+
+---
+
+113
+
+Question #20Topic 3
+DRAG DROP -
+You develop an Azure solution that uses Cosmos DB.
+The current Cosmos DB container must be replicated and must use a partition key that is optimized for queries.
+You need to implement a change feed processor solution.
+Which change feed processor components should you use? To answer, drag the appropriate components to the correct requirements. Each component may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view the content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![113-1](./img/113-1.png)
+
+![113-2](./img/113-2.png)
+
+Box 1: The monitored container -
+The monitored container has the data from which the change feed is generated. Any inserts and updates to the monitored container are reflected in the change feed of the container.
+
+Box 2: The lease container -
+The lease container acts as a state storage and coordinates processing the change feed across multiple workers. The lease container can be stored in the same account as the monitored container or in a separate account.
+Box 3: The host: A host is an application instance that uses the change feed processor to listen for changes. Multiple instances with the same lease configuration can run in parallel, but each instance should have a different instance name.
+
+Box 4: The delegate -
+The delegate is the code that defines what you, the developer, want to do with each batch of changes that the change feed processor reads.
+Reference:
+https://docs.microsoft.com/en-us/azure/cosmos-db/change-feed-processor
+
+---
+
+114
+
+Question #21Topic 3
+HOTSPOT -
+You are developing a web application that will use Azure Storage. Older data will be less frequently used than more recent data.
+You need to configure data storage for the application. You have the following requirements:
+✑ Retain copies of data for five years.
+✑ Minimize costs associated with storing data that is over one year old.
+✑ Implement Zone Redundant Storage for application data.
+What should you do? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![114-1](./img/114-1.png)
+
+![114-2](./img/114-2.png)
+
+---
+
+115
+
+Question #22Topic 3
+HOTSPOT -
+A company develops a series of mobile games. All games use a single leaderboard service.
+You have the following requirements:
+✑ Code must be scalable and allow for growth.
+✑ Each record must consist of a playerId, gameId, score, and time played.
+✑ When users reach a new high score, the system will save the new score using the SaveScore function below.
+Each game is assigned an Id based on the series title.
+
+You plan to store customer information in Azure Cosmos DB. The following data already exists in the database:
+
+![115-1](./img/115-1.png)
+
+![115-2](./img/115-2.png)
+
+![115-5](./img/115-5.jpg)
+
+![115-3](./img/115-3.png)
+
+![115-4](./img/115-4.png)
+
+Box 1: Yes -
+Create a table.
+A CloudTableClient object lets you get reference objects for tables and entities. The following code creates a CloudTableClient object and uses it to create a new
+CloudTable object, which represents a table
+// Retrieve storage account from connection-string.
+CloudStorageAccount storageAccount =
+CloudStorageAccount.parse(storageConnectionString);
+// Create the table client.
+CloudTableClient tableClient = storageAccount.createCloudTableClient();
+// Create the table if it doesn't exist.
+String tableName = "people";
+CloudTable cloudTable = tableClient.getTableReference(tableName); cloudTable.createIfNotExists();
+
+Box 2: No -
+New records are inserted with TableOperation.insert. Old records are not updated.
+To update old records TableOperation.insertOrReplace should be used instead.
+
+Box 3: No -
+
+Box 4: Yes -
+Reference:
+https://docs.microsoft.com/en-us/azure/cosmos-db/table-storage-how-to-use-java
+
+---
+
+116
+
+Question #23Topic 3
+You develop and deploy a web application to Azure App Service. The application accesses data stored in an Azure Storage account. The account contains several containers with several blobs with large amounts of data. You deploy all Azure resources to a single region.
+You need to move the Azure Storage account to the new region. You must copy all data to the new region.
+What should you do first?
+
+	A. Export the Azure Storage account Azure Resource Manager template
+	B. Initiate a storage account failover
+	C. Configure object replication for all blobs
+	D. Use the AzCopy command line tool
+	E. Create a new Azure Storage account in the current region
+	F. Create a new subscription in the current region
+
+Correct Answer: A
+
+We can create a new Storage account in the new region, using the existing storage account ARM template. All we need to do is change the region name after exporting the ARM of existing account..
+
+---
+
+117
+
+Question #24Topic 3
+HOTSPOT -
+You are developing an application to collect the following telemetry data for delivery drivers: first name, last name, package count, item id, and current location coordinates. The app will store the data in Azure Cosmos DB.
+You need to configure Azure Cosmos DB to query the data.
+Which values should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![117-1](./img/117-1.png)
+
+![117-2](./img/117-2.png)
+
+Box 1: Core (SQL)
+Core(SQL) API stores data in document format. It offers the best end-to-end experience as we have full control over the interface, service, and the SDK client libraries. SQL API supports analytics and offers performance isolation between operational and analytical workloads.
+
+Box 2: item id -
+item id is a unique identifier and is suitable for the partition key.
+Reference:
+https://docs.microsoft.com/en-us/azure/cosmos-db/choose-api
+https://docs.microsoft.com/en-us/azure/cosmos-db/partitioning-overview
+
+---
+
+118
+
+Question #25Topic 3
+DRAG DROP -
+You are implementing an Azure solution that uses Azure Cosmos DB and the latest Azure Cosmos DB SDK. You add a change feed processor to a new container instance.
+You attempt to read a batch of 100 documents. The process fails when reading one of the documents. The solution must monitor the progress of the change feed processor instance on the new container as the change feed is read. You must prevent the change feed processor from retrying the entire batch when one document cannot be read.
+You need to implement the change feed processor to read the documents.
+Which features should you use? To answer, drag the appropriate features to the cored requirements. Each feature may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each cored selection is worth one point.
+Select and Place:
+
+![118-1](./img/118-1.jpg)
+
+![118-2](./img/118-2.jpg)
+
+Box 1: Change feed estimator -
+You can use the change feed estimator to monitor the progress of your change feed processor instances as they read the change feed or use the life cycle notifications to detect underlying failures.
+
+Box 2: Dead-letter queue -
+To prevent your change feed processor from getting "stuck" continuously retrying the same batch of changes, you should add logic in your delegate code to write documents, upon exception, to a dead-letter queue. This design ensures that you can keep track of unprocessed changes while still being able to continue to process future changes. The dead-letter queue might be another Cosmos container. The exact data store does not matter, simply that the unprocessed changes are persisted.
+Reference:
+https://docs.microsoft.com/en-us/azure/cosmos-db/sql/change-feed-processor
+
+---
+
+119
+
+Question #26Topic 3
+HOTSPOT -
+You are developing an application that uses a premium block blob storage account. The application will process a large volume of transactions daily. You enable
+Blob storage versioning.
+You are optimizing costs by automating Azure Blob Storage access tiers. You apply the following policy rules to the storage account. (Line numbers are included for reference only.)
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![119-1](./img/119-1.png)
+
+![119-2](./img/119-2.png)
+
+![119-3](./img/119-3.png)
+
+不确定
+
+Box 1: No -
+Would be true if daysAfterModificationGreaterThan was used, but here daysAfterCreationGreaterThan
+
+Box 2: No -
+Would need to use the daysAfterLastAccessTimeGreaterThan predicate.
+
+Box 3: Yes -
+
+Box 4: No
+is no present line "enableAutoTierToHotFromCool": true
+
+I guess, third statement (The policy rule tiers..) result is Yes.
+Container name "transactions" is in prefixMatch.
+
+https://docs.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview#archive-data-after-ingest
+
+Solution is:
+- No
+- No
+- Yes
+- No
+
+---
+
+120
+
+Question #27Topic 3
+An organization deploys Azure Cosmos DB.
+You need to ensure that the index is updated as items are created, updated, or deleted.
+What should you do?
+
+	A. Set the indexing mode to Lazy.
+	B. Set the value of the automatic property of the indexing policy to False.
+	C. Set the value of the EnableScanInQuery option to True.
+	D. Set the indexing mode to Consistent. 
+
+Correct Answer: D
+
+Azure Cosmos DB supports two indexing modes:
+Consistent: The index is updated synchronously as you create, update or delete items. This means that the consistency of your read queries will be the consistency configured for the account.
+None: Indexing is disabled on the container.
+Reference:
+https://docs.microsoft.com/en-us/azure/cosmos-db/index-policy
+
+Azure Cosmos DB 具有不同的索引模式，其中两种常见的模式是 Consistent 和 Lazy。
+
+Consistent（一致性）： 在这个模式下，索引会在写入（创建、更新、删除）时同步更新。这确保了在查询时能够获得最新的数据，但也会导致写入操作的延迟。
+
+Lazy（延迟）： 在这个模式下，写入操作不会立即更新索引，而是在后台异步进行。这可以减少写入操作的延迟，但在查询时可能会遇到一些较旧的数据，因为索引的更新有一些延迟。
+
+在这个问题中，要求确保索引在创建、更新或删除项时得到同步更新，因此最佳选择是将索引模式设置为 Consistent。
+
+
+
