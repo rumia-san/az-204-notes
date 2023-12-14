@@ -3325,7 +3325,6 @@ https://jessehouwing.net/azure-devops-accessing-apis-with-large-volumes-of-data/
 
 Question #34Topic 3
 HOTSPOT
--
 
 You develop an application that sells AI generated images based on user input. You recently started a marketing campaign that displays unique ads every second day.
 
@@ -3351,7 +3350,6 @@ Can't be DateTimePart as it takes two args only, see https://learn.microsoft.com
 
 Question #35Topic 3
 HOTSPOT
--
 
 You implement an Azure solution to include Azure Cosmos DB, the latest Azure Cosmos DB SDK, and the Core (SQL) API. You also implement a change feed processor on a new container instance by using the Azure Functions trigger for Azure Cosmos DB.
 
@@ -3650,11 +3648,9 @@ NOTE: Each correct selection is worth one point.
 
 Question #46Topic 3
 HOTSPOT
--
 
 
 Case study
--
 
 This is a case study. Case studies are not timed separately. You can use as much exam time as you would like to complete each case. However, there may be additional case studies and sections on this exam. You must manage your time to ensure that you are able to complete all questions included on this exam in the time provided.
 
@@ -3664,40 +3660,40 @@ At the end of this case study, a review screen will appear. This screen allows y
 
 
 To start the case study
--
+
 To display the first question in this case study, click the Next button. Use the buttons in the left pane to explore the content of the case study before you answer the questions. Clicking these buttons displays information such as business requirements, existing environment, and problem statements. When you are ready to answer a question, click the Question button to return to the question.
 
 
 Background
--
+
 
 VanArsdel, Ltd. is a global office supply company. The company is based in Canada and has retail store locations across the world. The company is developing several cloud-based solutions to support their stores, distributors, suppliers, and delivery services.
 
 
 Current environment
--
+
 
 
 Corporate website
--
+
 
 The company provides a public website located at http://www.vanarsdelltd.com. The website consists of a React JavaScript user interface, HTML, CSS, image assets, and several APIs hosted in Azure Functions.
 
 
 Retail Store Locations
--
+
 
 The company supports thousands of store locations globally. Store locations send data every hour to an Azure Blob storage account to support inventory, purchasing and delivery services. Each record includes a location identifier and sales transaction information.
 
 
 Requirements
--
+
 
 The application components must meet the following requirements:
 
 
 Corporate website
--
+
 
 • Secure the website by using SSL.
 • Minimize costs for data storage and hosting.
@@ -3708,39 +3704,39 @@ Corporate website
 
 
 Retail store locations
--
+
 
 • Azure Functions must process data immediately when data is uploaded to Blob storage. Azure Functions must update Azure Cosmos DB by using native SQL language queries.
 • Audit store sale transaction information nightly to validate data, process sales financials, and reconcile inventory.
 
 
 Delivery services
--
+
 
 • Store service telemetry data in Azure Cosmos DB by using an Azure Function. Data must include an item id, the delivery vehicle license plate, vehicle package capacity, and current vehicle location coordinates.
 • Store delivery driver profile information in Azure Active Directory (Azure AD) by using an Azure Function called from the corporate website.
 
 
 Inventory services
--
+
 
 The company has contracted a third-party to develop an API for inventory processing that requires access to a specific blob within the retail store storage account for three months to
 include read-only access to the data.
 
 
 Security
--
+
 
 • All Azure Functions must centralize management and distribution of configuration data for different environments and geographies, encrypted by using a company-provided RSA-HSM key.
 • Authentication and authorization must use Azure AD and services must use managed identities where possible.
 
 
 Issues
--
+
 
 
 Retail Store Locations
--
+
 
 • You must perform a point-in-time restoration of the retail store location data due to an unexpected and accidental deletion of data.
 • Azure Cosmos DB queries from the Azure Function exhibit high Request Unit (RU) usage and contain multiple, complex queries that exhibit high point read latency for large items as the function app is scaling.
@@ -3784,5 +3780,281 @@ A- Add an identity provide is correct
 https://learn.microsoft.com/en-us/azure/app-service/scenario-secure-app-authentication-app-service#3-configure-authentication-and-authorization
 
 ---
+
+141
+
+Question #48Topic 3
+DRAG DROP
+
+You have an Azure Cosmos DB for NoSQL account.
+
+You plan to develop two apps named App1 and App2 that will use the change feed functionality to track changes to containers. App1 will use the pull model and App2 will use the push model.
+
+You need to choose the method to track the most recently processed change in App1 and App2.
+
+Which component should you use? To answer, drag the appropriate components to the correct apps. Each component may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+
+NOTE: Each correct selection is worth one point.
+
+![141-1](./img/141-1.png)
+
+![141-2](./img/141-2.png)
+
+Seems correct.
+
+App2 Push Model - Lease container
+"When reading from the Azure Cosmos DB change feed, we usually recommend using a push model because you won't need to worry about: ... Storing state for the last processed change. If you are reading from the change feed processor, state is automatically stored in a lease container.
+Ref:
+https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/read-change-feed#reading-change-feed-with-a-push-model"
+
+---
+
+142
+
+Question #49Topic 3
+You have a Linux container-based console application that uploads image files from customer sites all over the world. A back-end system that runs on Azure virtual machines processes the images by using the Azure Blobs API.
+
+You are not permitted to make changes to the application.
+
+Some customer sites only have phone-based internet connections.
+
+You need to configure the console application to access the images.
+
+What should you use?
+
+	A. Azure BlobFuse
+	B. Azure Disks
+	C. Azure Storage Network File System (NFS) 3.0 support
+	D. Azure Files
+
+A
+
+由于一些客户站点只能通过手机上网连接，因此最适合的选择是 Azure BlobFuse。
+
+答案：A. Azure BlobFuse
+
+Azure BlobFuse 是一个开源工具，允许将 Azure Blob 存储挂载为本地文件系统。它可以在 Linux 上运行，并且不需要修改应用程序。通过 BlobFuse，你可以将 Azure Blob 存储中的数据视为本地文件系统中的文件，从而可以轻松地在 Linux 容器中使用 Azure Blob 存储中的图像文件，而无需对应用程序进行任何更改。
+
+https://learn.microsoft.com/en-us/azure/storage/blobs/blobfuse2-what-is
+
+---
+
+143
+
+Question #50Topic 3
+DRAG DROP
+
+You are developing several microservices named serviceA, serviceB, and serviceC. You deploy the microservices to a new Azure Container Apps environment.
+
+You have the following requirements:
+
+• The microservices must persist data to storage.
+• serviceA must persist data only visible to the current container and the storage must be restricted to the amount of disk space available in the container.
+• serviceB must persist data for the lifetime of the replica and allow multiple containers in the replica to mount the same storage location.
+• serviceC must persist data beyond the lifetime of the replica while allowing multiple containers to access the storage and enable per object permissions.
+
+You need to configure storage for each microservice.
+
+Which storage type should you use? To answer, drag the appropriate storage types to the correct microservices. Each storage type may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+
+NOTE: Each correct selection is worth one point.
+
+![143-1](./img/143-1.png)
+
+![143-2](./img/143-2.png)
+
+Sorry. I'm mean:
+ServiceA: Container file system
+ServiceB: Ephemeral volumes (it lives as long as replica lives)
+ServiceC: Azure Blob Storage (it lives outside of replica. So it's beyond the lifetime. And we want to have blob instead of file)
+
+---
+
+144
+
+Question #1Topic 4
+You are developing a Java application that uses Cassandra to store key and value data. You plan to use a new Azure Cosmos DB resource and the Cassandra API in the application. You create an Azure Active Directory (Azure AD) group named Cosmos DB Creators to enable provisioning of Azure Cosmos accounts, databases, and containers.
+The Azure AD group must not be able to access the keys that are required to access the data.
+You need to restrict access to the Azure AD group.
+Which role-based access control should you use?
+
+	A. DocumentDB Accounts Contributor
+	B. Cosmos Backup Operator
+	C. Cosmos DB Operator
+	D. Cosmos DB Account Reader
+
+Correct Answer: C
+
+DocumentDB Account Contributor: Can manage Azure Cosmos DB accounts.
+
+Cosmos Backup Operator: Can submit a restore request for Azure portal for a periodic backup enabled database or a container. Can modify the backup interval and retention on the Azure portal. Cannot access any data or use Data Explorer.
+
+Cosmos DB Operator: Can provision Azure Cosmos accounts, databases, and containers. Cannot access any data or use Data Explorer.
+
+Cosmos DB Account Reader: Can read Azure Cosmos DB account data.
+CosmosRestoreOperator: Can perform restore action for Azure Cosmos DB account with continuous backup mode.
+
+Reference:
+https://docs.microsoft.com/en-us/azure/cosmos-db/role-based-access-control
+
+---
+
+145
+
+Question #2Topic 4
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing a website that will run as an Azure Web App. Users will authenticate by using their Azure Active Directory (Azure AD) credentials.
+You plan to assign users one of the following permission levels for the website: admin, normal, and reader. A user's Azure AD group membership must be used to determine the permission level.
+You need to configure authorization.
+Solution: Configure the Azure Web App for the website to allow only authenticated requests and require Azure AD log on.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: B 
+
+Here you need to create an application in Azure AD. Then set the groupMembershipClaims claims. Then inspect the token in the application to see if the user is part of that group.
+
+在一些场景下，特别是在使用 Azure AD 进行身份验证的应用程序中，可以根据应用程序的需要配置 groupMembershipClaims，以便在令牌中包含适当的组信息，用于进行访问控制或其他身份验证相关的操作。
+
+---
+
+146
+
+Question #3Topic 4
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing a website that will run as an Azure Web App. Users will authenticate by using their Azure Active Directory (Azure AD) credentials.
+You plan to assign users one of the following permission levels for the website: admin, normal, and reader. A user's Azure AD group membership must be used to determine the permission level.
+You need to configure authorization.
+Solution:
+✑ Create a new Azure AD application. In the application's manifest, set value of the groupMembershipClaims option to All.
+✑ In the website, use the value of the groups claim from the JWT for the user to determine permissions.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: A
+
+Reference:
+https://docs.microsoft.com/en-us/archive/blogs/waws/azure-app-service-authentication-aad-groups
+
+---
+
+147
+
+Question #4Topic 4
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing a website that will run as an Azure Web App. Users will authenticate by using their Azure Active Directory (Azure AD) credentials.
+You plan to assign users one of the following permission levels for the website: admin, normal, and reader. A user's Azure AD group membership must be used to determine the permission level.
+You need to configure authorization.
+Solution:
+✑ Create a new Azure AD application. In the application's manifest, define application roles that match the required permission levels for the application.
+✑ Assign the appropriate Azure AD group to each role. In the website, use the value of the roles claim from the JWT for the user to determine permissions.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+不确定
+
+I agree that this solution should work as well. The roles get assigned by AD groups, so the requirement "A user's Azure AD group membership must be used to determine the permission level" is met.
+
+This solution should be answered with "yes".
+
+This scenario has 2 solutions provided as the approach using the "groupMembershipClaims" is possible as well.
+That's OK as it says "Some question sets might have more than one correct solution, while others might not have a correct solution."
+
+---
+
+148
+
+Question #5Topic 4
+DRAG DROP -
+You are developing an application to securely transfer data between on-premises file systems and Azure Blob storage. The application stores keys, secrets, and certificates in Azure Key Vault. The application uses the Azure Key Vault APIs.
+The application must allow recovery of an accidental deletion of the key vault or key vault objects. Key vault objects must be retained for 90 days after deletion.
+You need to protect the key vault and key vault objects.
+Which Azure Key Vault feature should you use? To answer, drag the appropriate features to the correct actions. Each feature may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![148-1](./img/148-1.png)
+
+![148-2](./img/148-2.png)
+
+Box 1: Soft delete
+When soft-delete is enabled, resources marked as deleted resources are retained for a specified period (90 days by default). The service further provides a mechanism for recovering the deleted object, essentially undoing the deletion.
+This can be achieved with the help of the soft-delete feature of the key vault.
+
+Box 2: Purge protection
+Purge protection is an optional Key Vault behavior and is not enabled by default. Purge protection can only be enabled once soft-delete is enabled.
+When purge protection is on, a vault or an object in the deleted state cannot be purged until the retention period has passed. Soft-deleted vaults and objects can still be recovered, ensuring that the retention policy will be followed.
+This can be achieved with the help of the purge protection feature of the key vault.
+
+
+Reference:
+
+https://docs.microsoft.com/en-us/azure/key-vault/general/soft-delete-overview
+
+---
+
+149
+
+Question #6Topic 4
+You provide an Azure API Management managed web service to clients. The back-end web service implements HTTP Strict Transport Security (HSTS).
+Every request to the backend service must include a valid HTTP authorization header.
+You need to configure the Azure API Management instance with an authentication policy.
+Which two policies can you use? Each correct answer presents a complete solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Basic Authentication
+	B. Digest Authentication
+	C. Certificate Authentication
+	D. OAuth Client Credential Grant
+
+AC
+
+不确定
+
+Must be A,C As the API documentation only allows 3 options. It states: >>>>
+Authentication policies
+Authenticate with Basic - Authenticate with a backend service using Basic authentication.
+Authenticate with client certificate - Authenticate with a backend service using client certificates.
+Authenticate with managed identity - Authenticate with the managed identity for the API Management service.
+
+---
+
+150
+
+Question #7Topic 4
+DRAG DROP -
+You are developing an ASP.NET Core website that can be used to manage photographs which are stored in Azure Blob Storage containers.
+Users of the website authenticate by using their Azure Active Directory (Azure AD) credentials.
+You implement role-based access control (RBAC) role permissions on the containers that store photographs. You assign users to RBAC roles.
+You need to configure the website's Azure AD Application so that user's permissions can be used with the Azure Blob containers.
+How should you configure the application? To answer, drag the appropriate setting to the correct location. Each setting can be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![150-1](./img/150-1.png)
+
+![150-2](./img/150-2.png)
+
+Box 1: user_impersonation
+The built-in user_impersonation scope indicates that the token is being requested on behalf of the user. Azure Storage exposes a single delegation scope named user_impersonation that permits applications to take any action allowed by the user.
+
+Box 2: delegated
+
+Box 3: delegated
+
+Reference:
+https://stackoverflow.com/questions/31404128/azure-ad-app-application-permissions-vs-delegated-permissions
+https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent
+https://docs.microsoft.com/en-us/azure/storage/common/storage-auth-aad-app?tabs=dotnet
+https://docs.microsoft.com/en-us/rest/api/storageservices/authorize-with-azure-active-directory
 
 
