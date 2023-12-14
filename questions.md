@@ -4058,3 +4058,228 @@ https://docs.microsoft.com/en-us/azure/storage/common/storage-auth-aad-app?tabs=
 https://docs.microsoft.com/en-us/rest/api/storageservices/authorize-with-azure-active-directory
 
 
+---
+
+151
+
+Question #8Topic 4
+HOTSPOT -
+You are developing an ASP.NET Core app that includes feature flags which are managed by Azure App Configuration. You create an Azure App Configuration store named AppFeatureFlagStore that contains a feature flag named Export.
+You need to update the app to meet the following requirements:
+✑ Use the Export feature in the app without requiring a restart of the app.
+✑ Validate users before users are allowed access to secure resources.
+✑ Permit users to access secure resources.
+How should you complete the code segment? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![151-1](./img/151-1.png)
+
+UseAuthentication,
+Use Authorization,
+UseAzureAppConfiguration.
+
+The last option allows dynamic configuration to be reloaded without an app restart.
+https://docs.microsoft.com/en-us/azure/azure-app-configuration/enable-dynamic-configuration-aspnet-core?tabs=core5x
+
+---
+
+152
+
+Question #9Topic 4
+You have an application that includes an Azure Web app and several Azure Function apps. Application secrets including connection strings and certificates are stored in Azure Key Vault.
+Secrets must not be stored in the application or application runtime environment. Changes to Azure Active Directory (Azure AD) must be minimized.
+You need to design the approach to loading application secrets.
+What should you do?
+
+	A. Create a single user-assigned Managed Identity with permission to access Key Vault and configure each App Service to use that Managed Identity.
+	B. Create a single Azure AD Service Principal with permission to access Key Vault and use a client secret from within the App Services to access Key Vault.
+	C. Create a system assigned Managed Identity in each App Service with permission to access Key Vault.
+	D. Create an Azure AD Service Principal with Permissions to access Key Vault for each App Service and use a certificate from within the App Services to access Key Vault.
+
+A
+
+I think the answer is A. Create a single user-assigned Managed Identity with permission to access Key Vault and configure each App Service to use that Managed Identity.
+Because we have more than one App (Web App and other Function Apps) , So we agree it is going to be a managed identity but should I create one for each app or one for all apps?
+If I create system MI then there should be one for each App.
+If I create user MI then I can re-use it for any App I want with minimum change to AD
+
+---
+
+153
+
+Question #10Topic 4
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing a medical records document management website. The website is used to store scanned copies of patient intake forms.
+If the stored intake forms are downloaded from storage by a third party, the contents of the forms must not be compromised.
+You need to store the intake forms according to the requirements.
+
+Solution:
+1. Create an Azure Key Vault key named skey.
+2. Encrypt the intake forms using the public key portion of skey.
+3. Store the encrypted data in Azure Blob storage.
+
+Does the solution meet the goal?
+	A. Yes
+	B. No
+
+Correct Answer: A
+
+---
+
+154
+
+Question #11Topic 4
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing a medical records document management website. The website is used to store scanned copies of patient intake forms.
+If the stored intake forms are downloaded from storage by a third party, the contents of the forms must not be compromised.
+You need to store the intake forms according to the requirements.
+Solution:
+1. Create an Azure Cosmos DB database with Storage Service Encryption enabled.
+2. Store the intake forms in the Azure Cosmos DB database.
+
+Does the solution meet the goal?
+	A. Yes
+	B. No
+
+Correct Answer: B - No
+
+If storage is encrypted by default but you need to encrypt the content so when downloaded, its useless to unauthorised party.
+
+Instead use an Azure Key vault and public key encryption. Store the encrypted from in Azure Storage Blob storage.
+
+---
+
+155
+
+Question #12Topic 4
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing a medical records document management website. The website is used to store scanned copies of patient intake forms.
+If the stored intake forms are downloaded from storage by a third party, the contents of the forms must not be compromised.
+You need to store the intake forms according to the requirements.
+Solution: Store the intake forms as Azure Key Vault secrets.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: B 
+
+---
+
+156
+
+Question #13Topic 4
+HOTSPOT -
+You plan to deploy a new application to a Linux virtual machine (VM) that is hosted in Azure.
+The entire VM must be secured at rest by using industry-standard encryption technology to address organizational security and compliance requirements.
+You need to configure Azure Disk Encryption for the VM.
+How should you complete the Azure CLI commands? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![156-1](./img/156-1.jpg)
+
+![156-2](./img/156-2.jpg)
+
+The answer is correct.
+Other possiblities doesn't make sense. Although it seems strange to me to create the VM when the question says that we already have one.
+
+---
+
+157
+
+Question #14Topic 4
+Your company is developing an Azure API hosted in Azure.
+You need to implement authentication for the Azure API to access other Azure resources. You have the following requirements:
+✑ All API calls must be authenticated.
+✑ Callers to the API must not send credentials to the API.
+Which authentication mechanism should you use?
+
+	A. Basic
+	B. Anonymous
+	C. Managed identity
+	D. Client certificate
+
+Correct Answer: C
+
+Azure Active Directory Managed Service Identity (MSI) gives your code an automatically managed identity for authenticating to Azure services, so that you can keep credentials out of your code.
+
+A and D will send credential to the API.
+B is not meet the requirement.
+only C can be selected
+
+---
+
+158
+
+Question #15Topic 4
+DRAG DROP -
+You are developing an application. You have an Azure user account that has access to two subscriptions.
+You need to retrieve a storage account key secret from Azure Key Vault.
+In which order should you arrange the PowerShell commands to develop the solution? To answer, move all commands from the list of commands to the answer area and arrange them in the correct order.
+Select and Place:
+
+![158-1](./img/158-1.png)
+
+![158-2](./img/158-2.png)
+
+```
+1. Get-AzSubscription ($subscriptionID = (...).SubscriptionName)
+2. Set-AzContext
+3. Get-AzStorageAccountKey ($storAcctkey = "(...)[0].Value")
+4. ConvertTo-SecureString, Set-AzKeyVaultSecret
+5. Get-AzKeyVaultSecret (list the secrets stored in the KeyVault - check only)
+```
+最后一个get是为了检查有没有做好
+
+---
+
+159
+
+Question #16Topic 4
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop Azure solutions.
+You must grant a virtual machine (VM) access to specific resource groups in Azure Resource Manager.
+You need to obtain an Azure Resource Manager access token.
+Solution: Use an X.509 certificate to authenticate the VM with Azure Resource Manager.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: B
+
+---
+
+160
+
+Question #17Topic 4
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You develop Azure solutions.
+You must grant a virtual machine (VM) access to specific resource groups in Azure Resource Manager.
+You need to obtain an Azure Resource Manager access token.
+Solution: Use the Reader role-based access control (RBAC) role to authenticate the VM with Azure Resource Manager.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Correct Answer: B - No
+
+Azure RBAC is an authorization system built on Azure Resource Manager that provides fine-grained access management of Azure resources. Here we need to authenticate.
+
+Here we need to make use of managed identities for the virtual machine. Role-based access control is used for authorization and not authentication.
+
+Instead run the Invoke-RestMethod or Invoke-WebRequest cmdlet to make a request to the local managed identity for Azure resources endpoint.
+
+
+Reference:
+https://docs.microsoft.com/en-us/azure/role-based-access-control/overview
+https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/tutorial-windows-vm-access-arm
+
