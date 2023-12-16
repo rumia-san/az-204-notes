@@ -5748,4 +5748,286 @@ NOTE: Each correct selection is worth one point.
 
 ![210-2](./img/210-2.png)
 
+---
+
+211
+
+Question #: 1
+Topic #: 5
+
+DRAG DROP -
+You develop a web app that uses the tier D1 app service plan by using the Web Apps feature of Microsoft Azure App Service.
+Spikes in traffic have caused increases in page load times.
+You need to ensure that the web app automatically scales when CPU load is about 85 percent and minimize costs.
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+NOTE: More than one order of answer choices is correct. You will receive credit for any of the correct orders you select.
+Select and Place:
+
+![211-1](./img/211-1.jpg)
+
+![211-2](./img/211-2.jpg)
+
+the correct answer is :-
+Configure the web app to the Standard App Service Tier
+Enable autoscaling on the web app
+Add a Scale condition
+Add a scale rule
+Please refer - https://docs.microsoft.com/en-us/learn/modules/app-service-autoscale-rules/6-autoscale-a-web-app
+
+Standard App Service Tier就支持auto scale了
+要先加condition才能加rule
+
+---
+
+212
+
+Question #: 2
+Topic #: 5
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution. Determine whether the solution meets the stated goals.
+You are developing and deploying several ASP.NET web applications to Azure App Service. You plan to save session state information and HTML output.
+You must use a storage mechanism with the following requirements:
+✑ Share session state across all ASP.NET web applications.
+✑ Support controlled, concurrent access to the same session state data for multiple readers and a single writer.
+✑ Save full HTTP responses for concurrent requests.
+You need to store the information.
+Proposed Solution: Enable Application Request Routing (ARR).
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B
+
+The correct answer is NO.
+
+启用 Application Request Routing (ARR) 不是一个用于保存会话状态信息或 HTML 输出的存储机制。ARR 是 IIS（Internet Information Services）的一个功能，用于将客户端请求路由到Web农场中的健康服务器节点，有助于负载平衡和流量管理。
+
+ Application Request Routing is for controlling internet traffic in IIS using a proxy server. It doesn't deal with managing state information.
+
+---
+
+213
+
+Question #: 3
+Topic #: 5
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution. Determine whether the solution meets the stated goals.
+You are developing and deploying several ASP.NET web applications to Azure App Service. You plan to save session state information and HTML output.
+You must use a storage mechanism with the following requirements:
+✑ Share session state across all ASP.NET web applications.
+✑ Support controlled, concurrent access to the same session state data for multiple readers and a single writer.
+✑ Save full HTTP responses for concurrent requests.
+You need to store the information.
+Proposed Solution: Deploy and configure an Azure Database for PostgreSQL. Update the web applications.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B
+
+不确定
+
+The worst solution from a performance and scalability standpoint is to use a database backed session state provider.
+
+https://docs.microsoft.com/en-us/azure/azure-cache-for-redis/cache-aspnet-session-state-provider
+
+---
+
+214
+
+Question #: 4
+Topic #: 5
+
+HOTSPOT -
+A company is developing a gaming platform. Users can join teams to play online and see leaderboards that include player statistics. The solution includes an entity named Team.
+You plan to implement an Azure Redis Cache instance to improve the efficiency of data operations for entities that rarely change.
+You need to invalidate the cache when team data is changed.
+How should you complete the code? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+
+![214-1](./img/214-1.jpg)
+
+
+Answer is:
+IDatabase cache = Connection.GetDatabase();
+cache.KeyDelete("teams")
+
+cache.KeyDelete() is the correct method for removing a key from the redis cache.
+
+---
+
+215
+
+Question #: 5
+Topic #: 5
+
+DRAG DROP -
+A company has multiple warehouses. Each warehouse contains IoT temperature devices which deliver temperature data to an Azure Service Bus queue.
+You need to send email alerts to facility supervisors immediately if the temperature at a warehouse goes above or below specified threshold temperatures.
+Which five actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![215-1](./img/215-1.png)
+
+1. Create blank logic app
+2. Add logic app trigger when one or more messages arrive in the queue
+3. Action to read IoT Temp data
+4. Compare upper and lower temp
+5. Send emails
+
+先建个app，再建个trigger，然后读数据，然后比较，最后发邮件
+
+---
+
+216
+
+Question #: 6
+Topic #: 5
+
+DRAG DROP -
+You develop an ASP.NET Core MVC application. You configure the application to track webpages and custom events.
+You need to identify trends in application usage.
+Which Azure Application Insights Usage Analysis features should you use? To answer, drag the appropriate features to the correct requirements. Each feature may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![216-1](./img/216-1.png)
+
+	Funnels
+	Impact
+	Retention
+	User Flows
+
+https://docs.microsoft.com/en-us/azure/azure-monitor/app/usage-impact
+
+Funnels（漏斗）：
+
+解释： 漏斗是一种可视化工具，用于跟踪和分析用户在应用程序中执行的步骤。通常，这些步骤代表了用户完成某个特定目标的过程。漏斗图显示了用户从一个步骤到另一个步骤的转化率，帮助你了解在整个用户旅程中哪些步骤可能导致了较高的退出率或流失。
+
+Impact（影响）：
+
+解释： 影响是一种分析工具，用于衡量应用程序中的某个变化对用户行为和性能的影响。例如，如果你进行了代码更改、性能优化或引入了新功能，你可以使用影响工具来了解这些变化对应用程序的各个方面产生的影响。这有助于评估变化的积极或消极影响。
+
+Retention（留存）：
+
+解释： 留存是指用户在一段时间内返回应用程序的能力。留存分析可以帮助你了解用户参与度，即用户在注册或首次使用应用程序后的一段时间内是否继续使用。留存分析显示了用户在不同时间间隔内的保留率，帮助你评估和改进用户吸引和留存策略。
+
+User Flows（用户流）：
+
+解释： 用户流是一种可视化工具，用于跟踪用户在应用程序中的实际导航路径。用户流图显示了用户从一个页面或事件到另一个页面或事件的流程。这有助于你了解用户的实际交互方式，发现常见的用户行为路径，并识别潜在的流程问题或瓶颈。
+
+---
+
+217
+
+Question #: 7
+Topic #: 5
+
+You develop a gateway solution for a public facing news API. The news API back end is implemented as a RESTful service and uses an OpenAPI specification.
+You need to ensure that you can access the news API by using an Azure API Management service instance.
+Which Azure PowerShell command should you run?
+
+	A. Import-AzureRmApiManagementApi -Context $ApiMgmtContext -SpecificationFormat "Swagger" -SpecificationPath $SwaggerPath -Path $Path
+	B. New-AzureRmApiManagementBackend -Context $ApiMgmtContext -Url $Url -Protocol http
+	C. New-AzureRmApiManagement -ResourceGroupName $ResourceGroup -Name $Name ג€"Location $Location -Organization $Org -AdminEmail $AdminEmail
+	D. New-AzureRmApiManagementBackendProxy -Url $ApiUrl
+
+A
+
+There is an example of importing an API from an Open Api Link using Import-AzApiManagementApi cmdlet:
+https://docs.microsoft.com/en-us/powershell/module/az.apimanagement/import-azapimanagementapi#example-4--import-an-api-from-a-open-api-link
+
+And as mentioned here:
+https://docs.microsoft.com/en-us/powershell/module/azurerm.apimanagement/import-azurermapimanagementapi
+the Import-AzureRmApiManagementApi cmdlet is obsoleted by Import-AzApiManagementApi cmdlet.
+
+So I would select answer A.
+
+Import-AzureRmApiManagementApi： 该 cmdlet 用于将 API 导入到 Azure API Management。
+
+---
+
+218
+
+Question #: 8
+Topic #: 5
+
+You are creating a hazard notification system that has a single signaling server which triggers audio and visual alarms to start and stop.
+You implement Azure Service Bus to publish alarms. Each alarm controller uses Azure Service Bus to receive alarm signals as part of a transaction. Alarm events must be recorded for audit purposes. Each transaction record must include information about the alarm type that was activated.
+You need to implement a reply trail auditing solution.
+Which two actions should you perform? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+
+		A. Assign the value of the hazard message SessionID property to the ReplyToSessionId property.
+		B. Assign the value of the hazard message MessageId property to the DevileryCount property.
+		C. Assign the value of the hazard message SessionID property to the SequenceNumber property.
+		D. Assign the value of the hazard message MessageId property to the CorrelationId property.
+		E. Assign the value of the hazard message SequenceNumber property to the DeliveryCount property.
+		F. Assign the value of the hazard message MessageId property to the SequenceNumber property.
+
+
+Suggested Answer: AD
+
+Answer is correct.
+ReplyToSessionId (reply-to-group-id) This value augments the ReplyTo information and specifies which SessionId should be set for the reply when sent to the reply entity.
+CorrelationId (correlation-id) Enables an application to specify a context for the message for the purposes of correlation; for example, reflecting the MessageId of a message that is being replied to.
+
+A. 将危险消息的 SessionID 属性值分配给 ReplyToSessionId 属性。
+
+说明： 通过将 SessionID 分配给 ReplyToSessionId，你可以建立一个会话之间的关联，从而追踪与原始消息相关的回复。
+
+D. 将危险消息的 MessageId 属性值分配给 CorrelationId 属性。
+
+说明： 将 MessageId 分配给 CorrelationId 有助于关联原始消息和相关的回复。CorrelationId 通常用于指示消息之间的关系。
+
+---
+
+Actual exam question from Microsoft's AZ-204
+Question #: 9
+Topic #: 5
+
+You are developing an Azure function that connects to an Azure SQL Database instance. The function is triggered by an Azure Storage queue.
+You receive reports of numerous System.InvalidOperationExceptions with the following message:
+`Timeout expired. The timeout period elapsed prior to obtaining a connection from the pool. This may have occurred because all pooled connections were in use and max pool size was reached.`
+You need to prevent the exception.
+What should you do?
+
+	A. In the host.json file, decrease the value of the batchSize option
+	B. Convert the trigger to Azure Event Hub
+	C. Convert the Azure Function to the Premium plan
+	D. In the function.json file, change the value of the type option to queueScaling
+
+A is the correct answer
+
+The error message shows that there is not enough connections, which means that the concurrency is too high. Too many instances are running parallel. So we have to reduce the concurrency of the app.
+
+---
+
+Question #: 10
+Topic #: 5
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution. Determine whether the solution meets the stated goals.
+You are developing and deploying several ASP.NET web applications to Azure App Service. You plan to save session state information and HTML output.
+You must use a storage mechanism with the following requirements:
+✑ Share session state across all ASP.NET web applications.
+✑ Support controlled, concurrent access to the same session state data for multiple readers and a single writer.
+✑ Save full HTTP responses for concurrent requests.
+You need to store the information.
+Proposed Solution: Deploy and configure Azure Cache for Redis. Update the web applications.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+
+A
+
+Correct answer
+
+---
+
 
