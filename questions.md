@@ -5986,6 +5986,8 @@ D. 将危险消息的 MessageId 属性值分配给 CorrelationId 属性。
 
 ---
 
+219
+
 Actual exam question from Microsoft's AZ-204
 Question #: 9
 Topic #: 5
@@ -6006,6 +6008,8 @@ A is the correct answer
 The error message shows that there is not enough connections, which means that the concurrency is too high. Too many instances are running parallel. So we have to reduce the concurrency of the app.
 
 ---
+
+220
 
 Question #: 10
 Topic #: 5
@@ -6030,4 +6034,242 @@ Correct answer
 
 ---
 
+221
+
+Question #: 11
+Topic #: 5
+
+HOTSPOT -
+You are debugging an application that is running on Azure Kubernetes cluster named cluster1. The cluster uses Azure Monitor for containers to monitor the cluster.
+The application has sticky sessions enabled on the ingress controller.
+Some customers report a large number of errors in the application over the last 24 hours.
+You need to determine on which virtual machines (VMs) the errors are occurring.
+How should you complete the Azure Monitor query? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![221-1](./img/221-1.png)
+
+![221-2](./img/221-2.png)
+
+the answer is correct
+
+---
+
+222
+
+Question #: 12
+Topic #: 5
+
+HOTSPOT -
+You plan to deploy a web app to App Service on Linux. You create an App Service plan. You create and push a custom Docker image that contains the web app to Azure Container Registry.
+You need to access the console logs generated from inside the container in real-time.
+How should you complete the Azure CLI command? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![222-1](./img/222-1.png)
+
+	Box 1: config
+	Box 2: --docker-container-logging
+	Box 3: webapp
+	Box 4 : Tail
+
+因为要real time，所以最后一个是tail
+
+---
+
+223
+
+Question #: 13
+Topic #: 5
+
+You develop and deploy an ASP.NET web app to Azure App Service. You use Application Insights telemetry to monitor the app.
+You must test the app to ensure that the app is available and responsive from various points around the world and at regular intervals. If the app is not responding, you must send an alert to support staff.
+You need to configure a test for the web app.
+Which two test types can you use? Each correct answer presents a complete solution.
+NOTE: Each correct selection is worth one point.
+
+	A. integration
+	B. multi-step web
+	C. URL ping
+	D. unit
+	E. load
+
+Suggested Answer: BC
+
+为了配置一个测试以确保从世界各地的不同点定期检查应用程序的可用性和响应性，并在应用程序无响应时向支持人员发送警报，你可以使用以下两种测试类型：
+
+B. 多步 Web 测试 (Multi-step web)。
+
+说明： 多步 Web 测试允许你模拟用户与应用程序进行交互的多个步骤。你可以配置测试执行一系列步骤，例如登录、浏览页面和执行其他交互，以确保应用程序的各个部分都能正常运行。
+
+C. URL ping 测试。
+
+说明： URL ping 测试是通过发送 HTTP 请求来检查应用程序的基本可用性。如果应用程序无法响应 HTTP 请求，可以发出警报。这是一种轻量级的测试，适用于检查应用程序是否正常运行。
+
+---
+
+224
+
+Question #: 14
+Topic #: 5
+
+DRAG DROP -
+A web service provides customer summary information for e-commerce partners. The web service is implemented as an Azure Function app with an HTTP trigger.
+Access to the API is provided by an Azure API Management instance. The API Management instance is configured in consumption plan mode. All API calls are authenticated by using OAuth.
+API calls must be cached. Customers must not be able to view cached data for other customers.
+You need to configure API Management policies for caching.
+How should you complete the policy statement?
+Select and Place:
+
+![224-1](./img/224-1.jpg)
+
+![224-2](./img/224-2.jpg)
+
+Caching type must be external since consumption plan does not support internal caching.
+
+Downstream caching type must be private as it is not shared.
+
+Vary by header must be authorization as it is cached per customer.
+
+Reference: https://docs.microsoft.com/en-us/azure/api-management/api-management-features
+
+---
+
+225
+
+Question #: 15
+Topic #: 5
+
+You are developing applications for a company. You plan to host the applications on Azure App Services.
+The company has the following requirements:
+✑ Every five minutes verify that the websites are responsive.
+✑ Verify that the websites respond within a specified time threshold. Dependent requests such as images and JavaScript files must load properly.
+✑ Generate alerts if a website is experiencing issues.
+✑ If a website fails to load, the system must attempt to reload the site three more times.
+You need to implement this process with the least amount of effort.
+What should you do?
+
+	A. Create a Selenium web test and configure it to run from your workstation as a scheduled task.
+	B. Set up a URL ping test to query the home page.
+	C. Create an Azure function to query the home page.
+	D. Create a multi-step web test to query the home page.
+	E. Create a Custom Track Availability Test to query the home page.
+
+B
+
+URL ping test validate whether an endpoint is responding. It also measures the performance associated with that response. You can also set custom success criteria, coupled with more advanced features like parsing dependent requests and allowing for retries.
+
+https://docs.microsoft.com/en-us/azure/azure-monitor/app/monitor-web-app-availability
+
+---
+
+226
+
+Question #: 16
+Topic #: 5
+
+You develop and add several functions to an Azure Function app that uses the latest runtime host. The functions contain several REST API endpoints secured by using SSL. The Azure Function app runs in a Consumption plan.
+You must send an alert when any of the function endpoints are unavailable or responding too slowly.
+You need to monitor the availability and responsiveness of the functions.
+What should you do?
+
+	A. Create a URL ping test.
+	B. Create a timer triggered function that calls TrackAvailability() and send the results to Application Insights.
+	C. Create a timer triggered function that calls GetMetric("Request Size") and send the results to Application Insights.
+	D. Add a new diagnostic setting to the Azure Function app. Enable the FunctionAppLogs and Send to Log Analytics options.
+
+B
+
+Based on the doc, I believe B is correct.
+
+https://docs.microsoft.com/en-us/azure/azure-monitor/app/availability-azure-functions
+
+说明： TrackAvailability() 是用于跟踪应用程序的可用性的方法。通过定时调用该方法，并将结果发送到 Application Insights，你可以监视函数的可用性和性能，并在需要时设置警报。
+
+---
+
+227
+
+Question #: 17
+Topic #: 5
+
+DRAG DROP -
+You are developing an application to retrieve user profile information. The application will use the Microsoft Graph SDK.
+The app must retrieve user profile information by using a Microsoft Graph API call.
+You need to call the Microsoft Graph API from the application.
+In which order should you perform the actions? To answer, move all actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![227-1](./img/227-1.jpg)
+
+![227-2](./img/227-2.jpg)
+
+---
+
+228
+
+Question #: 18
+Topic #: 5
+
+DRAG DROP -
+You develop and deploy an Azure Logic App that calls an Azure Function app. The Azure Function App includes an OpenAPI (Swagger) definition and uses an
+Azure Blob storage account. All resources are secured by using Azure Active Directory (Azure AD).
+The Logic App must use Azure Monitor logs to record and store information about runtime data and events. The logs must be stored in the Azure Blob storage account.
+You need to set up Azure Monitor logs and collect diagnostics data for the Azure Logic App.
+Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![228-1](./img/228-1.png)
+
+![228-2](./img/228-2.png)
+
+已经有storage account了，不用再建
+
+---
+
+229
+
+Question #: 19
+Topic #: 5
+
+DRAG DROP -
+You develop an application. You plan to host the application on a set of virtual machines (VMs) in Azure.
+You need to configure Azure Monitor to collect logs from the application.
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+
+![229-1](./img/229-1.png)
+
+	1. Create Log Analytics workspace (in Azure Portal)
+	2. Create Application Insights resource (in Monitor, Application Insights with workspace attached)
+	3. Add VMInsights solution (== activate VMInsights in Monitor, choose VM's, attach workspace).
+	4. Install agents on VM
+
+---
+
+230
+
+Question #: 20
+Topic #: 5
+
+You develop and deploy an Azure App Service web app. The app is deployed to multiple regions and uses Azure Traffic Manager. Application Insights is enabled for the app.
+You need to analyze app uptime for each month.
+Which two solutions will achieve the goal? Each correct answer presents a complete solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Azure Monitor logs
+	B. Application Insights alerts
+	C. Azure Monitor metrics
+	D. Application Insights web tests
+
+AC 不确定
+
+A and C. Metrics will give you the uptime. Logs will give you the causes of the downtime.
+wrong B: Alerts are not required
+wrong D: Web tests has nothing to do with uptime.
+
+---
 
