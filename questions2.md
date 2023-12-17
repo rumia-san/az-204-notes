@@ -542,7 +542,7 @@ Diagnostic setting - diagnostic logs are streamed to that workspace as soon as n
 
 Question #: 39
 Topic #: 5
-[All AZ-204 Questions]
+
 You develop and deploy a web app to Azure App Service. The Azure App Service uses a Basic plan in a single region.
 
 Users report that the web app is responding slow. You must capture the complete call stack to help identify performance issues in the code. Call stack data must be correlated across app instances. You must minimize cost and impact to users on the web app.
@@ -589,4 +589,661 @@ https://learn.microsoft.com/en-us/azure/azure-web-pubsub/howto-develop-eventhand
 
 通过 Azure 门户或 CLI 设置事件处理程序 Webhook 时，服务遵循 CloudEvents 滥用保护措施来验证上游 Webhook。 每个已注册的上游 Webhook URL 都将通过此机制进行验证。 WebHook-Request-Origin 请求头设置为服务域名 xxx.webpubsub.azure.com，它会要求含标头 WebHook-Allowed-Origin 的响应包含此域名或 *。
 
+---
+
+251
+
+Question #: 41
+Topic #: 5
+
+You are developing an Azure App Service web app.
+
+The web app must securely store session information in Azure Redis Cache.
+
+You need to connect the web app to Azure Redis Cache.
+
+Which three Azure Redis Cache properties should you use? Each correct answer presents part of the solution.
+
+NOTE: Each correct selection is worth one point.
+
+	A. Access key
+	B. SSL port
+	C. Subscription name
+	D. Location
+	E. Host name
+	F. Subscription id
+
+Suggested Answer: ABE
+
+When connecting a web app to Azure Redis Cache, you need to specify certain properties. Here are three Azure Redis Cache properties you should use:
+
+Hostname: This property represents the fully qualified domain name (FQDN) or the endpoint URL of the Azure Redis Cache instance. It is used to establish a connection between the web app and the cache. The hostname typically follows the format yourcache.redis.cache.windows.net.
+
+Port: This property specifies the port number used for communication with the Azure Redis Cache instance. The default port for Redis is 6379, but you can configure it differently if needed.
+
+Access key: This property is the primary or secondary access key for the Azure Redis Cache instance.
+
+---
+
+252
+
+Question #: 42
+Topic #: 5
+
+HOTSPOT
+
+You are developing several microservices to run on Azure Container Apps.
+
+You need to monitor and diagnose the microservices.
+
+Which features should you use? To answer, select the appropriate feature in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![252-1](./img2/252-1.png)
+
+![252-2](./img2/252-2.png)
+
+Answer is correct!
+
+https://learn.microsoft.com/en-us/azure/container-apps/observability
+
+From this page:
+Log Streaming - View streaming system and console logs from a container in near real-time.
+Container console - Connect to the Linux console in your containers to debug your application from inside the container.
+
+---
+
+253
+
+Case study -
+
+This is a case study. Case studies are not timed separately. You can use as much exam time as you would like to complete each case. However, there may be additional case studies and sections on this exam. You must manage your time to ensure that you are able to complete all questions included on this exam in the time provided.
+
+To answer the questions included in a case study, you will need to reference information that is provided in the case study. Case studies might contain exhibits and other resources that provide more information about the scenario that is described in the case study. Each question is independent of the other questions in this case study.
+
+At the end of this case study, a review screen will appear. This screen allows you to review your answers and to make changes before you move to the next section of the exam. After you begin a new section, you cannot return to this section.
+
+
+To start the case study -
+To display the first question in this case study, click the Next button. Use the buttons in the left pane to explore the content of the case study before you answer the questions. Clicking these buttons displays information such as business requirements, existing environment, and problem statements. When you are ready to answer a question, click the Question button to return to the question.
+
+
+Background -
+
+VanArsdel, Ltd. is a global office supply company. The company is based in Canada and has retail store locations across the world. The company is developing several cloud-based solutions to support their stores, distributors, suppliers, and delivery services.
+
+
+Current environment -
+
+
+Corporate website -
+
+The company provides a public website located at http://www.vanarsdelltd.com. The website consists of a React JavaScript user interface, HTML, CSS, image assets, and several APIs hosted in Azure Functions.
+
+
+Retail Store Locations -
+
+The company supports thousands of store locations globally. Store locations send data every hour to an Azure Blob storage account to support inventory, purchasing and delivery services. Each record includes a location identifier and sales transaction information.
+
+
+Requirements -
+
+The application components must meet the following requirements:
+
+
+Corporate website -
+
+• Secure the website by using SSL.
+• Minimize costs for data storage and hosting.
+• Implement native GitHub workflows for continuous integration and continuous deployment (CI/CD).
+• Distribute the website content globally for local use.
+• Implement monitoring by using Application Insights and availability web tests including SSL certificate validity and custom header value verification.
+• The website must have 99.95 percent uptime.
+
+
+Retail store locations -
+
+• Azure Functions must process data immediately when data is uploaded to Blob storage. Azure Functions must update Azure Cosmos DB by using native SQL language queries.
+• Audit store sale transaction information nightly to validate data, process sales financials, and reconcile inventory.
+
+
+Delivery services -
+
+• Store service telemetry data in Azure Cosmos DB by using an Azure Function. Data must include an item id, the delivery vehicle license plate, vehicle package capacity, and current vehicle location coordinates.
+• Store delivery driver profile information in Azure Active Directory (Azure AD) by using an Azure Function called from the corporate website.
+
+
+Inventory services -
+
+The company has contracted a third-party to develop an API for inventory processing that requires access to a specific blob within the retail store storage account for three months to include read-only access to the data.
+
+
+Security -
+
+• All Azure Functions must centralize management and distribution of configuration data for different environments and geographies, encrypted by using a company-provided RSA-HSM key.
+• Authentication and authorization must use Azure AD and services must use managed identities where possible.
+
+
+Issues -
+
+
+Retail Store Locations -
+
+• You must perform a point-in-time restoration of the retail store location data due to an unexpected and accidental deletion of data.
+• Azure Cosmos DB queries from the Azure Function exhibit high Request Unit (RU) usage and contain multiple, complex queries that exhibit high point read latency for large items as the function app is scaling.
+
+
+You need to test the availability of the corporate website.
+
+Which two test types can you use? Each correct answer presents a complete solution.
+
+NOTE: Each correct selection is worth one point.
+
+A. Standard
+B. URL ping
+C. Custom testing using the TrackAvailability API method
+D. Multi-step
+
+
+
+A and C per this requirement: "Implement monitoring by using Application Insights and availability web tests including SSL certificate validity and custom header value verification."
+
+A - Standard test: This single request test is similar to the URL ping test. It includes TLS/SSL certificate validity, proactive lifetime check, HTTP request verb.
+
+C - Custom TrackAvailability test: If you decide to create a custom application to run availability tests, you can use the TrackAvailability() method to send the results to Application Insights.
+
+https://learn.microsoft.com/en-us/azure/azure-monitor/app/availability-overview#types-of-tests
+
+
+---
+
+254
+
+Question #: 44
+Topic #: 5
+
+You have an Azure API Management (APIM) Standard tier instance named APIM1 that uses a managed gateway.
+
+You plan to use APIM1 to publish an API named API1 that uses a backend database that supports only a limited volume of requests per minute. You also need a policy for API1 that will minimize the possibility that the number of requests to the backend database from an individual IP address you specify exceeds the supported limit.
+
+You need to identify a policy for API1 that will meet the requirements.
+
+Which policy should you use?
+
+	A. ip-filter
+	B. quota-by-key
+	C. rate-limit-by-key
+	D. rate-limit
+
+Suggested Answer: C
+
+
+为了最小化来自特定 IP 地址的请求数量，以确保不超过支持的限制，你应该使用 C. rate-limit-by-key 策略。
+
+C. rate-limit-by-key： 该策略允许你按照键对请求进行速率限制。你可以为每个 IP 地址分配一个键，并为该键设置速率限制。这样，就可以确保特定 IP 地址在一定时间内不会超过一定数量的请求。
+
+---
+
+255
+
+Question #: 45
+Topic #: 5
+
+You develop a web application that sells access to last-minute openings for child camps that run on the weekends. The application uses Azure Application Insights for all alerting and monitoring.
+
+The application must alert operators when a technical issue is preventing sales to camps.
+
+You need to build an alert to detect technical issues.
+
+Which alert type should you use?
+
+	A. Metric alert using multiple time series
+	B. Metric alert using dynamic thresholds
+	C. Log alert using multiple time series
+	D. Log alert using dynamic thresholds
+
+Suggested Answer: B
+
+
+---
+
+256
+
+暂缺
+
+---
+
+257
+
+暂缺
+
+---
+
+258
+
+Question #: 3
+Topic #: 6
+
+DRAG DROP -
+You manage several existing Logic Apps.
+You need to change definitions, add new logic, and optimize these apps on a regular basis.
+What should you use? To answer, drag the appropriate tools to the correct functionalities. Each tool may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![258-1](./img2/258-1.jpg)
+
+![258-2](./img2/258-2.jpg)
+
+---
+
+259
+
+Question #: 4
+Topic #: 6
+
+
+
+A company is developing a solution that allows smart refrigerators to send temperature information to a central location.
+The solution must receive and store messages until they can be processed. You create an Azure Service Bus instance by providing a name, pricing tier, subscription, resource group, and location.
+You need to complete the configuration.
+Which Azure CLI or PowerShell command should you run?
+
+![259-1](./img2/259-1.png)
+
+![259-2](./img2/259-2.png)
+
+![259-3](./img2/259-3.png)
+
+![259-4](./img2/259-4.png)
+
+A
+
+I think the Service Bus has already been created and now they ask you to complete the configuration. The next step is creating the queue.
+
+B. Create group.
+C. Create Service Bus.
+A. Create Queue. <-- Correct answer.
+D. Get connectionstring.
+
+---
+
+260
+
+Question #: 5
+Topic #: 6
+
+HOTSPOT -
+You are developing an application that uses Azure Storage Queues.
+You have the following code:
+
+![260-1](./img2/260-1.jpg)
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![260-2](./img2/260-2.jpg)
+
+![260-3](./img2/260-3.jpg)
+
+GetMessageAsync:
+Gets a message from the queue using the default request options. This operation marks the retrieved message as invisible in the queue for the default visibility timeout period.
+
+Only marks the message is invisible but does not delete.
+
+---
+
+261
+
+Question #: 6
+Topic #: 6
+
+A company is developing a solution that allows smart refrigerators to send temperature information to a central location.
+The solution must receive and store messages until they can be processed. You create an Azure Service Bus instance by providing a name, pricing tier, subscription, resource group, and location.
+You need to complete the configuration.
+Which Azure CLI or PowerShell command should you run?
+
+![261-1](./img2/261-1.png)
+
+![261-2](./img2/261-2.png)
+
+![261-3](./img2/261-3.png)
+
+![261-4](./img2/261-4.png)
+
+Suggested Answer: C
+
+---
+
+262
+
+Question #: 7
+Topic #: 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure Service application that processes queue data when it receives a message from a mobile application. Messages may not be sent to the service consistently.
+You have the following requirements:
+✑ Queue size must not grow larger than 80 gigabytes (GB).
+✑ Use first-in-first-out (FIFO) ordering of messages.
+✑ Minimize Azure costs.
+You need to implement the messaging solution.
+Solution: Use the .Net API to add a message to an Azure Storage Queue from the mobile application. Create an Azure Function App that uses an Azure Storage
+Queue trigger.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Suggested Answer: B
+
+Answer is B (NO),
+Becz FIFO is supported by Service bus queue and Service bus queue should be use for data less than 80GB
+https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted
+
+Service Bus queues才有FIFO
+
+---
+
+263
+
+Question #: 8
+Topic #: 6
+
+DRAG DROP -
+You develop software solutions for a mobile delivery service. You are developing a mobile app that users can use to order from a restaurant in their area. The app uses the following workflow:
+1. A driver selects the restaurants for which they will deliver orders.
+2. Orders are sent to all available drivers in an area.
+3. Only orders for the selected restaurants will appear for the driver.
+4. The first driver to accept an order removes it from the list of available orders.
+You need to implement an Azure Service Bus solution.
+Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![263-1](./img2/263-1.png)
+
+不确定
+
+	Create a single Service Bus Namespace.
+	Create a single Service Bus Topic.
+	Create a Service Bus subscription for each restaurant for which a driver can receive orders.
+
+---
+
+264
+
+Question #: 9
+Topic #: 6
+
+HOTSPOT -
+You develop a news and blog content app for Windows devices.
+A notification must arrive on a user's device when there is a new article available for them to view.
+You need to implement push notifications.
+How should you complete the code segment? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![264-1](./img2/264-1.png)
+
+![264-2](./img2/264-2.png)
+
+The answer is correct, but the first reference is not very helpful and the second one doesn't even exists. Here are references of the methods used in the answer:
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.notificationhubs.notificationhubclient.createclientfromconnectionstring?view=azure-dotnet#Microsoft_Azure_NotificationHubs_NotificationHubClient_CreateClientFromConnectionString_System_String_System_String_
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.notificationhubs.notificationhubclient.sendwindowsnativenotificationasync?view=azure-dotnet#Microsoft_Azure_NotificationHubs_NotificationHubClient_SendWindowsNativeNotificationAsync_System_String_
+
+
+---
+
+265
+
+Question #: 10
+Topic #: 6
+
+You are developing an Azure messaging solution.
+You need to ensure that the solution meets the following requirements:
+✑ Provide transactional support.
+✑ Provide duplicate detection.
+✑ Store the messages for an unlimited period of time.
+Which two technologies will meet the requirements? Each correct answer presents a complete solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Azure Service Bus Topic
+	B. Azure Service Bus Queue
+	C. Azure Storage Queue
+	D. Azure Event Hub
+
+Suggested Answer: AB
+
+Answer is correct. Queue Storage does not provide transactional support and Event Hub can't be configured to store events for infinite time.
+
+---
+
+266
+
+Question #: 11
+Topic #: 6
+
+DRAG DROP -
+You develop a gateway solution for a public facing news API.
+The news API back end is implemented as a RESTful service and hosted in an Azure App Service instance.
+You need to configure back-end authentication for the API Management service instance.
+Which target and gateway credential type should you use? To answer, drag the appropriate values to the correct parameters. Each value may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![266-1](./img2/266-1.jpg)
+
+Answer :
+1. Https(s) endpoint,
+2. Client cert
+
+Reference : https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-mutual-certificates#configure-an-api-to-use-client-certificate-for-gateway-authentication
+
+---
+
+267
+
+Question #: 12
+Topic #: 6
+
+HOTSPOT -
+You are creating an app that uses Event Grid to connect with other services. Your app's event data will be sent to a serverless function that checks compliance.
+This function is maintained by your company.
+You write a new event subscription at the scope of your resource. The event must be invalidated after a specific period of time.
+You need to configure Event Grid.
+What should you do? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![267-1](./img2/267-1.jpg)
+
+![267-2](./img2/267-2.jpg)
+
+
+Dropdowns placement in Answer area is incorrect
+WebHook Event Delivery ---ValidationCode handsShake
+Topic publishing --- SAS Tokens
+
+https://docs.microsoft.com/en-us/azure/event-grid/concepts
+https://docs.microsoft.com/en-us/azure/event-grid/webhook-event-delivey
+
+---
+
+268
+
+Question #: 13
+Topic #: 6
+
+HOTSPOT -
+You are working for Contoso, Ltd.
+You define an API Policy object by using the following XML markup:
+
+For each of the following statements, select Yes if the statement is true. Otherwise, select No.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![268-1](./img2/268-1.jpg)
+
+![268-2](./img2/268-2.jpg)
+
+![268-3](./img2/268-3.jpg)
+
+---
+
+269
+
+Question #: 14
+Topic #: 6
+
+You are developing a solution that will use Azure messaging services.
+You need to ensure that the solution uses a publish-subscribe model and eliminates the need for constant polling.
+What are two possible ways to achieve the goal? Each correct answer presents a complete solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Service Bus
+	B. Event Hub
+	C. Event Grid
+	D. Queue
+
+Suggested Answer: AC 
+
+Correct Ans is A & C
+https://docs.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber#issues-and-considerations
+
+Event Hubs : event-based receiving is not possible, you still need to poll. So B falls off
+
+Agree, but publish/subscribe is a feature of event-hub as well, but event-based receiving is not. That is why option B falls off.
+
+---
+
+270
+
+Question #: 15
+Topic #: 6
+
+A company is implementing a publish-subscribe (Pub/Sub) messaging component by using Azure Service Bus. You are developing the first subscription application.
+In the Azure portal you see that messages are being sent to the subscription for each topic. You create and initialize a subscription client object by supplying the correct details, but the subscription application is still not consuming the messages.
+You need to ensure that the subscription client processes all messages.
+Which code segment should you use?
+
+	A. await subscriptionClient.AddRuleAsync(new RuleDescription(RuleDescription.DefaultRuleName, new TrueFilter()));
+	B. subscriptionClient = new SubscriptionClient(ServiceBusConnectionString, TopicName, SubscriptionName);
+	C. await subscriptionClient.CloseAsync();
+	D. subscriptionClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
+
+Suggested Answer: D 
+
+Agreed on D
+Clientsubcriber object initialization is done, so B incorrect.
+Here Nothing to do with Rule and closeclient so A and C incorrect
+
+---
+
+271
+
+Question #: 16
+Topic #: 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure Service application that processes queue data when it receives a message from a mobile application. Messages may not be sent to the service consistently.
+You have the following requirements:
+✑ Queue size must not grow larger than 80 gigabytes (GB).
+✑ Use first-in-first-out (FIFO) ordering of messages.
+✑ Minimize Azure costs.
+You need to implement the messaging solution.
+Solution: Use the .Net API to add a message to an Azure Storage Queue from the mobile application. Create an Azure VM that is triggered from Azure Storage
+Queue events.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Suggested Answer: B
+
+---
+
+272
+
+Question #: 17
+Topic #: 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure Service application that processes queue data when it receives a message from a mobile application. Messages may not be sent to the service consistently.
+You have the following requirements:
+✑ Queue size must not grow larger than 80 gigabytes (GB).
+✑ Use first-in-first-out (FIFO) ordering of messages.
+✑ Minimize Azure costs.
+You need to implement the messaging solution.
+Solution: Use the .Net API to add a message to an Azure Service Bus Queue from the mobile application. Create an Azure Windows VM that is triggered from Azure Service Bus Queue.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Suggested Answer: B
+
+Using Service bus is fine, however having a Windows VM does not address the cost requirement.
+
+Answer is 'NO'
+
+Windows VM太贵了
+
+---
+
+273
+
+Question #: 18
+Topic #: 6
+
+DRAG DROP -
+You are developing a REST web service. Customers will access the service by using an Azure API Management instance.
+The web service does not correctly handle conflicts. Instead of returning an HTTP status code of 409, the service returns a status code of 500. The body of the status message contains only the word conflict.
+You need to ensure that conflicts produce the correct response.
+How should you complete the policy? To answer, drag the appropriate code segments to the correct locations. Each code segment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![273-1](./img2/273-1.png)
+
+![273-2](./img2/273-2.png)
+
+---
+
+274
+
+![274-1](./img2/274-1.jpg)
+
+![274-2](./img2/274-2.jpg)
+
+Answer is correct.
+https://docs.microsoft.com/en-us/rest/api/notificationhubs/send-wns-native-notification
+
+---
+
+275
+
+Question #: 20
+Topic #: 6
+[All AZ-204 Questions]
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure solution to collect point-of-sale (POS) device data from 2,000 stores located throughout the world. A single device can produce
+2 megabytes (MB) of data every 24 hours. Each store location has one to five devices that send data.
+You must store the device data in Azure Blob storage. Device data must be correlated based on a device identifier. Additional stores are expected to open in the future.
+You need to implement a solution to receive the device data.
+Solution: Provision an Azure Event Hub. Configure the machine identifier as the partition key and enable capture.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B 不确定
+
+Answer is NO
+How many partitions event hub can have? NOT MORE than 1024
+https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-quotas
 
