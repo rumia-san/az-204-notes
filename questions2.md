@@ -1215,6 +1215,18 @@ Select and Place:
 
 274
 
+Question #: 19
+Topic #: 6
+
+DRAG DROP -
+You are a developer for a Software as a Service (SaaS) company. You develop solutions that provide the ability to send notifications by using Azure Notification
+Hubs.
+You need to create sample code that customers can use as a reference for how to send raw notifications to Windows Push Notification Services (WNS) devices.
+The sample code must not use external packages.
+How should you complete the code segment? To answer, drag the appropriate code segments to the correct locations. Each code segment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
 ![274-1](./img2/274-1.jpg)
 
 ![274-2](./img2/274-2.jpg)
@@ -1228,7 +1240,7 @@ https://docs.microsoft.com/en-us/rest/api/notificationhubs/send-wns-native-notif
 
 Question #: 20
 Topic #: 6
-[All AZ-204 Questions]
+
 Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
 After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
 You are developing an Azure solution to collect point-of-sale (POS) device data from 2,000 stores located throughout the world. A single device can produce
@@ -1246,4 +1258,240 @@ B 不确定
 Answer is NO
 How many partitions event hub can have? NOT MORE than 1024
 https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-quotas
+
+---
+
+276
+
+Question #: 21
+Topic #: 6
+
+DRAG DROP -
+You are developing an Azure solution to collect inventory data from thousands of stores located around the world. Each store location will send the inventory data hourly to an Azure Blob storage account for processing.
+The solution must meet the following requirements:
+✑ Begin processing when data is saved to Azure Blob storage.
+✑ Filter data based on store location information.
+✑ Trigger an Azure Logic App to process the data for output to Azure Cosmos DB.
+✑ Enable high availability and geographic distribution.
+✑ Allow 24-hours for retries.
+✑ Implement an exponential back off data processing.
+You need to configure the solution.
+What should you implement? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![276-1](./img2/276-1.jpg)
+
+Source -> blob storage
+Receiver -> event grid
+Handler -> logic app
+
+1)the source of the event, which means WHO has created the event and who is publishing this event, is the Blob Storage
+2)The receiver of this event, which means who should receive this event, is the Event Grid. In the event Grid we can create Topic. Topic is where all publishers write messages --> so the Blob Storage write into a topic which is inside an Event Grid.
+3)Handler of this event, which means who should handle this event, is the Logic App by creating a subscription in the event grid and connecting the Logic App to that subscription.
+
+---
+
+277
+
+Question #: 22
+Topic #: 6
+
+You are creating an app that will use CosmosDB for data storage. The app will process batches of relational data.
+You need to select an API for the app.
+Which API should you use?
+
+	A. MongoDB API
+	B. Table API
+	C. SQL API
+	D. Cassandra API
+
+
+C
+
+relational data.
+
+---
+
+278
+
+Question #: 23
+Topic #: 6
+
+HOTSPOT -
+You are developing a .NET application that communicates with Azure Storage.
+A message must be stored when the application initializes.
+You need to implement the message.
+How should you complete the code segment? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![278-1](./img2/278-1.png)
+
+![278-2](./img2/278-2.png)
+
+---
+
+279
+
+Question #: 24
+Topic #: 6
+
+HOTSPOT -
+A software as a service (SaaS) company provides document management services. The company has a service that consists of several Azure web apps. All Azure web apps run in an Azure App Service Plan named PrimaryASP.
+You are developing a new web service by using a web app named ExcelParser. The web app contains a third-party library for processing Microsoft Excel files.
+The license for the third-party library stipulates that you can only run a single instance of the library.
+You need to configure the service.
+How should you complete the script? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![279-1](./img2/279-1.png)
+
+![279-2](./img2/279-2.png)
+
+https://docs.microsoft.com/en-us/azure/app-service/manage-scale-per-app
+
+---
+
+280
+
+Question #: 25
+Topic #: 6
+
+DRAG DROP -
+You have an application that provides weather forecasting data to external partners. You use Azure API Management to publish APIs.
+You must change the behavior of the API to meet the following requirements:
+✑ Support alternative input parameters
+✑ Remove formatting text from responses
+✑ Provide additional context to back-end services
+Which types of policies should you implement? To answer, drag the policy types to the correct requirements. Each policy type may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![280-1](./img2/280-1.jpg)
+
+	Inbound
+	Outbound
+	Backend
+
+---
+
+281
+
+Question #: 26
+Topic #: 6
+
+You are developing an e-commerce solution that uses a microservice architecture.
+You need to design a communication backplane for communicating transactional messages between various parts of the solution. Messages must be communicated in first-in-first-out (FIFO) order.
+What should you use?
+
+	A. Azure Storage Queue
+	B. Azure Event Hub
+	C. Azure Service Bus
+	D. Azure Event Grid
+
+C
+
+---
+
+282
+
+Question #: 27
+Topic #: 6
+
+DRAG DROP -
+A company backs up all manufacturing data to Azure Blob Storage. Admins move blobs from hot storage to archive tier storage every month.
+You must automatically move blobs to Archive tier after they have not been modified within 180 days. The path for any item that is not archived must be placed in an existing queue. This operation must be performed automatically once a month. You set the value of TierAgeInDays to -180.
+How should you configure the Logic App? To answer, drag the appropriate triggers or action blocks to the correct trigger or action slots. Each trigger or action block may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![282-1](./img2/282-1.jpg)
+
+![282-2](./img2/282-2.jpg)
+
+Admin, please correct this answer.
+The box 3 shown in the image (When there are messages in a queue) differs from the solution (Put a message on a queue).
+"Put a message on a queue" is the right answer!
+
+Box 1: Reoccurance..
+To regularly run tasks, processes, or jobs on specific schedule, you can start your logic app workflow with the built-in Recurrence - Schedule trigger. You can set a date and time as well as a time zone for starting the workflow and a recurrence for repeating that workflow.
+Set the interval and frequency for the recurrence. In this example, set these properties to run your workflow every week.
+
+Box 2: Condition..
+To run specific actions in your logic app only after passing a specified condition, add a conditional statement. This control structure compares the data in your workflow against specific values or fields. You can then specify different actions that run based on whether or not the data meets the condition.
+
+Box 3: Put a message on a queue -
+The path for any item that is not archived must be placed in an existing queue.
+Note: Under If true and If false, add the steps to perform based on whether the condition is met.
+Box 4: ..tier it to Cool or Archive tier.
+Archive item.
+
+Box 5: List blobs 2 -
+Reference:
+https://docs.microsoft.com/en-us/azure/connectors/connectors-native-recurrence https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-loops https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement
+
+
+---
+
+283
+
+Question #: 28
+Topic #: 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure Service application that processes queue data when it receives a message from a mobile application. Messages may not be sent to the service consistently.
+You have the following requirements:
+✑ Queue size must not grow larger than 80 gigabytes (GB).
+✑ Use first-in-first-out (FIFO) ordering of messages.
+✑ Minimize Azure costs.
+You need to implement the messaging solution.
+Solution: Use the .Net API to add a message to an Azure Service Bus Queue from the mobile application. Create an Azure Function App that uses an Azure
+Service Bus Queue trigger.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Suggested Answer: A
+
+---
+
+284
+
+Question #: 29
+Topic #: 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure solution to collect point-of-sale (POS) device data from 2,000 stores located throughout the world. A single device can produce 2 megabytes (MB) of data every 24 hours. Each store location has one to five devices that send data.
+You must store the device data in Azure Blob storage. Device data must be correlated based on a device identifier. Additional stores are expected to open in the future.
+You need to implement a solution to receive the device data.
+Solution: Provision an Azure Notification Hub. Register all devices with the hub.
+Does the solution meet the goal?
+
+A. Yes
+B. No
+
+Suggested Answer: B 
+
+---
+
+Question #: 30
+Topic #: 6
+
+You are building a loyalty program for a major snack producer. When customers buy a snack at any of 100 participating retailers the event is recorded in Azure Event Hub. Each retailer is given a unique identifier that is used as the primary identifier for the loyalty program.
+Retailers must be able to be added or removed at any time. Retailers must only be able to record sales for themselves.
+You need to ensure that retailers can record sales.
+What should you do?
+
+A. Use publisher policies for retailers.
+B. Create a partition for each retailer.
+C. Define a namespace for each retailer.
+
+Suggested Answer: A
+
+注意Retailers must be able to be added or removed at any time. Retailers must only be able to record sales for themselves.
 
