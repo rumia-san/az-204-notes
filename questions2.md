@@ -1766,7 +1766,7 @@ Suggested Answer: C
 
 Question #: 41
 Topic #: 6
-[All AZ-204 Questions]
+
 DRAG DROP
 
 You develop and deploy several APIs to Azure API Management.
@@ -1799,7 +1799,7 @@ For example, insert the policy fragment named ForwardContext in the inbound poli
 
 Question #: 42
 Topic #: 6
-[All AZ-204 Questions]
+
 HOTSPOT
 
 You are developing a solution that uses several Azure Service Bus queues. You create an Azure Event Grid subscription for the Azure Service Bus namespace. You use Azure Functions as subscribers to process the messages.
@@ -1824,7 +1824,7 @@ https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-to-eve
 
 Question #: 43
 Topic #: 6
-[All AZ-204 Questions]
+
 You are developing several Azure API Management (APIM) hosted APIs.
 
 The APIs have the following requirements:
@@ -1857,7 +1857,7 @@ https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-add-
 
 Question #: 44
 Topic #: 6
-[All AZ-204 Questions]
+
 HOTSPOT
 
 You are developing a solution by using the Azure Event Hubs SDK. You create a standard Azure Event Hub with 16 partitions. You implement eight event processor clients.
@@ -1897,9 +1897,8 @@ Can't make my mind, I'll say select checkpoint on both and call it a day.
 
 Question #: 45
 Topic #: 6
-[All AZ-204 Questions]
+
 HOTSPOT
--
 
 You are developing a new API to be hosted by Azure API Management (APIM). The backend service that implements the API has not been completed. You are creating a test API and operation.
 
@@ -1917,5 +1916,224 @@ Answer should be:
 3. 200
 
 refs: https://learn.microsoft.com/en-us/azure/api-management/mock-api-responses?tabs=azure-cli
+
+---
+
+301
+
+Question #: 46
+Topic #: 6
+
+You are developing several Azure API Management (APIM) hosted APIs.
+
+You must inspect request processing of the APIs in APIM. Requests to APIM by using a REST client must also be included. The request inspection must include the following information:
+
+• requests APIM sent to the API backend and the response it received
+• policies applied to the response before sending back to the caller
+• errors that occurred during the processing of the request and the policies applied to the errors
+• original request APIM received from the caller and the policies applied to the request
+
+You need to inspect the APIs.
+
+Which three actions should you do? Each correct answer presents part of the solution.
+
+NOTE: Each correct selection is worth one point.
+
+	A. Enable the Allow tracing setting for the subscription used to inspect the API.
+	B. Add the Ocp-Apim-Trace header value to the API call whit a value set to true.
+	C. Add the Ocp-Apim-Subscription-Key header value to the key for a subscription that allows access to the API.
+	D. Create and configure a custom policy. Apply the policy to the inbound policy section with a global scope.
+	E. Create and configure a custom policy. Apply the policy to the outbound policy section with an API scope.
+
+ABC
+
+From: https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-api-inspector
+-To trace request processing, you must enable the Allow tracing setting for the subscription used to debug your API.
+-When making requests to API Management using curl, a REST client such as Postman, or a client app, enable tracing by adding the following request headers:
+Ocp-Apim-Trace - set value to true
+Ocp-Apim-Subscription-Key - set value to the key for a tracing-enabled subscription that allows access to the API
+
+---
+
+302
+
+和之前的249重复
+
+---
+
+303
+
+Question #: 48
+Topic #: 6
+
+HOTSPOT
+
+You plan to implement an Azure Functions app.
+
+The Azure Functions app has the following requirements:
+
+• Must be triggered by a message placed in an Azure Storage queue.
+• Must use the queue name set by an app setting named input_queue.
+• Must create an Azure Blob Storage named the same as the content of the message.
+
+You need to identify how to reference the queue and blob name in the function.json file of the Azure Functions app.
+
+How should you reference the names? To answer, select the appropriate values in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![303-1](./img2/303-1.png)
+
+```
+Queue name: %input_queue%
+Reference: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-expressions-patterns#binding-expressions---app-settings
+
+Blob name: {queue Trigger}
+Reference: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-expressions-patterns#trigger-metadata
+```
+
+Blobname
+
+---
+
+304
+
+Question #: 49
+Topic #: 6
+
+HOTSPOT
+
+You have an Azure API Management instance named API1 that uses a managed gateway.
+
+You plan to implement a policy that will apply at a product scope and will set the header of inbound requests to include information about the region hosting the gateway of API1. The policy definition contains the following content:
+
+![304-1](./img2/304-1.png)
+
+You have the following requirements for the policy definition:
+
+• Ensure that the header contains the information about the region hosting the gateway of API1.
+• Ensure the policy applies only after any global level policies are processed first.
+
+You need to complete the policy definition.
+
+Which values should you choose? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![304-2](./img2/304-2.png)
+
+![304-3](./img2/304-3.png)
+
+Given answer is correct:
+https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies#use-policy-expressions-to-modify-requests
+
+---
+
+305
+
+Question #: 50
+Topic #: 6
+
+You are developing several Azure API Management (APIM) hosted APIs.
+
+You must make several minor and non-breaking changes to one of the APIs. The API changes include the following requirements:
+
+• Must not disrupt callers of the API.
+• Enable roll back if you find issues.
+• Documented to enable developers to understand what is new.
+• Tested before publishing.
+
+You need to update the API.
+
+What should you do?
+
+	A. Configure and apply header-based versioning.
+	B. Create and publish a product.
+	C. Configure and apply a custom policy.
+	D. Add a new revision to the API.
+	E. Configure and apply query string-based versioning.
+
+D
+
+---
+
+306
+
+Question #: 51
+Topic #: 6
+[All AZ-204 Questions]
+HOTSPOT
+
+You are developing an application to store millions of images in Azure blob storage.
+
+The application has the following requirements:
+
+• Store the Exif (exchangeable image file format) data from the image as blob metadata when the application uploads the image.
+• Retrieve the Exif data from the image while minimizing bandwidth and processing time.
+• Utilizes the REST API.
+
+You need to use the image Exif data as blob metadata in the application.
+
+Which HTTP verbs should you use? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![306-1](./img2/306-1.png)
+
+![306-2](./img2/306-2.png)
+
+---
+
+307
+
+Question #: 52
+Topic #: 6
+[All AZ-204 Questions]
+You are developing several microservices to run on Azure Container Apps for a company. External TCP ingress traffic from the internet has been enabled for the microservices.
+
+The company requires that the microservices must scale based on an Azure Event Hub trigger.
+
+You need to scale the microservices by using a custom scaling rule.
+
+Which two Kubernetes Event-driven Autoscaling (KEDA) trigger fields should you use? Each correct answer presents part of the solution.
+
+NOTE: Each correct selection is worth one point.
+
+	A. metadata
+	B. type
+	C. authenticationRef
+	D. name
+	E. metricType
+
+
+AB
+
+https://keda.sh/docs/2.11/scalers/azure-event-hub/
+
+```
+- type: azure-eventhub
+  metadata:
+    一坨东西
+```
+
+---
+
+308
+
+和249差不多，反正就是建queue
+
+---
+
+309
+
+和249差不多，反正就是建queue
+
+---
+
+310
+
+和249差不多，反正就是建queue
+
+---
 
 
