@@ -1479,6 +1479,8 @@ Suggested Answer: B
 
 ---
 
+285
+
 Question #: 30
 Topic #: 6
 
@@ -1494,4 +1496,426 @@ C. Define a namespace for each retailer.
 Suggested Answer: A
 
 注意Retailers must be able to be added or removed at any time. Retailers must only be able to record sales for themselves.
+
+---
+
+286
+
+Question #: 31
+Topic #: 6
+
+DRAG DROP -
+You develop and deploy a web app to Azure App Service in a production environment. You scale out the web app to four instances and configure a staging slot to support changes.
+You must monitor the web app in the environment to include the following requirements:
+✑ Increase web app availability by re-routing requests away from instances with error status codes and automatically replace instances if they remain in an error state after one hour.
+✑ Send web server logs, application logs, standard output, and standard error messaging to an Azure Storage blob account.
+You need to configure Azure App Service.
+Which values should you use? To answer, drag the appropriate configuration value to the correct requirements. Each configuration value may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![286-1](./img2/286-1.jpg)
+
+![286-2](./img2/286-2.jpg)
+
+---
+
+287
+
+Question #: 32
+Topic #: 6
+
+You develop a solution that uses Azure Virtual Machines (VMs).
+The VMs contain code that must access resources in an Azure resource group. You grant the VM access to the resource group in Resource Manager.
+You need to obtain an access token that uses the VM's system-assigned managed identity.
+Which two actions should you perform? Each correct answer presents part of the solution.
+
+A. From the code on the VM, call Azure Resource Manager using an access token.
+B. Use PowerShell on a remote machine to make a request to the local managed identity for Azure resources endpoint.
+C. Use PowerShell on the VM to make a request to the local managed identity for Azure resources endpoint.
+D. From the code on the VM, call Azure Resource Manager using a SAS token.
+E. From the code on the VM, generate a user delegation SAS token.
+
+AC
+
+https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/tutorial-windows-vm-access-arm
+
+---
+
+288
+
+Question #: 33
+Topic #: 6
+
+You are developing a road tollway tracking application that sends tracking events by using Azure Event Hubs using premium tier.
+Each road must have a throttling policy uniquely assigned.
+You need to configure the event hub to allow for per-road throttling.
+What should you do?
+
+	A. Use a unique consumer group for each road.
+	B. Ensure each road stores events in a different partition.
+	C. Ensure each road has a unique connection string.
+	D. Use a unique application group for each road.
+
+D
+
+https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-features.
+
+Application groups
+An application group is a collection of client applications that connect to an Event Hubs namespace sharing a unique identifying condition such as the security context - shared access policy or Azure Active Directory (Azure AD) application ID.
+
+Azure Event Hubs enables you to define resource access policies such as throttling policies for a given application group and controls event streaming (publishing or consuming) between client applications and Event Hubs.
+
+For more information, see Resource governance for client applications with application groups.
+
+---
+
+289
+
+Question #: 34
+Topic #: 6
+
+You develop and deploy an ASP.NET Core application that connects to an Azure Database for MySQL instance.
+Connections to the database appear to drop intermittently and the application code does not handle the connection failure.
+You need to handle the transient connection errors in code by implementing retries.
+What are three possible ways to achieve this goal? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Close the database connection and immediately report an error.
+	B. Disable connection pooling and configure a second Azure Database for MySQL instance.
+	C. Wait five seconds before repeating the connection attempt to the database.
+	D. Set a maximum number of connection attempts to 10 and report an error on subsequent connections.
+	E. Increase connection repeat attempts exponentially up to 120 seconds.
+
+C,D,E
+
+The first and second case are fairly straight forward to handle. Try to open the connection again. When you succeed, the transient error has been mitigated by the system. You can use your Azure Database for MySQL again. We recommend having waits before retrying the connection. Back off if the initial retries fail. This way the system can use all resources available to overcome the error situation. A good pattern to follow is:
+
+Wait for 5 seconds before your first retry.
+For each following retry, the increase the wait exponentially, up to 60 seconds.
+Set a max number of retries at which point your application considers the operation failed.
+
+https://docs.microsoft.com/en-us/azure/mysql/single-server/concepts-connectivity
+
+---
+
+290
+
+Question #: 35
+Topic #: 6
+
+You are building a B2B web application that uses Azure B2B collaboration for authentication. Paying customers authenticate to Azure B2B using federation.
+The application allows users to sign up for trial accounts using any email address.
+When a user converts to a paying customer, the data associated with the trial should be kept, but the user must authenticate using federation.
+You need to update the user in Azure Active Directory (Azure AD) when they convert to a paying customer.
+Which Graph API parameter is used to change authentication from one-time passcodes to federation?
+
+	A. resetRedemption
+	B. Status
+	C. userFlowType
+	D. invitedUser
+
+A
+
+"When a user redeems a one-time passcode and later obtains an MSA, Azure AD account, or other federated account, they'll continue to be authenticated using a one-time passcode. If you want to update the user's authentication method, you can reset their redemption status."
+
+https://docs.microsoft.com/en-us/azure/active-directory/external-identities/one-time-passcode#user-experience-for-one-time-passcode-guest-users
+
+---
+
+291
+
+Question #: 36
+Topic #: 6
+
+HOTSPOT
+
+You develop an image upload service that is exposed using Azure API Management. Images are analyzed after upload for automatic tagging.
+
+Images over 500 KB are processed by a different backend that offers a lower tier of service that costs less money. The lower tier of service is denoted by a header named x-large-request. Images over 500 KB must never be processed by backends for smaller images and must always be charged the lower price.
+
+You need to implement API Management policies to ensure that images are processed correctly.
+How should you complete the API Management inbound policy? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![291-1](./img2/291-1.png)
+
+![291-2](./img2/291-2.png)
+
+The given answer looks correct
+the condition here is for "Images < 500KB" so based on the below reference we need to delete the header.
+https://learn.microsoft.com/en-us/azure/api-management/set-header-policy#attributes
+This is also the reference for back end service
+https://learn.microsoft.com/en-us/azure/api-management/set-backend-service-policy
+
+---
+
+292
+
+Question #: 37
+Topic #: 6
+
+HOTSPOT
+
+You develop several Azure Functions app functions to process JSON documents from a third-party system. The third-party system publishes events to Azure Event Grid to include hundreds of event types, such as billing, inventory, and shipping updates.
+
+Events must be sent to a single endpoint for the Azure Functions app to process. The events must be filtered by event type before processing. You must have authorization and authentication control to partition your tenants to receive the event data.
+
+You need to configure Azure Event Grid.
+
+Which configuration should you use? To answer, select the appropriate values in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![292-1](./img2/292-1.png)
+
+
+
+Check this from official trainig material:
+https://learn.microsoft.com/en-us/training/modules/azure-event-grid/2-event-grid-overview
+
+1. custom topic
+Because according to link:
+"Topics. The event grid topic provides an endpoint where the source sends events(...)Custom topics are application and third-party topics"
+
+2. event subscription
+Because according to link:
+"Event subscriptions. A subscription tells Event Grid which events on a topic you're interested in receiving. When creating the subscription, you provide an endpoint for handling the event"
+
+---
+
+293
+
+Question #: 38
+Topic #: 6
+
+A company is developing a solution that allows smart refrigerators to send temperature information to a central location.
+
+The solution must receive and store messages until they can be processed. You create an Azure Service Bus instance by providing a name, pricing tier, subscription, resource group, and location.
+
+You need to complete the configuration.
+
+Which Azure CLI or PowerShell command should you run?
+
+![293-1](./img2/293-1.png)
+
+![293-2](./img2/293-2.png)
+
+![293-3](./img2/293-3.png)
+
+![293-4](./img2/293-4.png)
+
+B
+
+The next step in the process should be to create a queue IMO (as discussed in similar questions earlier). How the commans looks depends on what type of command prompt you are using (Azure CLI, PowerShell, Bash, ...).
+
+---
+
+294
+
+Question #: 39
+Topic #: 6
+
+A company is developing a solution that allows smart refrigerators to send temperature information to a central location.
+
+The solution must receive and store messages until they can be processed. You create an Azure Service Bus instance by providing a name, pricing tier, subscription, resource group, and location.
+
+You need to complete the configuration.
+
+Which Azure CLI or PowerShell command should you run?
+
+![294-1](./img2/294-1.png)
+
+![294-2](./img2/294-2.png)
+
+![294-3](./img2/294-3.png)
+
+![294-4](./img2/294-4.png)
+
+Suggested Answer: C
+
+---
+
+295
+
+Question #: 40
+Topic #: 6
+
+A company is developing a solution that allows smart refrigerators to send temperature information to a central location.
+
+The solution must receive and store messages until they can be processed. You create an Azure Service Bus instance by providing a name, pricing tier, subscription, resource group, and location.
+
+You need to complete the configuration.
+
+Which Azure CLI or PowerShell command should you run?
+
+![295-1](./img2/295-1.png)
+
+![295-2](./img2/295-2.png)
+
+![295-3](./img2/295-3.png)
+
+![295-4](./img2/295-4.png)
+
+Suggested Answer: C
+
+---
+
+296
+
+Question #: 41
+Topic #: 6
+[All AZ-204 Questions]
+DRAG DROP
+
+You develop and deploy several APIs to Azure API Management.
+
+You create the following policy fragment named APICounts:
+
+![296-1](./img2/296-1.png)
+
+![296-2](./img2/296-2.png)
+
+![296-3](./img2/296-3.png)
+
+Answers are correct. Here is an explanation of Policy fragments
+
+https://learn.microsoft.com/en-us/azure/api-management/policy-fragments
+
+For example, insert the policy fragment named ForwardContext in the inbound policy section:
+
+```
+<policies>
+<inbound>
+<include-fragment fragment-id="ForwardContext" />
+<base />
+</inbound>
+```
+
+---
+
+297
+
+Question #: 42
+Topic #: 6
+[All AZ-204 Questions]
+HOTSPOT
+
+You are developing a solution that uses several Azure Service Bus queues. You create an Azure Event Grid subscription for the Azure Service Bus namespace. You use Azure Functions as subscribers to process the messages.
+
+You need to emit events to Azure Event Grid from the queues. You must use the principal of least privilege and minimize costs.
+
+Which Azure Service Bus values should you use? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![297-1](./img2/297-1.png)
+
+![297-2](./img2/297-2.png)
+
+Remember with Service bus + event grid its always premimum
+
+https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-to-event-grid-integration-concept?tabs=event-grid-event-schema
+
+---
+
+298
+
+Question #: 43
+Topic #: 6
+[All AZ-204 Questions]
+You are developing several Azure API Management (APIM) hosted APIs.
+
+The APIs have the following requirements:
+
+• Require a subscription key to access all APIs.
+• Include terms of use that subscribers must accept to use the APIs.
+• Administrators must review and accept or reject subscription attempts.
+• Limit the count of multiple simultaneous subscriptions.
+
+You need to implement the APIs.
+
+What should you do?
+
+	A. Configure and apply header-based versioning.
+	B. Create and publish a product.
+	C. Configure and apply query string-based versioning.
+	D. Add a new revision to all APIs. Make the revisions current and add a change log entry.
+	
+B
+
+B. Create and publish a product.
+
+To meet the requirements of needing a subscription key, including terms of use, having administrators review subscriptions, and limiting simultaneous subscriptions for Azure API Management hosted APIs, you should create and publish a product
+
+https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-add-products?tabs=azure-portal#create-and-publish-a-product
+
+---
+
+299
+
+Question #: 44
+Topic #: 6
+[All AZ-204 Questions]
+HOTSPOT
+
+You are developing a solution by using the Azure Event Hubs SDK. You create a standard Azure Event Hub with 16 partitions. You implement eight event processor clients.
+
+You must balance the load dynamically when an event processor client fails. When an event processor client fails, another event processor must continue processing from the exact point at which the failure occurred. All events must be aggregate and upload to an Azure Blob storage account.
+
+You need to implement event processing recovery for the solution.
+
+Which SDK features should you use? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![299-1](./img2/299-1.png)
+
+![299-2](./img2/299-2.png)
+
+
+不确定
+
+Checkpoint for both.
+
+The features needed to implement event processing recovery for the solution, and specifically to handle the marking of the event processor client position within a partition event sequence, are related to checkpointing. Checkpointing is the process of tracking the processing of events within a partition and is essential for ensuring that processing can continue from the exact point at which a failure occurred.
+
+1. Ensure that event process clients mark the position within an event sequence: Again, use Checkpointing. By regularly recording checkpoints, the event processor clients can ensure that they mark their progress through the event stream, allowing for recovery from failures.
+
+
+2. Mark the event processor client position within a partition event sequence: Use Checkpointing. This allows an event processor to record its position in the event stream and resume from that position if it's restarted.
+
+
+An offset is the position of an event within a partition.
+Checkpointing is a process by which readers mark or commit their position within a partition event sequence.
+Can't make my mind, I'll say select checkpoint on both and call it a day.
+
+---
+
+300
+
+Question #: 45
+Topic #: 6
+[All AZ-204 Questions]
+HOTSPOT
+-
+
+You are developing a new API to be hosted by Azure API Management (APIM). The backend service that implements the API has not been completed. You are creating a test API and operation.
+
+You must enable developers to continue with the implementation and testing of the APIM instance integrations while you complete the backend API development.
+
+You need to configure a test API response.
+
+How should you complete the configuration? To answer, select the appropriate options in the answer area.
+
+![300-1](./img2/300-1.png)
+
+Answer should be:
+1. mock-response
+2. inbound
+3. 200
+
+refs: https://learn.microsoft.com/en-us/azure/api-management/mock-api-responses?tabs=azure-cli
+
 
