@@ -2136,4 +2136,115 @@ https://keda.sh/docs/2.11/scalers/azure-event-hub/
 
 ---
 
+311
 
+Question #: 1
+Topic #: 7
+[All AZ-204 Questions]
+HOTSPOT -
+You need to configure Azure CDN for the Shipping web site.
+Which configuration options should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![311-1](./img2/311-1.jpg)
+
+Standard - Microsoft - General Web Delivery should be used instead.
+
+Akamai is retiring. Standard - Microsoft - General Web Delivery should be used instead.
+
+General web delivery Note:
+"If you are using an Azure CDN Standard from Akamai profile, select this optimization type if your average file size is smaller than 10 MB. Otherwise, if your average file size is larger than 10 MB, select Large file download from the Optimized for drop-down list."
+
+Reference: https://learn.microsoft.com/en-us/azure/cdn/cdn-optimization-overview#general-web-delivery
+
+To prevent reading the cases multiple times:
+Please see the spots below where you can find the questions (page/topic/question/subject)
+Wide World Importers
+46 7 1 Azure CDN tiers
+46 7 2 azure tools on/with VM
+49 12 1 secure Function app : auth + token + trigger type
+49 12 2 secure Logic App : tool used
+55 23 1 setup workflow in logic app
+55 23 2 setup network to trigger logic app from external server
+
+---
+
+312
+
+Question #: 2
+Topic #: 7
+[All AZ-204 Questions]
+HOTSPOT -
+You need to correct the VM issues.
+Which tools should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![312-1](./img2/312-1.jpg)
+
+![312-2](./img2/312-2.jpg)
+
+Accelerated Networking only works in conjunction with a Azure Virtual Network (VNet). That is mentioned in the case and is a clue as well.
+
+---
+
+313
+
+暂缺
+
+---
+
+314
+
+Question #: 1
+Topic #: 8
+[All AZ-204 Questions]
+DRAG DROP -
+You need to add code at line PC32 in Processing.cs to implement the GetCredentials method in the Processing class.
+How should you complete the code? To answer, drag the appropriate code segments to the correct locations. Each code segment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![314-1](./img2/314-1.jpg)
+![314-2](./img2/314-2.jpg)
+
+Answer is correct.
+
+TokenCredential class receives a string in the constructor:
+- https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.storage.auth.tokencredential?view=azure-dotnet#constructors
+
+So the answer cannot be MSITokenProvider.GetAuthenticationHeaderAsync which returns an AuthenticationHeaderValue:
+- https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.management.resourcemanager.fluent.authentication.msitokenprovider.getauthenticationheaderasync
+
+AzureServiceTokenProvider.GetAccessTokenAsync on the other hand returns a string:
+- https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.services.appauthentication.azureservicetokenprovider.getaccesstokenasync
+
+
+---
+
+315
+
+Question #: 2
+Topic #: 8
+[All AZ-204 Questions]
+DRAG DROP -
+You need to ensure disaster recovery requirements are met.
+What code should you add at line PC16?
+To answer, drag the appropriate code fragments to the correct locations. Each code fragment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![315-1](./img2/315-1.jpg)
+
+	SingleTranferConext
+	ShouldOverwriteCallbackAsync
+	true
+
+Answers in box 1 and 2 arent' correct. They should be SingleTranferConext and ShouldOverwriteCallbackAsync because we are copying a single blob (see CopyAsync method). We are inside a foreach loop that scan each file in the share.
+
+---
+
+316
+
+暂缺
