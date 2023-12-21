@@ -2209,6 +2209,18 @@ Select and Place:
 ![314-1](./img2/314-1.jpg)
 ![314-2](./img2/314-2.jpg)
 
+To prevent reading the cases multiple times:
+Please see the spots below where you can find the questions (page/topic/question/subject)
+Litware Inc
+47 8 1 code : GetCredentials method
+47 8 2 code : disaster recovery requirements
+51 14 1 code : set encryption with request to blob storage
+51 14 2 ARM set keyVault access policy
+53 20 1 prevent blob writing concurrency problems
+54 20 2 resolve capacity issue at function processing
+54 20 3 resolve capacity issue at extensive logging
+
+
 Answer is correct.
 
 TokenCredential class receives a string in the constructor:
@@ -2248,3 +2260,145 @@ Answers in box 1 and 2 arent' correct. They should be SingleTranferConext and Sh
 316
 
 暂缺
+
+---
+
+317
+
+Question #: 1
+Topic #: 9
+
+HOTSPOT -
+You need to configure Azure Cosmos DB.
+Which settings should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![317-1](./img2/317-1.jpg)
+![317-2](./img2/317-2.jpg)
+
+Answer is correct - Strong consistency matches requirements and MS recommends that if you have no preference or specific reason to use any of the other cosmos APIs, you should use the SQL api
+
+To prevent reading the cases multiple times:
+Please see the spots below where you can find the questions (page/topic/question/subject)
+Coho Winery
+47 9 1 configure Azure Cosmos DB
+47 9 2 SQL
+54 22 1 Review logs/history to troubleshoot workflow
+54 22 2 ARM function configuration : retries etc
+57 28 1 workflow for Azure Container Registry
+57 28 2 access data from the user claim object
+
+---
+
+318
+
+
+Question #: 2
+Topic #: 9
+[All AZ-204 Questions]
+HOTSPOT -
+You need to retrieve all order line items from Order.json and sort the data alphabetically by the city.
+How should you complete the code? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![318-1](./img2/318-1.jpg)
+![318-2](./img2/318-2.jpg)
+
+The last one should be o.address.city
+
+---
+
+319
+
+Question #: 1
+Topic #: 10
+[All AZ-204 Questions]
+HOTSPOT -
+You need to implement the Azure Function for delivery driver profile information.
+Which configurations should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![319-1](./img2/319-1.jpg)
+![319-2](./img2/319-2.jpg)
+
+Store delivery driver profile information in Azure Active Directory (Azure AD), I would use:
+Code Library: MSAL
+API: Microsoft Graph
+https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-overview
+
+To prevent reading the cases multiple times:
+Please see the spots below where you can find the questions (page/topic/question/subject)
+VanArsdel, Ltd.
+47 10 1 delivery profile information in code
+48 10 2 grant access SAS or AD?
+48 10 3 JWT +claims
+48 10 4 place to store the RSA-HSM key
+51 15 1 reduce read latency Cosmos DB
+51 15 2 audit transactions in blob
+54 21 1 systems for source-receiver-handler
+57 29 1 funcion configuration : binding , trigger, direction
+57 29 2 tier of SPA web app
+57 30 1 Azure Blob features for point-in-time restore and accidental deletion of data
+
+---
+
+320
+
+Question #: 2
+Topic #: 10
+[All AZ-204 Questions]
+You need to grant access to the retail store location data for the inventory service development effort.
+What should you use?
+
+	A. Azure AD access token
+	B. Azure RBAC role
+	C. Shared access signature (SAS) token
+	D. Azure AD ID token
+	E. Azure AD refresh token
+
+Seems Correct as access is required to access for 3 months
+
+---
+
+321
+
+Question #: 3
+Topic #: 10
+
+HOTSPOT -
+You need to reliably identify the delivery driver profile information.
+How should you configure the system? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![321-1](./img2/321-1.png)
+![321-2](./img2/321-2.png)
+
+Looks correct.
+Ref.: https://learn.microsoft.com/en-us/azure/active-directory/develop/id-tokens
+
+---
+
+322
+
+Question #: 4
+Topic #: 10
+
+You need to secure the Azure Functions to meet the security requirements.
+Which two actions should you perform? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Store the RSA-HSM key in Azure Key Vault with soft-delete and purge-protection features enabled.
+	B. Store the RSA-HSM key in Azure Blob storage with an immutability policy applied to the container.
+	C. Create a free tier Azure App Configuration instance with a new Azure AD service principal.
+	D. Create a standard tier Azure App Configuration instance with an assigned Azure AD managed identity.
+	E. Store the RSA-HSM key in Azure Cosmos DB. Apply the built-in policies for customer-managed keys and allowed locations.
+
+AD
+
+---
+
+
