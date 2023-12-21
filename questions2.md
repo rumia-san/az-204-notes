@@ -2751,7 +2751,7 @@ https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-to-even
 
 Question #: 1
 Topic #: 14
-[All AZ-204 Questions]
+
 HOTSPOT -
 You need to add code at line PC26 of Processing.cs to ensure that security policies are met.
 How should you complete the code that you will add at line PC26? To answer, select the appropriate options in the answer area.
@@ -2761,3 +2761,1034 @@ Hot Area:
 ![335-1](./img2/335-1.png)
 ![335-2](./img2/335-2.png)
 
+---
+
+336
+
+Question #: 2
+Topic #: 14
+
+You need to ensure the security policies are met.
+What code do you add at line CS07 of ConfigureSSE.ps1?
+
+	A. ג€"PermissionsToKeys create, encrypt, decrypt
+	B. ג€"PermissionsToCertificates create, encrypt, decrypt
+	C. ג€"PermissionsToCertificates wrapkey, unwrapkey, get
+	D. ג€"PermissionsToKeys wrapkey, unwrapkey, get
+
+D
+
+
+My opinion is that the answer is D.
+
+The policy should belong to a key. In the case study the code retrieve the key so the GET access policy is mandatory. The wrap/unwrap is used for symmetric encryption and in this case study the task is to encrypt the blobs.
+
+Correct Answer: D
+
+PS C:\>Set-AzKeyVaultAccessPolicy -VaultName "MyKeyVault" -ObjectId $account.Identity.PrincipalId -PermissionsToKeys wrapkey,unwrapkey,get
+
+Reference:
+
+https://docs.microsoft.com/en-us/powershell/module/az.storage/set-azstorageaccount?view=azps-5.8.0#example-5--set-encryption-keysource-to-keyvault
+
+100% D - All certificates and secrets used to secure data must be stored in Azure Key Vault.
+
+You need to retrieve the keys so get permission is required. The wrapkey and unwrapkey will be used for symmetric encryption to encrypt the blobs.
+
+Below link contains an example of same scenario.
+
+https://docs.microsoft.com/en-us/powershell/module/az.storage/set-azstorageaccount?view=azps-8.0.0#example-5-set-encryption-keysource-to-keyvault
+
+https://docs.microsoft.com/en-us/azure/key-vault/keys/about-keys-details#key-access-control
+
+
+
+---
+
+337
+
+暂缺
+
+---
+
+338
+
+暂缺
+
+---
+
+339
+
+Question #: 1
+Topic #: 15
+
+You need to reduce read latency for the retail store solution.
+What are two possible ways to achieve the goal? Each correct answer presents a complete solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Create a new composite index for the store location data queries in Azure Cosmos DB. Modify the queries to support parameterized SQL and update the Azure Function app to call the new queries.
+	B. Provision an Azure Cosmos DB dedicated gateway. Update the Azure Function app connection string to use the new dedicated gateway endpoint.
+	C. Configure Azure Cosmos DB consistency to session consistency. Cache session tokens in a new Azure Redis cache instance after every write. Update reads to use the session token stored in Azure Redis.
+	D. Provision an Azure Cosmos DB dedicated gateway. Update blob storage to use the new dedicated gateway endpoint.
+	E. Configure Azure Cosmos DB consistency to strong consistency. Increase the RUs for the container supporting store location data.
+
+AB 
+
+不确定
+
+A. Create a new composite index for the store location data queries in Azure Cosmos DB. Modify the queries to support parameterized SQL and update the Azure Function app to call the new queries:
+By creating a composite index tailored to the specific queries used, you can potentially reduce the query cost and improve performance. Parameterized queries can further improve efficiency.
+
+B. Provision an Azure Cosmos DB dedicated gateway. Update the Azure Function app connection string to use the new dedicated gateway endpoint:
+A dedicated gateway in Azure Cosmos DB provides improved performance for query execution and can reduce latency. Connecting the Azure Function app to this dedicated gateway can leverage these performance improvements.
+
+---
+
+340
+
+Question #: 2
+Topic #: 15
+
+You need to audit the retail store sales transactions.
+What are two possible ways to achieve the goal? Each correct answer presents a complete solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Update the retail store location data upload process to include blob index tags. Create an Azure Function to process the blob index tags and filter by store location.
+	B. Process the change feed logs of the Azure Blob storage account by using an Azure Function. Specify a time range for the change feed data.
+	C. Enable blob versioning for the storage account. Use an Azure Function to process a list of the blob versions per day.
+	D. Process an Azure Storage blob inventory report by using an Azure Function. Create rule filters on the blob inventory report.
+	E. Subscribe to blob storage events by using an Azure Function and Azure Event Grid. Filter the events by store location.
+
+BE
+
+B. Process the change feed logs of the Azure Blob storage account by using an Azure Function. Specify a time range for the change feed data.
+The change feed provides a way to log changes to blobs in a storage account. By using an Azure Function to process the change feed logs, it is possible to track and audit sales transaction information. The time range for the change feed data can be specified to capture the transactions within a specific time period.
+
+E. Subscribe to blob storage events by using an Azure Function and Azure Event Grid. Filter the events by store location.
+Azure Event Grid allows subscribing to events raised by Azure services or third-party services. By using an Azure Function and Event Grid, it is possible to filter the events for a specific store location and track sales transactions. This approach can help to monitor sales transactions in real-time and provide an audit trail for reconciliation.
+
+---
+
+341
+
+Question #: 1
+Topic #: 16
+
+You need to monitor ContentUploadService according to the requirements.
+Which command should you use?
+
+	A. az monitor metrics alert create ג€"n alert ג€"g ג€¦ - -scopes ג€¦ - -condition "avg Percentage CPU > 8"
+	B. az monitor metrics alert create ג€"n alert ג€"g ג€¦ - -scopes ג€¦ - -condition "avg Percentage CPU > 800"
+	C. az monitor metrics alert create ג€"n alert ג€"g ג€¦ - -scopes ג€¦ - -condition "CPU Usage > 800"
+	D. az monitor metrics alert create ג€"n alert ג€"g ג€¦ - -scopes ג€¦ - -condition "CPU Usage > 8"
+
+C
+
+C is the correct answer. We are dealing with containers here not VM so "CPU usage" is a valid condition. Had it been VM then it should have been "Percentage CPU usage". 800 is also correct since for containers its measured in millicores.
+Ref : https://docs.microsoft.com/en-us/azure/azure-monitor/platform/metrics-supported#microsoftcontainerinstancecontainergroups
+
+---
+
+342
+
+Question #: 2
+Topic #: 16
+
+You need to investigate the http server log output to resolve the issue with the ContentUploadService.
+Which command should you use first?
+
+	A. az webapp log
+	B. az ams live-output
+	C. az monitor activity-log
+	D. az container attach
+
+D
+
+Answer is az container attach
+
+Ref: https://docs.microsoft.com/en-us/azure/container-instances/container-instances-get-logs
+
+---
+
+343
+
+Question #: 1
+Topic #: 17
+
+You need to investigate the Azure Function app error message in the development environment.
+What should you do?
+
+	A. Connect Live Metrics Stream from Application Insights to the Azure Function app and filter the metrics.
+	B. Create a new Azure Log Analytics workspace and instrument the Azure Function app with Application Insights.
+	C. Update the Azure Function app with extension methods from Microsoft.Extensions.Logging to log events by using the log instance.
+	D. Add a new diagnostic setting to the Azure Function app to send logs to Log Analytics.
+
+
+A
+
+Given answer is correct.
+Live Metrics Stream:
+when your function app is connected to Application Insights, you can view log data and other metrics in near real time in the Azure portal using Live Metrics Stream. Open below link for this statement.
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-monitoring
+
+---
+
+344
+
+Question #: 2
+Topic #: 17
+
+HOTSPOT -
+You need to configure security and compliance for the corporate website files.
+Which Azure Blob storage settings should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![344-1](./img2/344-1.png)
+
+Box 1: shared access signature (SAS) token
+According to the diagram, blob storage is accessed from Azure CDN. Azure CDN doesn't support authentication with managed identity. If you want to grant limited access to private storage containers, you can use the Shared Access Signature (SAS) feature of your Azure storage account. Also, using a managed identity you can't restrict access by IP as requested.
+
+Box 2: change feed
+The purpose of the change feed is to provide transaction logs of all the changes that occur to the blobs and the blob metadata in your storage account.
+The file updates must be read-only, stored in the order in which they occurred, include only create, update, delete, and copy operations, and be retained for compliance reasons.
+
+Reference:
+https://docs.microsoft.com/en-us/azure/cdn/cdn-sas-storage-support
+https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal
+
+---
+
+345
+
+暂缺
+
+---
+
+346
+
+暂缺
+
+---
+
+347
+
+Question #: 1
+Topic #: 18
+
+You need to correct the RequestUserApproval Function app error.
+What should you do?
+
+	A. Update line RA13 to use the async keyword and return an HttpRequest object value.
+	B. Configure the Function app to use an App Service hosting plan. Enable the Always On setting of the hosting plan.
+	C. Update the function to be stateful by using Durable Functions to process the request payload.
+	D. Update the functionTimeout property of the host.json project file to 15 minutes.
+
+C
+
+Answer is correct. In addition you can see this pattern in microosoft documentation and it's known as Human Interaction.
+https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview?tabs=csharp#human
+
+http trigger timeout is maxed to 230 seconds, so the only available option is to change to a durable one
+
+---
+
+348
+
+暂缺
+
+---
+
+349
+
+Question #: 1
+Topic #: 19
+
+DRAG DROP -
+You need to implement the Log policy.
+How should you complete the Azure Event Grid subscription? To answer, drag the appropriate JSON segments to the correct locations. Each JSON segment may be used once, more than once, or not at all. You may need to drag the split bar between panes to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![349-1](./img2/349-1.png)
+![349-2](./img2/349-2.png)
+
+Looks correct based on the provided reference.
+https://docs.microsoft.com/en-us/azure/event-grid/subscription-creation-schema
+
+To prevent reading the cases multiple times:
+Please see the spots below where you can find the questions (page/topic/question/subject)
+Proseware, Inc.
+53 19 1 ARM for Azure Event Grid subscription, enable + filter logging
+53 19 2 use Application Insights for scaling
+53 19 3 code : telemetry filter/ telemetry processor
+53 19 4 code : telemetry initializer
+55 25 1 code : if-then condition on properties of incomming event from GRID
+56 25 2 code : class for login event, properties needed
+56 25 3 code : programatically update application settings for blob
+56 26 1 azure function delay : always on and tier
+
+---
+
+350
+
+Question #: 2
+Topic #: 19
+
+You need to ensure that the solution can meet the scaling requirements for Policy Service.
+Which Azure Application Insights data model should you use?
+
+	A. an Application Insights dependency
+	B. an Application Insights event
+	C. an Application Insights trace
+	D. an Application Insights metric
+
+D
+
+Application Insights provides three additional data types for custom telemetry:
+- Trace: used either directly, or through an adapter to implement diagnostics logging using an instrumentation framework that is familiar to you, such as Log4Net or System.Diagnostics.
+- Event: typically used to capture user interaction with your service, to analyze usage patterns.
+- Metric: used to report periodic scalar measurements.
+
+Scenario:
+Policy service must use Application Insights to automatically scale with the number of policy actions that it is performing.
+
+So, it is D.
+
+---
+
+351
+
+Question #: 3
+Topic #: 19
+
+DRAG DROP -
+You need to implement telemetry for non-user actions.
+How should you complete the Filter class? To answer, drag the appropriate code segments to the correct locations. Each code segment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![351-1](./img2/351-1.png)
+![351-2](./img2/351-2.png)
+
+The question is so wrong
+"You need to implement telemetry for non-user actions"
+that MUST be:
+"You need to implement telemetry to exclude non-user actions" (according to the requirements).
+
+In that case you have to exclude RequestTelemetry in combination with /health
+
+---
+
+352
+
+Question #: 4
+Topic #: 19
+
+DRAG DROP -
+You need to ensure that PolicyLib requirements are met.
+How should you complete the code segment? To answer, drag the appropriate code segments to the correct locations. Each code segment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![352-1](./img2/352-1.png)
+
+Box 1: ITelemetryInitializer
+Box 2: Initialize
+Box 3: Telemetry.Context
+Box 4: EventGridController.EventId.Value
+
+Scenario: The application reacts to events from Azure Event Grid and performs policy actions based on those events. The application must include the Event Grid Event ID field in all Application Insights telemetry.
+
+You can add properties to telemetry by implementing ITelemetryInitializer which defines the Initialize method.
+
+https://docs.microsoft.com/en-us/azure/azure-monitor/app/api-custom-events-metrics#sampling-filtering-and-processing-telemetry
+
+```
+* EventId is held by class EventGridController
+* You can add properties to telemetry by implementing ITelemetryInitializer which defines the Initialize method.
+* ITelemetry.Context.Properties is correct, but shouldnt be used any more as obsoloete
+
+public class IncludeEventId : ITelemetryInitializer
+{
+	public void Initialize (ITelemetry telemetry)
+	{
+		telemetry.Context.Properties["EventId"] = EventgridController.EventId.Value;
+	}
+}
+
+https://docs.microsoft.com/en-us/azure/azure-monitor/app/api-custom-events-metrics#sampling-filtering-and-processing-telemetry
+https://docs.microsoft.com/en-us/dotnet/api/microsoft.applicationinsights.datacontracts.telemetrycontext.properties?view=azure-dotnet#Microsoft_ApplicationInsights_DataContracts_TelemetryContext_Properties
+```
+
+---
+
+353
+
+Question #: 1
+Topic #: 20
+
+You need to ensure receipt processing occurs correctly.
+What should you do?
+
+	A. Use blob properties to prevent concurrency problems
+	B. Use blob SnapshotTime to prevent concurrency problems
+	C. Use blob metadata to prevent concurrency problems
+	D. Use blob leases to prevent concurrency problems
+
+D
+
+I think it is lease (see this link)
+https://docs.microsoft.com/en-us/azure/storage/blobs/concurrency-manage?tabs=dotnet
+
+blobLease 是 Azure Blob Storage 中的一种机制，用于管理 Blob（二进制大对象）的访问权限和锁定状态。
+
+具体来说，blobLease 提供了一种机制，允许一个客户端获取对 Blob 的独占访问权限，这样其他客户端就无法修改或删除该 Blob，直到租赁期满或租赁被显式释放。
+
+---
+
+354
+
+Question #: 2
+Topic #: 20
+
+You need to resolve the capacity issue.
+Scenario: Capacity issue: During busy periods, employees report long delays between the time they upload the receipt and when it appears in the web application.
+![354-1](./img2/354-1.png)
+
+What should you do?
+
+	A. Convert the trigger on the Azure Function to an Azure Blob storage trigger
+	B. Ensure that the consumption plan is configured correctly to allow scaling
+	C. Move the Azure Function to a dedicated App Service Plan
+	D. Update the loop starting on line PC09 to process items in parallel
+
+D
+
+---
+
+355
+
+Question #: 3
+Topic #: 20
+
+
+Scenario, the log capacity issue: Developers report that the number of log message in the trace output for the processor is too high, resulting in lost log messages.
+
+You need to resolve the log capacity issue.
+What should you do?
+
+A. Create an Application Insights Telemetry Filter
+B. Change the minimum log level in the host.json file for the function
+C. Implement Application Insights Sampling
+D. Set a LogCategoryFilter during startup
+
+C
+
+---
+
+356
+
+Question #: 1
+Topic #: 21
+
+HOTSPOT -
+You need to implement event routing for retail store location data.
+Which configurations should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![356-1](./img2/356-1.jpg)
+
+blob/grid/function
+
+---
+
+357
+
+暂缺
+
+---
+
+358
+
+Question #: 1
+Topic #: 22
+
+Scenario: The order workflow fails to run upon initial deployment to Azure.
+
+You need to troubleshoot the order workflow.
+Which two actions should you perform? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Review the API connections.
+	B. Review the activity log.
+	C. Review the run history.
+	D. Review the trigger history.
+
+CD
+
+Check runs history: Each time that the trigger fires for an item or event, the Logic Apps engine creates and runs a separate workflow instance for each item or event. If a run fails, follow these steps to review what happened during that run, including the status for each step in the workflow plus the inputs and outputs for each step.
+Check the workflow's run status by checking the runs history. To view more information about a failed run, including all the steps in that run in their status, select the failed run.
+
+---
+
+359
+
+Question #: 2
+Topic #: 22
+
+HOTSPOT -
+You need to update the order workflow to address the issue when calling the Printer API App.
+How should you complete the code? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![](./img2/359-1.jpg)
+
+1. Fixed
+2. PT10S
+3. 5
+PT10 means retry after 10sec ,
+https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-exception-handling
+
+---
+
+360
+
+暂缺
+
+---
+
+361
+
+Question #: 1
+Topic #: 23
+
+DRAG DROP -
+You need to support the message processing for the ocean transport workflow.
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![](./img2/361-1.png)
+
+![](./img2/361-2.png)
+
+This is about logic app, which is not part anymore of the exam
+
+However :
+
+1.Create integration account
+2.Link Logic app
+3.Add partners...
+4.Update logic app
+
+https://learn.microsoft.com/en-us/azure/logic-apps/add-artifacts-integration-service-environment-ise#create-integration-accounts
+
+Why not custom connector? X12 is Managed connector, as it is opposed to a custom connector
+
+https://learn.microsoft.com/en-us/azure/logic-apps/add-artifacts-integration-service-environment-ise#add-ise-connectors
+
+---
+
+362
+
+Question #: 2
+Topic #: 23
+
+
+Scenario: The Shipping Logic app must meet the following requirements:
+✑ Support the ocean transport and inland transport workflows by using a Logic App.
+✑ Support industry-standard protocol X12 message format for various messages including vessel content details and arrival notices.
+✑ Secure resources to the corporate VNet and use dedicated storage resources with a fixed costing model.
+✑ Maintain on-premises connectivity to support legacy applications and final BizTalk migrations.
+
+You need to support the requirements for the Shipping Logic App.
+What should you use?
+
+	A. Azure Active Directory Application Proxy
+	B. Site-to-Site (S2S) VPN connection
+	C. On-premises Data Gateway
+	D. Point-to-Site (P2S) VPN connection
+
+C 不确定
+
+---
+
+363
+
+Question #: 3
+Topic #: 23
+
+You need to access user claims in the e-commerce web app.
+What should you do first?
+
+	A. Using the Azure CLI, enable Cross-origin resource sharing (CORS) from the e-commerce checkout API to the e-commerce web app.
+	B. Update the e-commerce web app to read the HTTP request header values.
+	C. Assign the Contributor RBAC role to the e-commerce web app by using the Resource Manager create role assignment API.
+	D. Write custom code to make a Microsoft Graph API call from the e-commerce web app.
+
+B
+
+For all language frameworks, App Service makes the claims in the incoming token (whether from an authenticated end user or a client application) available to your code by injecting them into the request headers. External requests aren't allowed to set these headers, so they are present only if set by App Service. Some example headers include:
+
+X-MS-CLIENT-PRINCIPAL-NAME
+X-MS-CLIENT-PRINCIPAL-ID
+
+https://docs.microsoft.com/en-us/azure/app-service/configure-authentication-user-identities
+
+---
+
+364
+
+Question #: 4
+Topic #: 23
+
+Scenario: The LabelMaker applications must be secured by using an AAD account that has full access to all namespaces of the Azure Kubernetes Service (AKS) cluster.
+
+You need to meet the LabelMaker application security requirement.
+What should you do?
+
+	A. Create a conditional access policy and assign it to the Azure Kubernetes Service cluster.
+	B. Place the Azure Active Directory account into an Azure AD group. Create a ClusterRoleBinding and assign it to the group.
+	C. Create a RoleBinding and assign it to the Azure AD account.
+	D. Create a Microsoft Azure Active Directory service principal and assign it to the Azure Kubernetes Service (AKS) cluster.
+
+D 不确定
+
+This is a tough question because multiple answers appear supported by the MSFT documentation.
+
+B: Supported by this documentation, but it says "This article assumes that you have an existing AKS cluster enabled with Azure AD integration" -- so I think that since this will be a new AKS cluster, D is the correct answer.
+https://docs.microsoft.com/en-us/azure/aks/azure-ad-rbac
+
+D: supported by this (legacy) documentation, for new AKS clusters
+https://docs.microsoft.com/en-us/azure/aks/azure-ad-integration-cli
+
+---
+
+365
+
+Question #: 1
+Topic #: 24
+
+HOTSPOT -
+You need to configure the integration for Azure Service Bus and Azure Event Grid.
+How should you complete the CLI statement? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![365-1](./img2/365-1.png)
+
+![365-2](./img2/365-2.png)
+
+Appeared in exam I took on 27 May 2023
+1 eventgrid
+2 event-subscription
+3 servicebusqueue
+Following is the example from Azcli command of az eventgrid
+
+Create a new event subscription for an Azure subscription, using default filters, and an Azure
+ServiceBusQueue as a destination.
+az eventgrid event-subscription create --name es2 \
+--source-resource-id /subscriptions/{SubID} \
+--endpoint-type servicebusqueue \
+--endpoint /subscriptions/{SubID}/resourceGroups/TestRG/providers/Microsoft.ServiceBus/n
+amespaces/ns1/queues/queue1
+
+---
+
+366
+
+Question #: 2
+Topic #: 24
+
+You need to ensure that all messages from Azure Event Grid are processed.
+What should you use?
+
+	A. Azure Event Grid topic
+	B. Azure Service Bus topic
+	C. Azure Service Bus queue
+	D. Azure Storage queue
+	E. Azure Logic App custom connector
+
+C
+
+Answer is Correct C. Service Bus
+Only C. ServiceBus Queue and B. Service Bus Topic give a guarantee of delivery.
+Since Topics can only receive messages from a Queue that leaves only C.
+
+---
+
+367
+
+Question #: 1
+Topic #: 25
+
+Scenario, Log policy: All Azure App Service Web Apps must write logs to Azure Blob storage.
+
+DRAG DROP -
+You need to add code at line EG15 in EventGridController.cs to ensure that the Log policy applies to all services.
+How should you complete the code? To answer, drag the appropriate code segments to the correct locations. Each code segment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![367-1](./img2/367-1.png)
+
+![367-2](./img2/367-2.png)
+
+Answer seems to be correct.
+
+Once a new web app is created, an event is triggered from the resource group...
+https://docs.microsoft.com/en-us/azure/event-grid/event-schema-resource-groups?tabs=event-grid-event-schema
+
+That event contains the status, which must be Succeeded in order for it to make sense to apply the policy. The above site also mentions that the event["data"] contains an operationName property for resource group events, which in this case is an "Microsoft.web/sites/write" operation.
+
+---
+
+368
+
+Question #: 2
+Topic #: 25
+
+HOTSPOT -
+You need to insert code at line LE03 of LoginEvent.cs to ensure that all authentication events are processed correctly.
+How should you complete the code? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![368-1](./img2/368-1.png)
+
+![368-2](./img2/368-2.png)
+
+Answer is correct : metadataVersion string Not required, but if included, must match the Event Grid Schema
+
+---
+
+369
+
+Question #: 3
+Topic #: 25
+
+HOTSPOT -
+You need to implement the Log policy.
+How should you complete the EnsureLogging method in EventGridController.cs? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+![369-1](./img2/369-1.png)
+
+![369-2](./img2/369-2.png)
+
+Box 1: logdrop -
+All log files should be saved to a container named logdrop.
+
+Box 2: 15 -
+Logs must remain in the container for 15 days.
+
+Box 3: UpdateApplicationSettings
+All Azure App Service Web Apps must write logs to Azure Blob storage.
+Reference:
+https://blog.hompus.nl/2017/05/29/adding-application-logging-blob-to-a-azure-web-app-service-using-powershell/
+
+answer is correct
+
+---
+
+370
+
+Question #: 1
+Topic #: 26
+
+Scenario: Notification latency: Users report that anomaly detection emails can sometimes arrive several minutes after an anomaly is detected.
+You need to resolve a notification latency issue.
+Which two actions should you perform? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+
+A. Set Always On to true.
+B. Ensure that the Azure Function is using an App Service plan.
+C. Set Always On to false.
+D. Ensure that the Azure Function is set to use a consumption plan.
+
+AB
+
+Correct Answer: A and B
+
+Always On enables waking up on HTTP trigger, but does not prevent the exceeding the max time out time of 230 seconds.
+If your function app is on the Consumption plan, there can be up to a 10-minute delay in processing new blobs if a function app has gone idle. To avoid this latency, you can switch to an App Service plan with Always On enabled. You can also use an Event Grid trigger with your Blob storage account.
+
+Reference:
+
+https://docs.microsoft.com/en-us/azure/azure-functions/dedicated-plan#always-on
+
+https://github.com/Azure/Azure-Functions/wiki/Enable-Always-On-when-running-on-dedicated-App-Service-Plan
+
+https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-event-overview
+
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=csharp#event-grid-trigger
+
+---
+
+371
+
+Question #: 1
+Topic #: 27
+
+HOTSPOT -
+You need to ensure that validation testing is triggered per the requirements.
+How should you complete the code segment? To answer, select the appropriate values in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![371-1](./img2/371-1.jpg)
+
+Incorrect...
+1. ImagePushed
+2. repository
+3. topic
+
+https://learn.microsoft.com/zh-cn/azure/event-grid/event-schema-container-registry?tabs=event-grid-event-schema
+
+---
+
+372
+
+Question #: 2
+Topic #: 27
+
+Scenario:
+You must minimize costs for all Azure services.
+All Internal services must only be accessible from internal Virtual Networks (VNets).
+
+You need to deploy the CheckUserContent Azure Function. The solution must meet the security and cost requirements.
+Which hosting model should you use?
+
+	A. Premium plan
+	B. App Service plan
+	C. Consumption plan
+
+B
+
+Premium does NOT support VNET in multiple regions: https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale#networking-features, i beleive it's B
+
+---
+
+373
+
+Question #: 1
+Topic #: 28
+
+DRAG DROP -
+You need to deploy a new version of the LabelMaker application to ACR.
+Which three actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![373-1](./img2/373-1.jpg)
+![373-2](./img2/373-2.jpg)
+
+
+Correct answer given.
+Step 1: Build a new application image by using dockerfile
+
+FROM node:8.9.3-alpine
+RUN mkdir -p /usr/src/app
+COPY ./app/ /usr/src/app/
+WORKDIR /usr/src/app
+RUN npm install
+CMD node /usr/src/app/index.js
+
+docker build ./aci-helloworld -t aci-test-app
+docker images
+docker run -d -p 8080:80 aci-test-app
+(Example to build image only and run locally)
+
+Step 2: Create an alias if the image with the fully qualified path to the registry
+docker tag mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine myregistry.azurecr.io/samples/nginx
+
+Step 3: Log in to the registry and push image
+docker push myregistry.azurecr.io/samples/nginx
+
+
+---
+
+374
+
+Question #: 2
+Topic #: 28
+
+You need to access data from the user claim object in the e-commerce web app.
+What should you do first?
+
+A. Write custom code to make a Microsoft Graph API call from the e-commerce web app.
+B. Assign the Contributor RBAC role to the e-commerce web app by using the Resource Manager create role assignment API.
+C. Update the e-commerce web app to read the HTTP request header values.
+D. Using the Azure CLI, enable Cross-origin resource sharing (CORS) from the e-commerce checkout API to the e-commerce web app.
+
+C
+
+
+https://docs.microsoft.com/en-us/azure/app-service/configure-authentication-user-identities
+The answer C
+
+I would say this is correct because the JWT is sent in the header and it contains the claims. No need to access the GraphAPI
+
+
+---
+
+375
+
+Question #: 1
+Topic #: 29
+
+Scenario: Retail store locations: Azure Functions must process data immediately when data is uploaded to Blob storage.
+
+HOTSPOT -
+You need to implement the retail store location Azure Function.
+How should you configure the solution? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![375-1](./img2/375-1.png)
+
+1. (binding) = Azure CosmosDB
+reason: Azure Functions must update Azure Cosmos DB
+2. (direction) = output
+reason: all triggers are input, so we are not talking about the trigger binding. we must update Azure Cosmos DB so we need output binding. If input and output were selectable, i'd probably go for that
+3. (trigger) = blob storage
+reason: the azure function is triggered by an EventGrid event so that processing happens immediately
+
+---
+
+376
+
+Question #: 2
+Topic #: 29
+[All AZ-204 Questions]
+HOTSPOT -
+You need to implement the corporate website.
+How should you configure the solution? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![376-1](./img2/376-1.png)
+![376-2](./img2/376-2.png)
+
+All below requirements are met with standard plan
+
+Secure the website by using SSL.
+Minimize costs for data storage and hosting.
+Implement native GitHub workflows for continuous integration and continuous deployment (CI/CD).
+Distribute the website content globally for local use.
+Implement monitoring by using Application Insights and availability web tests including SSL certificate validity and custom header value verification.
+The website must have 99.95 percent uptime.
+
+---
+
+377
+
+Question #: 1
+Topic #: 30
+
+Scenario: You must perform a point-in-time restoration of the retail store location data due to an unexpected and accidental deletion of data.
+
+You need to implement a solution to resolve the retail store location data issue.
+Which three Azure Blob features should you enable? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+
+	A. Soft delete
+	B. Change feed
+	C. Snapshots
+	D. Versioning
+	E. Object replication
+	F. Immutability
+
+ABD
+
+Correct
+Microsoft recommends that after you enable blob versioning, you also update your application to stop taking snapshots of block blobs. If versioning is enabled for your storage account, all block blob updates and deletions are captured and preserved by versions. Taking snapshots does not offer any additional protections to your block blob data if blob versioning is enabled, and may increase costs and application complexity.
+
+---
+
+378
+
+Question #: 1
+Topic #: 31
+
+You need to store the user agreements.
+Where should you store the agreement after it is completed?
+
+	A. Azure Storage queue
+	B. Azure Event Hub
+	C. Azure Service Bus topic
+	D. Azure Event Grid topic
+
+B
+
+Correct: "Information regarding agreements is used by multiple divisions within Contoso, Ltd. User responses must not be lost and must be available to all parties regardless of individual service uptime. The volume of agreements is expected to be in the millions per hour."
+
+---
+
+379
+
+Question #: 2
+Topic #: 31
+[All AZ-204 Questions]
+HOTSPOT -
+You need to implement the bindings for the CheckUserContent function.
+How should you complete the code segment? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![379-1](./img2/379-1.png)
+![379-2](./img2/379-2.png)
+
+不确定
+
+```
+1- Queue Trigre[]
+2- Blob[]
+```
+The "content" parameter is of type "string" so it must be QueueTrigger.
+
+---
+
+380
+
+Question #: 3
+Topic #: 31
+
+Scenario: All Internal services must only be accessible from Internal Virtual Networks (VNets)
+
+You need to configure the ContentUploadService deployment.
+Which two actions should you perform? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+
+A. Add the following markup to line CS23: type: Private
+B. Add the following markup to line CS24: osType: Windows
+C. Add the following markup to line CS24: osType: Linux
+D. Add the following markup to line CS23: type: Public
+
+A
+https://docs.microsoft.com/en-us/azure/container-instances/container-instances-virtual-network-concepts#unsupported-networking-scenarios
+
+C
+https://docs.microsoft.com/en-us/azure/container-instances/container-instances-region-availability#windows-container-groups
+
+---
+
+381
+
+Question #: 1
+Topic #: 32
+[All AZ-204 Questions]
+Scenario: Azure Storage blob will be used (refer to the exhibit). Data storage costs must be minimized.
+HOTSPOT -
+You need to configure the Account Kind, Replication, and Access tier options for the corporate website's Azure Storage account.
+How should you complete the configuration? To answer, select the appropriate options in the dialog box in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![381-1](./img2/381-1.jpg)
+
+Storage V2 (general purpose v2), GZRS, Cool
+
+Replication should be GZRS.
+Requirements ask "Data must be replicated to a secondary region and three availability zones". GRS option doesn't copy data in different availability zones

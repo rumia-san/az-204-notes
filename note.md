@@ -681,3 +681,39 @@ Azure Service Bus Queue：
 
 提供更多高级特性，因此相对来说更昂贵。以消息传递次数和其他高级功能的使用为基础的定价模型。
 总的来说，选择使用 Azure Queue Storage 还是 Azure Service Bus Queue 取决于具体的应用场景和需求。如果只需要简单的消息队列功能，而且对高级特性没有特别的需求，可以选择 Azure Queue Storage。如果需要更多的高级功能和更大的控制权，以及对可靠性和事务性的需求更高，可以选择 Azure Service Bus Queue。
+
+# Service Plan 和 Consumption Plan 对比
+
+
+Azure App Service Plan 和 Azure Functions 的 Consumption Plan 是两种 Azure 服务计划，它们用于托管应用程序，但在用途和特性上有一些区别。
+
+App Service Plan:
+
+用途： 主要用于托管 Web 应用、API 应用、移动应用等各种类型的应用程序。
+特点： 需要预先配置和支付一定的计算资源，包括虚拟机实例的数量和大小。适用于对资源需求有较好预测的应用，可以选择按时间计费或按应用容器实例计费。
+弹性： 可以手动扩展或缩减实例数量，根据实际需求调整计算资源。
+Consumption Plan:
+
+用途： 主要用于 Azure Functions，适用于事件驱动的、短寿命的计算任务，如处理队列消息、定时触发器等。
+特点： 是一种无服务器计算模型，无需事先配置虚拟机实例，按照实际执行的代码和资源消耗进行计费。自动处理弹性伸缩，根据负载动态分配资源。
+弹性： 完全由 Azure 自动管理，根据实际负载动态分配和释放计算资源，无需手动干预。
+简而言之，App Service Plan 适用于长时间运行、资源需求较为稳定的应用，而 Consumption Plan 则适用于无需一直运行、按需处理事件的计算任务，具有更高的弹性和成本效益。
+
+https://learn.microsoft.com/en-us/azure/azure-functions/functions-scale
+
+# Change feed
+
+Azure Cosmos DB 的 Change Feed 是一项功能，用于跟踪和捕获 Cosmos DB 集合中文档的更改。Change Feed 记录了对集合中文档的创建和更新操作，以时间顺序存储这些更改，客户端可以使用 Change Feed 以增量方式获取数据的变化。
+
+主要特点和用途包括：
+
+增量式变更： Change Feed 记录了对文档的变更操作，以时间顺序存储，使得客户端可以轻松获取自上次查询以来发生的变更。
+
+实时处理： 可以用于构建实时处理应用程序，监视和响应数据库中数据的变化。
+
+异步通知： 变更是异步传送给客户端，客户端可以通过 Cosmos DB SDK 或 Azure Functions 触发器等方式来处理这些变更。
+
+实现多种场景： 适用于实现事件驱动的架构，例如在微服务中通知其他服务的数据变更。
+
+使用 Change Feed 可以帮助开发者更容易地跟踪和处理数据库中的数据变更，从而构建具有实时感知能力的应用程序。
+
