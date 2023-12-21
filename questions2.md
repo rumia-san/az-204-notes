@@ -2061,7 +2061,7 @@ D
 
 Question #: 51
 Topic #: 6
-[All AZ-204 Questions]
+
 HOTSPOT
 
 You are developing an application to store millions of images in Azure blob storage.
@@ -2088,7 +2088,7 @@ NOTE: Each correct selection is worth one point.
 
 Question #: 52
 Topic #: 6
-[All AZ-204 Questions]
+
 You are developing several microservices to run on Azure Container Apps for a company. External TCP ingress traffic from the internet has been enabled for the microservices.
 
 The company requires that the microservices must scale based on an Azure Event Hub trigger.
@@ -2140,7 +2140,7 @@ https://keda.sh/docs/2.11/scalers/azure-event-hub/
 
 Question #: 1
 Topic #: 7
-[All AZ-204 Questions]
+
 HOTSPOT -
 You need to configure Azure CDN for the Shipping web site.
 Which configuration options should you use? To answer, select the appropriate options in the answer area.
@@ -2174,7 +2174,7 @@ Wide World Importers
 
 Question #: 2
 Topic #: 7
-[All AZ-204 Questions]
+
 HOTSPOT -
 You need to correct the VM issues.
 Which tools should you use? To answer, select the appropriate options in the answer area.
@@ -2199,7 +2199,7 @@ Accelerated Networking only works in conjunction with a Azure Virtual Network (V
 
 Question #: 1
 Topic #: 8
-[All AZ-204 Questions]
+
 DRAG DROP -
 You need to add code at line PC32 in Processing.cs to implement the GetCredentials method in the Processing class.
 How should you complete the code? To answer, drag the appropriate code segments to the correct locations. Each code segment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
@@ -2239,7 +2239,7 @@ AzureServiceTokenProvider.GetAccessTokenAsync on the other hand returns a string
 
 Question #: 2
 Topic #: 8
-[All AZ-204 Questions]
+
 DRAG DROP -
 You need to ensure disaster recovery requirements are met.
 What code should you add at line PC16?
@@ -2296,7 +2296,7 @@ Coho Winery
 
 Question #: 2
 Topic #: 9
-[All AZ-204 Questions]
+
 HOTSPOT -
 You need to retrieve all order line items from Order.json and sort the data alphabetically by the city.
 How should you complete the code? To answer, select the appropriate options in the answer area.
@@ -2314,7 +2314,7 @@ The last one should be o.address.city
 
 Question #: 1
 Topic #: 10
-[All AZ-204 Questions]
+
 HOTSPOT -
 You need to implement the Azure Function for delivery driver profile information.
 Which configurations should you use? To answer, select the appropriate options in the answer area.
@@ -2349,7 +2349,7 @@ VanArsdel, Ltd.
 
 Question #: 2
 Topic #: 10
-[All AZ-204 Questions]
+
 You need to grant access to the retail store location data for the inventory service development effort.
 What should you use?
 
@@ -2401,4 +2401,363 @@ AD
 
 ---
 
+323
+
+Question #: 1
+Topic #: 11
+
+DRAG DROP -
+You need to add markup at line AM04 to implement the ContentReview role.
+How should you complete the markup? To answer, drag the appropriate json segments to the correct locations. Each json segment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![323-1](./img2/323-1.jpg)
+![323-2](./img2/323-2.jpg)
+
+Correct. See MS example here:
+https://docs.microsoft.com/de-de/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps#example-user-app-role
+
+To prevent reading the cases multiple times:
+Please see the spots below where you can find the questions (page/topic/question/subject)
+Contoso, Ltd
+48 11 1 configure ApplicationManifest
+48 11 2 configure ApplicationManifest
+49 11 3 type of SSL certificate / proxy used
+49 11 4 YAML @Azure Container Instances for mounting
+49 11 5 ApplicationManifest optional claims
+52 16 1 cli : az monitor metrics alert create
+52 16 2 cli : az for http server log output
+56 27 1 code : read properties from GRID event
+56 27 2 tier of function plan @Vnet
+58 31 1 choose best storage solution
+58 31 2 code : bindings for function
+58 31 3 docker file : Private/Public Windows/Linux
+
+---
+
+324
+
+Question #: 2
+Topic #: 11
+
+HOTSPOT -
+You need to add code at line AM09 to ensure that users can review content using ContentAnalysisService.
+How should you complete the code? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![324-1](./img2/324-1.jpg)
+
+
+Box 1: "oauth2AllowIdTokenImplicitFlow":true
+This value indicates whether the web app can request ID tokens of the implicit OAuth 2.0 flow. The default setting is "false".
+
+Box 2: "oauth2AllowImplicitFlow":true
+This value indicates whether the web app can request OAuth 2.0 implicit flow access tokens. The default setting is "false".
+
+
+Reference:
+
+https://docs.microsoft.com/de-de/azure/active-directory/develop/reference-app-manifest
+
+https://docs.microsoft.com/de-de/azure/active-directory/develop/reference-app-manifest#oauth2allowidtokenimplicitflow-attribute
+
+https://docs.microsoft.com/de-de/azure/active-directory/develop/reference-app-manifest#oauth2allowimplicitflow-attribute
+
+---
+
+325
+
+Question #: 3
+Topic #: 11
+
+HOTSPOT -
+You need to ensure that network security policies are met.
+How should you configure network security? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![325-1](./img2/325-1.jpg)
+![325-2](./img2/325-2.jpg)
+
+Box 1: Valid root certificate
+Scenario: All websites and services must use SSL from a valid root certificate authority.
+
+Box 2: Azure Application Gateway
+Scenario:
+- Any web service accessible over the Internet must be protected from cross site scripting attacks.
+- All Internal services must only be accessible from Internal Virtual Networks (VNets).
+
+
+---
+
+326
+
+Question #: 4
+Topic #: 11
+
+DRAG DROP -
+You need to add YAML markup at line CS17 to ensure that the ContentUploadService can access Azure Storage access keys.
+How should you complete the YAML markup? To answer, drag the appropriate YAML segments to the correct locations. Each YAML segment may be used once, more than once, or not at all. You may need to drag the split bar between panes or scroll to view content.
+NOTE: Each correct selection is worth one point.
+Select and Place:
+
+![326-1](./img2/326-1.jpg)
+![326-2](./img2/326-2.jpg)
+
+Box 1: volumeMounts
+
+Box 2: volumes
+
+Box 3: secret
+
+Reference:
+https://docs.microsoft.com/en-us/azure/container-instances/container-instances-volume-secret
+
+---
+
+327
+
+Question #: 1
+Topic #: 12
+
+HOTSPOT -
+You need to secure the Shipping Function app.
+How should you configure the app? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![327-1](./img2/327-1.jpg)
+![327-2](./img2/327-2.jpg)
+
+The correct answer is:
+Anonymous
+JWT
+HTTP
+
+Scenario: Shipping Function app: Implement secure function endpoints by using app-level security and include Azure Active Directory (Azure AD).
+
+1. Authorization Level must be anonymous to use function app level security methods.
+2. User claims must be JWT tokens; API Key is not recommended due to security issues.
+3. Function App is triggered from Logic App. So it must be http
+
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=csharp#secure-an-http-endpoint-in-production
+
+
+---
+
+328
+
+Question #: 2
+Topic #: 12
+
+You need to secure the Shipping Logic App.
+What should you use?
+
+	A. Azure App Service Environment (ASE)
+	B. Integration Service Environment (ISE)
+	C. VNet service endpoint
+	D. Azure AD B2B integration
+
+B
+
+---
+
+329
+
+Question #: 1
+Topic #: 13
+
+HOTSPOT -
+You need to retrieve the database connection string.
+Which values should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![329-1](./img2/329-1.png)
+![329-2](./img2/329-2.png)
+
+As per requirement:
+- Azure Key Vault name: cpandlkeyvault
+- Secret name: PostgreSQLConn
+- Id: 80df3e46ffcd4f1cb187f79905e9a1e8
+https://myvault.vault.azure.net//secrets/mysecretname/4387e9f3d6e14c459867679a90fd0f79?api-version=7.1
+
+Box 1: cpandlkeyvault
+We specify the key vault, cpandlkeyvault.
+
+Box 2: PostgreSQLConn
+We specify the secret, PostgreSQLConn.
+
+Box 3: Environment
+If a reference is not resolved properly, the reference value will be used instead. This means that for application settings, an environment variable would be created
+
+To prevent reading the cases multiple times:
+Please see the spots below where you can find the questions (page/topic/question/subject)
+City Power & Light company
+50 13 1 API endpoint to Key Vault + variable
+50 13 2 create and import certificate in azure web app
+50 13 3 configure APIM for authentication with JWT
+50 13 4 authenticate user by JWT
+50 13 5 MI Authentication to Azure Logic app
+51 13 6 Azure Service Bus to Event Grid integration Tier of bus + RBAC role
+52 17 1 Application Insights/Monitor/Log Analytics
+52 17 2 Azure Blob storage settings SAS or MI, file auditing
+52 18 1 solve function timeout
+55 24 1 cli for integration Azure Service Bus and Azure Event Grid
+55 24 2 ingestion for Grid events
+58 32 1 create appropriate storage account + geo settings + cool/hot
+
+---
+
+330
+
+Question #: 2
+Topic #: 13
+
+DRAG DROP -
+You need to correct the corporate website error.
+Which four actions should you recommend be performed in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+Select and Place:
+
+![330-1](./img2/330-1.jpg)
+
+1. Generate a certificate.
+2. Upload the certificate to Azure Key Vault.
+3. Import the certificate to Azure App Service.
+4. Add the certificate thumbprint to the WEBSITE_LOAD_CERTIFICATES app setting.
+Prerequisite: Scale up your App Service plan if your app is in a shared infrastructure tier.
+https://docs.microsoft.com/en-us/azure/app-service/configure-ssl-certificate
+https://docs.microsoft.com/en-us/azure/app-service/configure-ssl-certificate-in-code#load-certificate-in-linuxwindows-containers
+
+---
+
+331
+
+Question #: 3
+Topic #: 13
+
+HOTSPOT -
+You need to configure API Management for authentication.
+Which policy values should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![331-1](./img2/331-1.png)
+
+Box 1: Validate JWT
+The validate-jwt policy enforces existence and validity of a JWT extracted from either a specified HTTP Header or a specified query parameter.
+
+Box 2: Inbound
+Authentication should be done on Incoming Request and that should be done in Inbound section of the policy of course.
+
+This policy can be used in the following policy sections and scopes.
+Policy sections: inbound
+Policy scopes: all scopes
+
+Reference:
+
+https://docs.microsoft.com/en-us/azure/api-management/api-management-access-restriction-policies
+
+https://docs.microsoft.com/en-us/azure/api-management/api-management-access-restriction-policies#ValidateJWT
+
+https://docs.microsoft.com/en-us/azure/api-management/api-management-access-restriction-policies
+
+
+---
+
+332
+
+Question #: 4
+Topic #: 13
+
+You need to authenticate the user to the corporate website as indicated by the architectural diagram.
+Which two values should you use? Each correct answer presents part of the solution.
+NOTE: Each correct selection is worth one point.
+
+	A. ID token signature
+	B. ID token claims
+	C. HTTP response code
+	D. Azure AD endpoint URI
+	E. Azure AD tenant ID
+
+AD
+
+You need ID Token Claims for authorisation.
+You need to validate ID Token signature as a part of authentication.
+So the correct answer is A.
+Having both D & E does not make sense, URI has tenant ID in it, so answer D.
+
+---
+
+
+333
+
+Question #: 5
+Topic #: 13
+
+HOTSPOT -
+You need to correct the Azure Logic app error message.
+Which configuration values should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![333-1](./img2/333-1.png)
+
+Logic app:
+You test the Logic app in a development environment. The following error message displays: '400 Bad Request'.
+Troubleshooting of the error shows an HttpTrigger action to call the RequestUserApproval function.
+
+Box 1: anonymous
+To use your logic app's managed identity in your function, you must set your function's authentication level to anonymous. Otherwise, your logic app throws a "BadRequest" error.
+
+Box 2: system-assigned
+Your logic app or individual connections can use either the system-assigned identity or a single user-assigned identity, which you can share across a group of logic apps, but not both. On your logic app menu, under Settings, select Identity > System assigned
+
+
+
+---
+
+334
+
+Question #: 6
+Topic #: 13
+
+HOTSPOT -
+You need to configure Azure Service Bus to Event Grid integration.
+Which Azure Service Bus settings should you use? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![334-1](./img2/334-1.png)
+![334-2](./img2/334-2.png)
+
+To enable the feature, you need the following items:
+- A Service Bus Premium namespace with at least one Service Bus queue or a Service Bus topic with at least one subscription.
+- Contributor access to the Service Bus namespace.
+
+Box 1: Premium
+
+Box 2: Contributor
+
+Reference:
+
+https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-to-event-grid-integration-concept
+
+---
+
+335
+
+Question #: 1
+Topic #: 14
+[All AZ-204 Questions]
+HOTSPOT -
+You need to add code at line PC26 of Processing.cs to ensure that security policies are met.
+How should you complete the code that you will add at line PC26? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![335-1](./img2/335-1.png)
+![335-2](./img2/335-2.png)
 
