@@ -717,3 +717,39 @@ Azure Cosmos DB 的 Change Feed 是一项功能，用于跟踪和捕获 Cosmos D
 
 使用 Change Feed 可以帮助开发者更容易地跟踪和处理数据库中的数据变更，从而构建具有实时感知能力的应用程序。
 
+# 杂项
+
+az webapp config container set 是设置image
+
+key vault 创建之后还要设置access policy
+
+Consumption Plan（消耗计划）：
+
+计费模型： 消耗计划是一种无服务器计算模型，您根据实际执行函数时消耗的资源支付费用。
+
+App Service Plan（应用服务计划）：
+
+计费模型： 应用服务计划是一种更传统的托管模型，您根据分配的虚拟机资源支付费用，而不考虑实际使用情况。
+
+在Web应用程序中的CorrelationContext中添加登录用户的客户ID是一种常见的做法，用于确保在整个系统中的所有操作都与相应用户的上下文相关联。这有助于在调试和分析跨系统操作时保持上下文一致性。
+
+在 Azure 中，"Basic Authentication" 通常指的是一种简单的身份验证机制，其中用户的凭据（用户名和密码）被以 Base64 编码的方式发送到服务端。虽然这种方法在传输过程中并不安全，因为凭据可以相对容易地被拦截和解码，但在某些情况下仍然被广泛使用。
+
+对于 Azure 资源（如存储帐户、Web 应用等），Basic Authentication 通常涉及到在 HTTP 请求的 Authorization 头中包含 Base64 编码的用户名和密码。例如，一个 HTTP 请求头可能如下所示：
+
+makefile
+Copy code
+Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+在这个例子中，"QWxhZGRpbjpPcGVuU2VzYW1l" 是用户名和密码 "Aladdin:OpenSesame" 的 Base64 编码。
+
+需要注意的是，由于安全性的问题，Azure 在许多服务中已经不再推荐使用 Basic Authentication，而是更加倡导使用更安全的身份验证方式，如基于令牌的身份验证（Token-based Authentication）。在 Web 应用中，通常会使用 Azure Active Directory (AAD) 来进行身份验证和授权，而不是使用 Basic Authentication。
+
+
+# 忘了的题
+
+64 66 72 73 74 82 86 88 95 96 97
+102 105 106 108 113 114 115 120 121 123 125 126 127 130 133
+138 140 142 143 144 145 148 149 150
+152 158 161 171 172 173 176 179 180
+182 183 185 186 188 189 190 193 194 195
+

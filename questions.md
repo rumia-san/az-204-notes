@@ -741,6 +741,15 @@ responseoverrides
 aad
 .referrer
 
+```
+"responseOverrides": {
+        "401": {
+            "statusCode": "302",
+            "redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer"
+        }
+}
+```
+
 ---
 
 Question #34
@@ -792,6 +801,8 @@ NOTE: Each correct selection is worth one point.
 
 Given answer is correct.
 https://learn.microsoft.com/en-us/azure/azure-web-pubsub/reference-functions-bindings?tabs=javascript
+
+EventType can be either user or system. EventType says who triggers the function. The question says: 'where ->customers<- can report news events from a browser using Azure Web PubSub'. For me customer is a person, not a system. So the answer is user.
 
 ---
 
@@ -880,6 +891,8 @@ Cloned Git Repo also does the job but it needs more details like Git URL and stu
 
 38
 
+Question #1 Topic 2
+
 HOTSPOT -
 
 You are implementing a software as a service (SaaS) ASP.NET Core web service that will run as an Azure Web App. The web service will use an on-premises
@@ -956,9 +969,8 @@ Given answer is correct, got this on my test yesterday
 
 Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
 After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
-You develop a software as a service (SaaS) offering to manage photographs. Users upload photos to a web service which then stores the photos in Azure
-Storage Blob storage. The storage account type is General-purpose V2.
-When photos are uploaded, they must be processed to produce and save a mobile-friendly version of the image. The process to produce a mobile-friendly version of the image must start in less than one minute.
+You develop a software as a service (SaaS) offering to manage photographs. Users upload photos to a web service which then stores the photos in Azure Storage Blob storage. The storage account type is General-purpose V2.
+When photos are uploaded, they must be processed to produce and save a mobile-friendly version of the image. The process to produce a mobile-friendly version of the image **must start in less than one minute.**
 You need to design the process that starts the photo processing.
 Solution: Trigger the photo processing from Blob storage events.
 Does the solution meet the goal?
@@ -2196,8 +2208,6 @@ In which order should you perform the actions? To answer, move all actions from 
 
 ![88-1](./img/88-1.png)
 
-![88-2](./img/88-2.png)
-
 1. Enable ingress: Enable ingress for the Azure Container Apps. This allows external traffic to reach the microservices.
 2. Add the custom domain name: Add the custom domain name that you want to use for HTTPS access to your Azure Container Apps.
 3. Add DNS records to the domain provider: After adding the custom domain name in Azure Container Apps, you need to add the required DNS records (such as CNAME or A records) to your domain provider's DNS settings. This step is essential for directing traffic from the custom domain to your Azure Container Apps.
@@ -2509,6 +2519,11 @@ Hot Area:
 --deployment-container-image-name images.azurecr.io/website:v1.0.0
 -- container set --docker-registry-server-url https://images.azurecr.io -u admin -p admin
 ```
+
+"use multiple containers in the same container group" this not is possible in windows. 
+Solution is:
+--is-linux
+--deployment-container-image-name
 
 ---
 
@@ -2928,6 +2943,7 @@ The monitored container has the data from which the change feed is generated. An
 
 Box 2: The lease container -
 The lease container acts as a state storage and coordinates processing the change feed across multiple workers. The lease container can be stored in the same account as the monitored container or in a separate account.
+
 Box 3: The host: A host is an application instance that uses the change feed processor to listen for changes. Multiple instances with the same lease configuration can run in parallel, but each instance should have a different instance name.
 
 Box 4: The delegate -
@@ -3489,6 +3505,8 @@ NOTE: Each correct selection is worth one point.
 
 Correct Answer: BD
 
+注意问题问的是 **should you prevent**
+
 The legal hold policies prevent the deletion of the legal documents that are stored on Azure Blob Storage, but they do not prevent other types of operations such as read, write, or update. Therefore, you need to prevent the following two operations that would fail only when a legal hold is in effect and when all other policies are expired:
 
 Delete operation: When a legal hold is in effect and all other policies are expired, attempting to delete the document will fail. Therefore, you should prevent the user from attempting to delete a document.
@@ -3641,6 +3659,25 @@ NOTE: Each correct selection is worth one point.
 ![138-1](./img/138-1.png)
 
 ![138-2](./img/138-2.png)
+
+Out of scope. Suggested answer seems correct. Ref:
+https://learn.microsoft.com/en-us/azure/aks/azure-csi-disk-storage-provision
+https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-disk
+
+Ref azure-file
+https://learn.microsoft.com/en-us/azure/aks/azure-csi-files-storage-provision#create-a-storage-class
+(Create a storage class)
+
+https://kubernetes.io/docs/concepts/storage/storage-classes/#azure-file
+
+Ref PodStorage / Persistent Volume / PersistentVolumeClaim
+https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/
+
+Ref portworx-volume 
+https://docs.portworx.com/portworx-enterprise/operations/operate-kubernetes/storage-operations/kubernetes-storage-101/volumes
+
+Ref Reclaim Policy
+https://kubernetes.io/docs/concepts/storage/storage-classes/#reclaim-policy
 
 ---
 
@@ -4235,6 +4272,8 @@ Select and Place:
 5. Get-AzKeyVaultSecret (list the secrets stored in the KeyVault - check only)
 ```
 最后一个get是为了检查有没有做好
+注意看 第三步 Get-AzStorageAccountKey 设置了 `$storAcctkey`，然后第四步 ConvertTo-SecureString使用了 `$storAcctkey`
+第四步里面 Set-AzKeyVaultSecret 了，所以 第五步 Get-AzKeyVaultSecret 来检查
 
 ---
 
@@ -4305,6 +4344,12 @@ First box: **Mobile**
 https://docs.microsoft.com/en-us/python/api/azure-mgmt-cdn/azure.mgmt.cdn.models.isdevicematchconditionparametersmatchvaluesitem
 
 Third box: **iPhone**. We are not looking for other Apple devices running iOS. It's the iPhone we're looking for.
+
+1. DeliveryRuleDeviceConditionParameters
+2. Mobile (as below: https://docs.microsoft.com/en-us/python/api/azure-mgmt-cdn/azure.mgmt.cdn.models.isdevicematchconditionparametersmatchvaluesitem?view=azure-python)
+3. DeliveryRequestHeaderConditionParameters
+4. HTTP_USER_AGENT 
+5. iPhone
 
 ---
 
@@ -4404,6 +4449,7 @@ B looks correct.
 Common Blob storage event scenarios include image or video processing, search indexing, or any file-oriented workflow. Asynchronous file uploads are a great fit for events. When changes are infrequent, but your scenario requires immediate responsiveness, event-based architecture can be especially efficient.
 https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-event-overview
 
+只有B是自动的
 
 你应该选择 B. 创建一个使用 Start-AzureStorageBlobCopy cmdlet 的 Event Grid 主题。
 
@@ -4574,6 +4620,18 @@ AB
 The Answer is Graph API and MSAL.
 API managment as nothing to do with the developing of the REST API...
 
+
+Correct answers are A , D
+https://docs.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas#revoke-a-user-delegation-sas
+
+Microsoft Graph API (Option A):
+
+Role: Microsoft Graph API is the primary tool for working with user profile information in Azure AD. It provides a unified programmability model that you can use to access the tremendous amount of data in Microsoft 365, Azure Active Directory, and other Microsoft cloud services.
+Microsoft Authentication Library (MSAL) (Option B):
+
+Role: MSAL helps you to authenticate users in your applications. It enables your app to sign in users and acquire tokens that are used to access resources protected by Azure AD.
+Explanation: When your API is accessed, it needs to authenticate the calling web app using Azure AD. MSAL helps in acquiring the necessary tokens for authentication.
+
 ---
 
 172
@@ -4590,17 +4648,12 @@ NOTE: Each correct selection is worth one point.
 	C. Regenerate the account key.
 	D. Remove the role assignment for the security principle.
 
+AD
 
+Given answer is incorrect.
 Correct answers are A , D
 https://docs.microsoft.com/en-us/rest/api/storageservices/create-user-delegation-sas#revoke-a-user-delegation-sas
 
-Microsoft Graph API (Option A):
-
-Role: Microsoft Graph API is the primary tool for working with user profile information in Azure AD. It provides a unified programmability model that you can use to access the tremendous amount of data in Microsoft 365, Azure Active Directory, and other Microsoft cloud services.
-Microsoft Authentication Library (MSAL) (Option B):
-
-Role: MSAL helps you to authenticate users in your applications. It enables your app to sign in users and acquire tokens that are used to access resources protected by Azure AD.
-Explanation: When your API is accessed, it needs to authenticate the calling web app using Azure AD. MSAL helps in acquiring the necessary tokens for authentication.
 
 ---
 
@@ -4979,6 +5032,10 @@ Hot Area:
 ![186-1](./img/186-1.png)
 
 ![186-2](./img/186-2.png)
+
+不确定
+I think the last one should be AzureADMultipleOrgs
+
 
 Given answers are correct.
 SigninAudience: Specifies what Microsoft accounts are supported for the current application. The users login with the current organizations AD accounts. This does not talk about the external access. And that is probably the red herring Microsoft added to the mix so that you will make a mistake and they win. Microsoft always wins
