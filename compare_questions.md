@@ -451,6 +451,25 @@ Regardless of the function app timeout setting, 230 seconds is the maximum amoun
 
 ---
 
+257
+
+Question #2
+
+ Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure solution to collect point-of-sale (POS) device data from 2,000 stores located throughout the world. A single device can produce 2 megabytes (MB) of data every 24 hours. Each store location has one to five devices that send data.
+You must store the device data in Azure Blob storage. Device data must be correlated based on a device identifier. Additional stores are expected to open in the future.
+You need to implement a solution to receive the device data.
+Solution: Provision an Azure Event Grid. Configure event filtering to evaluate the device identifier.
+Does the solution meet the goal?
+
+    A. Yes
+    B. No 
+
+B
+
+---
+
 # Azure Event Grid
 
 100
@@ -513,6 +532,25 @@ A. Yes
 B. No
 
 Suggested Answer: B 
+
+---
+
+256
+
+ Question #1 Topic 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure solution to collect point-of-sale (POS) device data from 2,000 stores located throughout the world. A single device can produce 2 megabytes (MB) of data every 24 hours. Each store location has one to five devices that send data.
+You must store the device data in Azure Blob storage. Device data must be correlated based on a device identifier. Additional stores are expected to open in the future.
+You need to implement a solution to receive the device data.
+Solution: Provision an Azure Service Bus. Configure a topic to receive the device data by using a correlation filter.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B
 
 ---
 
@@ -762,3 +800,192 @@ Using the Invoke-WebRequest cmdlet, make a request to the local managed identity
 I believe we can you Invoke-RestMethod too.
 
 https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/tutorial-windows-vm-access-arm
+
+---
+
+# Session
+
+212
+
+Question #: 2
+Topic #: 5
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution. Determine whether the solution meets the stated goals.
+You are developing and deploying several ASP.NET web applications to Azure App Service. You plan to save session state information and HTML output.
+You must use a storage mechanism with the following requirements:
+✑ Share session state across all ASP.NET web applications.
+✑ Support controlled, concurrent access to the same session state data for multiple readers and a single writer.
+✑ Save full HTTP responses for concurrent requests.
+You need to store the information.
+Proposed Solution: Enable Application Request Routing (ARR).
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B
+
+The correct answer is NO.
+
+启用 Application Request Routing (ARR) 不是一个用于保存会话状态信息或 HTML 输出的存储机制。ARR 是 IIS（Internet Information Services）的一个功能，用于将客户端请求路由到Web农场中的健康服务器节点，有助于负载平衡和流量管理。
+
+ Application Request Routing is for controlling internet traffic in IIS using a proxy server. It doesn't deal with managing state information.
+
+
+213
+
+Question #: 3
+Topic #: 5
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution. Determine whether the solution meets the stated goals.
+You are developing and deploying several ASP.NET web applications to Azure App Service. You plan to save session state information and HTML output.
+You must use a storage mechanism with the following requirements:
+✑ Share session state across all ASP.NET web applications.
+✑ Support controlled, concurrent access to the same session state data for multiple readers and a single writer.
+✑ Save full HTTP responses for concurrent requests.
+You need to store the information.
+Proposed Solution: Deploy and configure an Azure Database for PostgreSQL. Update the web applications.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B
+
+不确定
+
+The worst solution from a performance and scalability standpoint is to use a database backed session state provider.
+
+https://docs.microsoft.com/en-us/azure/azure-cache-for-redis/cache-aspnet-session-state-provider
+
+220
+
+Question #: 10
+Topic #: 5
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution. Determine whether the solution meets the stated goals.
+You are developing and deploying several ASP.NET web applications to Azure App Service. You plan to save session state information and HTML output.
+You must use a storage mechanism with the following requirements:
+✑ Share session state across all ASP.NET web applications.
+✑ Support controlled, concurrent access to the same session state data for multiple readers and a single writer.
+✑ Save full HTTP responses for concurrent requests.
+You need to store the information.
+Proposed Solution: Deploy and configure Azure Cache for Redis. Update the web applications.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+
+A
+
+Correct answer
+
+---
+
+# FIFO
+
+262
+
+Question #: 7
+Topic #: 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure Service application that processes queue data when it receives a message from a mobile application. Messages may not be sent to the service consistently.
+You have the following requirements:
+✑ Queue size must not grow larger than 80 gigabytes (GB).
+✑ Use first-in-first-out (FIFO) ordering of messages.
+✑ Minimize Azure costs.
+You need to implement the messaging solution.
+Solution: Use the .Net API to add a message to an Azure Storage Queue from the mobile application. Create an Azure Function App that uses an Azure Storage
+Queue trigger.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Suggested Answer: B
+
+Answer is B (NO),
+Becz FIFO is supported by Service bus queue and Service bus queue should be use for data less than 80GB
+https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted
+
+Service Bus queues才有FIFO
+
+---
+
+271
+
+Question #: 16
+Topic #: 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure Service application that processes queue data when it receives a message from a mobile application. Messages may not be sent to the service consistently.
+You have the following requirements:
+✑ Queue size must not grow larger than 80 gigabytes (GB).
+✑ Use first-in-first-out (FIFO) ordering of messages.
+✑ Minimize Azure costs.
+You need to implement the messaging solution.
+Solution: Use the .Net API to add a message to an Azure Storage Queue from the mobile application. Create an Azure VM that is triggered from Azure Storage
+Queue events.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Suggested Answer: B
+
+---
+
+272
+
+Question #: 17
+Topic #: 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure Service application that processes queue data when it receives a message from a mobile application. Messages may not be sent to the service consistently.
+You have the following requirements:
+✑ Queue size must not grow larger than 80 gigabytes (GB).
+✑ Use first-in-first-out (FIFO) ordering of messages.
+✑ Minimize Azure costs.
+You need to implement the messaging solution.
+Solution: Use the .Net API to add a message to an Azure Service Bus Queue from the mobile application. Create an Azure Windows VM that is triggered from Azure Service Bus Queue.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Suggested Answer: B
+
+Using Service bus is fine, however having a Windows VM does not address the cost requirement.
+
+Answer is 'NO'
+
+Windows VM太贵了
+
+---
+
+283
+
+Question #: 28
+Topic #: 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure Service application that processes queue data when it receives a message from a mobile application. Messages may not be sent to the service consistently.
+You have the following requirements:
+✑ Queue size must not grow larger than 80 gigabytes (GB).
+✑ Use first-in-first-out (FIFO) ordering of messages.
+✑ Minimize Azure costs.
+You need to implement the messaging solution.
+Solution: Use the .Net API to add a message to an Azure Service Bus Queue from the mobile application. Create an Azure Function App that uses an Azure Service Bus Queue trigger.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+Suggested Answer: A
+

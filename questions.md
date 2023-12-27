@@ -5805,6 +5805,10 @@ NOTE: Each correct selection is worth one point.
 
 ![210-2](./img/210-2.png)
 
+System Managed Identity: System managed identities are tied to your Azure service and are automatically cleaned up when the resource is deleted. They are easier to use if your application only needs to authenticate to services that support Azure AD authentication.
+
+Configure CORS allowed origins to none: To disallow JavaScript code running in a browser on an external host from interacting with the function, you should not include that host in your CORS policy. Configuring CORS allowed origins to none will prevent any domain from accessing your function app.
+
 ---
 
 211
@@ -6181,8 +6185,6 @@ How should you complete the policy statement?
 Select and Place:
 
 ![224-1](./img/224-1.jpg)
-
-![224-2](./img/224-2.jpg)
 
 Caching type must be external since consumption plan does not support internal caching.
 

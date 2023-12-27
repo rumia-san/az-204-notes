@@ -810,13 +810,45 @@ Suggested Answer: B
 
 256
 
-暂缺
+ Question #1 Topic 6
+
+Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure solution to collect point-of-sale (POS) device data from 2,000 stores located throughout the world. A single device can produce 2 megabytes (MB) of data every 24 hours. Each store location has one to five devices that send data.
+You must store the device data in Azure Blob storage. Device data must be correlated based on a device identifier. Additional stores are expected to open in the future.
+You need to implement a solution to receive the device data.
+Solution: Provision an Azure Service Bus. Configure a topic to receive the device data by using a correlation filter.
+Does the solution meet the goal?
+
+	A. Yes
+	B. No
+
+B
+
+First of all - that question is not about THE BEST solution but about THE VALID solution. So responses like "Event Hub is the best choice" doesn't bring anything to the table. 
+That being said - is the provided solution valid? I would say NO, because:
+- topics allows multiple subscribers, and here we need to process each event once
+- correlation filter is for subscriptions, not topics
+- even when assuming there is typo in the question and correlation filter is defined on the subscription level - it still is not a valid solution, because new stores can be opened in the future with many new device identifiers which you can't know in advance. Besides that filter make no sense in this scenario whatsoever, you just need to save data in storage account and basically partition it by device identifier.
 
 ---
 
 257
 
-暂缺
+Question #2
+
+ Note: This question is part of a series of questions that present the same scenario. Each question in the series contains a unique solution that might meet the stated goals. Some question sets might have more than one correct solution, while others might not have a correct solution.
+After you answer a question in this section, you will NOT be able to return to it. As a result, these questions will not appear in the review screen.
+You are developing an Azure solution to collect point-of-sale (POS) device data from 2,000 stores located throughout the world. A single device can produce 2 megabytes (MB) of data every 24 hours. Each store location has one to five devices that send data.
+You must store the device data in Azure Blob storage. Device data must be correlated based on a device identifier. Additional stores are expected to open in the future.
+You need to implement a solution to receive the device data.
+Solution: Provision an Azure Event Grid. Configure event filtering to evaluate the device identifier.
+Does the solution meet the goal?
+
+    A. Yes
+    B. No 
+
+B
 
 ---
 
@@ -1448,8 +1480,7 @@ You have the following requirements:
 ✑ Use first-in-first-out (FIFO) ordering of messages.
 ✑ Minimize Azure costs.
 You need to implement the messaging solution.
-Solution: Use the .Net API to add a message to an Azure Service Bus Queue from the mobile application. Create an Azure Function App that uses an Azure
-Service Bus Queue trigger.
+Solution: Use the .Net API to add a message to an Azure Service Bus Queue from the mobile application. Create an Azure Function App that uses an Azure Service Bus Queue trigger.
 Does the solution meet the goal?
 
 	A. Yes
@@ -1916,6 +1947,8 @@ Answer should be:
 3. 200
 
 refs: https://learn.microsoft.com/en-us/azure/api-management/mock-api-responses?tabs=azure-cli
+
+记住是inbound，因为outbound是后端发给outbound再发给user，但是后端是没有写好的，所以mock都是在inbound那里设置
 
 ---
 

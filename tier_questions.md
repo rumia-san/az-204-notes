@@ -181,3 +181,59 @@ D 不确定
 
 I think it's D.
 Strong consistency is not supported for multiple WRITE regions, and I don't see any such requirements in the question. https://learn.microsoft.com/en-us/azure/cosmos-db/high-availability#multiple-write-regions
+
+---
+
+211
+
+Question #: 1
+Topic #: 5
+
+DRAG DROP -
+You develop a web app that uses the tier D1 app service plan by using the Web Apps feature of Microsoft Azure App Service.
+Spikes in traffic have caused increases in page load times.
+You need to ensure that the web app automatically scales when CPU load is about 85 percent and minimize costs.
+Which four actions should you perform in sequence? To answer, move the appropriate actions from the list of actions to the answer area and arrange them in the correct order.
+NOTE: More than one order of answer choices is correct. You will receive credit for any of the correct orders you select.
+Select and Place:
+
+![211-1](./img/211-1.jpg)
+
+![211-2](./img/211-2.jpg)
+
+the correct answer is :-
+Configure the web app to the Standard App Service Tier
+Enable autoscaling on the web app
+Add a Scale condition
+Add a scale rule
+Please refer - https://docs.microsoft.com/en-us/learn/modules/app-service-autoscale-rules/6-autoscale-a-web-app
+
+Standard App Service Tier就支持auto scale了
+要先加condition才能加rule
+
+---
+
+297
+
+Question #: 42
+Topic #: 6
+
+HOTSPOT
+
+You are developing a solution that uses several Azure Service Bus queues. You create an Azure Event Grid subscription for the Azure Service Bus namespace. You use Azure Functions as subscribers to process the messages.
+
+You need to emit events to Azure Event Grid from the queues. You must use the principal of least privilege and minimize costs.
+
+Which Azure Service Bus values should you use? To answer, select the appropriate options in the answer area.
+
+NOTE: Each correct selection is worth one point.
+
+![297-1](./img2/297-1.png)
+
+![297-2](./img2/297-2.png)
+
+Remember with Service bus + event grid its always premimum
+
+https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-to-event-grid-integration-concept?tabs=event-grid-event-schema
+
+
