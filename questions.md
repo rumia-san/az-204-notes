@@ -2794,9 +2794,9 @@ Which components should you use? To answer, drag the appropriate components to t
 NOTE: Each correct selection is worth one point.
 Select and Place:
 
-![108-1](./img/108-1.png)
+![108-1](./img/108-1.jpg)
 
-![108-2](./img/108-2.png)
+![108-2](./img/108-2.jpg)
 
 Box 1: Helm
 Helm helps you manage Kubernetes applications — Helm Charts help you define, install, and upgrade even the most complex Kubernetes application. To create the ingress controller, use Helm to install nginx-ingress.
@@ -3172,11 +3172,12 @@ The Azure Cosmos DB account has been created with multiple write regions enabled
 You need to update the application to support multi-region writes.
 What are two possible ways to achieve this goal? Each correct answer presents part of the solution.
 NOTE: Each correct selection is worth one point.
-A. Update the ConnectionPolicy class for the Cosmos client and populate the PreferredLocations property based on the geo-proximity of the application. Most Voted
-B. Update Azure Cosmos DB to use the Strong consistency level. Add indexed properties to the container to indicate region.
-C. Update the ConnectionPolicy class for the Cosmos client and set the UseMultipleWriteLocations property to true. Most Voted
-D. Create and deploy a custom conflict resolution policy.
-E. Update Azure Cosmos DB to use the Session consistency level. Send the SessionToken property value from the FeedResponse object of the write action to the end-user by using a cookie.
+
+	A. Update the ConnectionPolicy class for the Cosmos client and populate the PreferredLocations property based on the geo-proximity of the application.
+	B. Update Azure Cosmos DB to use the Strong consistency level. Add indexed properties to the container to indicate region.
+	C. Update the ConnectionPolicy class for the Cosmos client and set the UseMultipleWriteLocations property to true.
+	D. Create and deploy a custom conflict resolution policy.
+	E. Update Azure Cosmos DB to use the Session consistency level. Send the SessionToken property value from the FeedResponse object of the write action to the end-user by using a cookie.
 
 
 AC

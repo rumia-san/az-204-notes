@@ -989,3 +989,67 @@ Does the solution meet the goal?
 
 Suggested Answer: A
 
+---
+
+# production and revision
+
+298
+
+Question #: 43
+Topic #: 6
+
+You are developing several Azure API Management (APIM) hosted APIs.
+
+The APIs have the following requirements:
+
+• Require a subscription key to access all APIs.
+• Include terms of use that subscribers must accept to use the APIs.
+• Administrators must review and accept or reject subscription attempts.
+• Limit the count of multiple simultaneous subscriptions.
+
+You need to implement the APIs.
+
+What should you do?
+
+	A. Configure and apply header-based versioning.
+	B. Create and publish a product.
+	C. Configure and apply query string-based versioning.
+	D. Add a new revision to all APIs. Make the revisions current and add a change log entry.
+	
+B
+
+B. Create and publish a product.
+
+To meet the requirements of needing a subscription key, including terms of use, having administrators review subscriptions, and limiting simultaneous subscriptions for Azure API Management hosted APIs, you should create and publish a product
+
+https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-add-products?tabs=azure-portal#create-and-publish-a-product
+
+---
+
+305
+
+Question #: 50
+Topic #: 6
+
+You are developing several Azure API Management (APIM) hosted APIs.
+
+You must make several minor and non-breaking changes to one of the APIs. The API changes include the following requirements:
+
+• Must not disrupt callers of the API.
+• Enable roll back if you find issues.
+• Documented to enable developers to understand what is new.
+• Tested before publishing.
+
+You need to update the API.
+
+What should you do?
+
+	A. Configure and apply header-based versioning.
+	B. Create and publish a product.
+	C. Configure and apply a custom policy.
+	D. Add a new revision to the API.
+	E. Configure and apply query string-based versioning.
+
+D
+
+

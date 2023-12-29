@@ -561,7 +561,7 @@ NOTE: Each correct selection is worth one point.
 	F. Enable Snapshot debugger.
 	G. Enable remote debugging.
 
-BDF 不确定
+BDF/BDE 不确定
 
 ---
 
@@ -1116,11 +1116,11 @@ For each of the following statements, select Yes if the statement is true. Other
 NOTE: Each correct selection is worth one point.
 Hot Area:
 
-![268-1](./img2/268-1.jpg)
+![268-1](./img2/268-1.png)
 
-![268-2](./img2/268-2.jpg)
+![268-2](./img2/268-2.png)
 
-![268-3](./img2/268-3.jpg)
+![268-3](./img2/268-3.png)
 
 ---
 
@@ -1443,26 +1443,22 @@ Select and Place:
 
 ![282-2](./img2/282-2.jpg)
 
-Admin, please correct this answer.
-The box 3 shown in the image (When there are messages in a queue) differs from the solution (Put a message on a queue).
-"Put a message on a queue" is the right answer!
+It is clear that :
+box 1 should be recurrence
+box 2 should be the condition
 
-Box 1: Reoccurance..
-To regularly run tasks, processes, or jobs on specific schedule, you can start your logic app workflow with the built-in Recurrence - Schedule trigger. You can set a date and time as well as a time zone for starting the workflow and a recurrence for repeating that workflow.
-Set the interval and frequency for the recurrence. In this example, set these properties to run your workflow every week.
+However, there is confusion about the condition, and rightly so:
+the right half, ticks(addDaysInMonth(), variables("TierAgeInDays")) has a few problems,
+first off: addDaysInMonth() doesn't exist as a function at all
+Second, ticks does not accept two parameters as is done here.
+(see reference:https://docs.microsoft.com/en-us/azure/logic-apps/workflow-definition-language-functions-reference#date-and-time-functions)
 
-Box 2: Condition..
-To run specific actions in your logic app only after passing a specified condition, add a conditional statement. This control structure compares the data in your workflow against specific values or fields. You can then specify different actions that run based on whether or not the data meets the condition.
+So, the condition block is bogus. However, they probably wanted to write something like: addDays(utcNow(), variables("TierAgeInDays")) which IS valid.
+The less-than will return true for anything older, which leaves the next boxes to be:
+box 3: Tier blob
+box 4: Message queue
 
-Box 3: Put a message on a queue -
-The path for any item that is not archived must be placed in an existing queue.
-Note: Under If true and If false, add the steps to perform based on whether the condition is met.
-Box 4: ..tier it to Cool or Archive tier.
-Archive item.
-
-Box 5: List blobs 2 -
-Reference:
-https://docs.microsoft.com/en-us/azure/connectors/connectors-native-recurrence https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-loops https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-control-flow-conditional-statement
+box 5: optional, they probably want to show the results with list blob2
 
 
 ---
@@ -2174,6 +2170,71 @@ https://keda.sh/docs/2.11/scalers/azure-event-hub/
 Question #: 1
 Topic #: 7
 
+Case study -
+This is a case study. Case studies are not timed separately. You can use as much exam time as you would like to complete each case. However, there may be additional case studies and sections on this exam. You must manage your time to ensure that you are able to complete all questions included on this exam in the time provided.
+To answer the questions included in a case study, you will need to reference information that is provided in the case study. Case studies might contain exhibits and other resources that provide more information about the scenario that is described in the case study. Each question is independent of the other questions in this case study.
+At the end of this case study, a review screen will appear. This screen allows you to review your answers and to make changes before you move to the next section of the exam. After you begin a new section, you cannot return to this section.
+
+To start the case study -
+To display the first question in this case study, click the Next button. Use the buttons in the left pane to explore the content of the case study before you answer the questions. Clicking these buttons displays information such as business requirements, existing environment, and problem statements. When you are ready to answer a question, click the Question button to return to the question.
+
+Background -
+Wide World Importers is moving all their datacenters to Azure. The company has developed several applications and services to support supply chain operations and would like to leverage serverless computing where possible.
+
+Current environment -
+Windows Server 2016 virtual machine
+This virtual machine (VM) runs BizTalk Server 2016. The VM runs the following workflows:
+Ocean Transport `" This workflow gathers and validates container information including container contents and arrival notices at various shipping ports.
+Inland Transport `" This workflow gathers and validates trucking information including fuel usage, number of stops, and routes.
+The VM supports the following REST API calls:
+Container API `" This API provides container information including weight, contents, and other attributes.
+Location API `" This API provides location information regarding shipping ports of call and trucking stops.
+Shipping REST API `" This API provides shipping information for use and display on the shipping website.
+
+Shipping Data -
+The application uses MongoDB JSON document storage database for all container and transport information.
+
+Shipping Web Site -
+The site displays shipping container tracking information and container contents. The site is located at http://shipping.wideworldimporters.com/
+
+Proposed solution -
+The on-premises shipping application must be moved to Azure. The VM has been migrated to a new Standard_D16s_v3 Azure VM by using Azure Site Recovery and must remain running in Azure to complete the BizTalk component migrations. You create a Standard_D16s_v3 Azure VM to host BizTalk Server. The Azure architecture diagram for the proposed solution is shown below:
+
+
+Requirements -
+
+Shipping Logic app -
+The Shipping Logic app must meet the following requirements:
+Support the ocean transport and inland transport workflows by using a Logic App.
+Support industry-standard protocol X12 message format for various messages including vessel content details and arrival notices.
+Secure resources to the corporate VNet and use dedicated storage resources with a fixed costing model.
+Maintain on-premises connectivity to support legacy applications and final BizTalk migrations.
+
+Shipping Function app -
+Implement secure function endpoints by using app-level security and include Azure Active Directory (Azure AD).
+
+REST APIs -
+The REST API's that support the solution must meet the following requirements:
+Secure resources to the corporate VNet.
+Allow deployment to a testing location within Azure while not incurring additional costs.
+Automatically scale to double capacity during peak shipping times while not causing application downtime.
+Minimize costs when selecting an Azure payment model.
+
+Shipping data -
+Data migration from on-premises to Azure must minimize costs and downtime.
+
+Shipping website -
+Use Azure Content Delivery Network (CDN) and ensure maximum performance for dynamic content while minimizing latency and costs.
+
+Issues -
+
+Windows Server 2016 VM -
+The VM shows high network latency, jitter, and high CPU utilization. The VM is critical and has not been backed up in the past. The VM must enable a quick restore from a 7-day snapshot to include in-place restore of disks in case of failure.
+
+Shipping website and REST APIs -
+The following error message displays while you are testing the website:
+Failed to load http://test-shippingapi.wideworldimporters.com/: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://test.wideworldimporters.com/' is therefore not allowed access.
+
 HOTSPOT -
 You need to configure Azure CDN for the Shipping web site.
 Which configuration options should you use? To answer, select the appropriate options in the answer area.
@@ -2232,6 +2293,94 @@ Accelerated Networking only works in conjunction with a Azure Virtual Network (V
 
 Question #: 1
 Topic #: 8
+
+Case study -
+This is a case study. Case studies are not timed separately. You can use as much exam time as you would like to complete each case. However, there may be additional case studies and sections on this exam. You must manage your time to ensure that you are able to complete all questions included on this exam in the time provided.
+To answer the questions included in a case study, you will need to reference information that is provided in the case study. Case studies might contain exhibits and other resources that provide more information about the scenario that is described in the case study. Each question is independent of the other questions in this case study.
+At the end of this case study, a review screen will appear. This screen allows you to review your answers and to make changes before you move to the next section of the exam. After you begin a new section, you cannot return to this section.
+
+To start the case study -
+To display the first question in this case study, click the Next button. Use the buttons in the left pane to explore the content of the case study before you answer the questions. Clicking these buttons displays information such as business requirements, existing environment, and problem statements. When you are ready to answer a question, click the Question button to return to the question.
+
+Background -
+You are a developer for Litware Inc., a SaaS company that provides a solution for managing employee expenses. The solution consists of an ASP.NET Core Web
+API project that is deployed as an Azure Web App.
+
+Overall architecture -
+Employees upload receipts for the system to process. When processing is complete, the employee receives a summary report email that details the processing results. Employees then use a web application to manage their receipts and perform any additional tasks needed for reimbursement.
+
+Receipt processing -
+Employees may upload receipts in two ways:
+Uploading using an Azure Files mounted folder
+Uploading using the web application
+
+Data Storage -
+Receipt and employee information is stored in an Azure SQL database.
+
+Documentation -
+Employees are provided with a getting started document when they first use the solution. The documentation includes details on supported operating systems for
+Azure File upload, and instructions on how to configure the mounted folder.
+
+Solution details -
+
+Users table -
+
+
+Web Application -
+You enable MSI for the Web App and configure the Web App to use the security principal name WebAppIdentity.
+
+Processing -
+Processing is performed by an Azure Function that uses version 2 of the Azure Function runtime. Once processing is completed, results are stored in Azure Blob
+Storage and an Azure SQL database. Then, an email summary is sent to the user with a link to the processing report. The link to the report must remain valid if the email is forwarded to another user.
+
+Logging -
+Azure Application Insights is used for telemetry and logging in both the processor and the web application. The processor also has TraceWriter logging enabled.
+Application Insights must always contain all log messages.
+
+Requirements -
+
+Receipt processing -
+Concurrent processing of a receipt must be prevented.
+
+Disaster recovery -
+Regional outage must not impact application availability. All DR operations must not be dependent on application running and must ensure that data in the DR region is up to date.
+
+Security -
+User's SecurityPin must be stored in such a way that access to the database does not allow the viewing of SecurityPins. The web application is the only system that should have access to SecurityPins.
+All certificates and secrets used to secure data must be stored in Azure Key Vault.
+You must adhere to the principle of least privilege and provide privileges which are essential to perform the intended function.
+All access to Azure Storage and Azure SQL database must use the application's Managed Service Identity (MSI).
+Receipt data must always be encrypted at rest.
+All data must be protected in transit.
+User's expense account number must be visible only to logged in users. All other views of the expense account number should include only the last segment, with the remaining parts obscured.
+In the case of a security breach, access to all summary reports must be revoked without impacting other parts of the system.
+
+Issues -
+
+Upload format issue -
+Employees occasionally report an issue with uploading a receipt using the web application. They report that when they upload a receipt using the Azure File
+Share, the receipt does not appear in their profile. When this occurs, they delete the file in the file share and use the web application, which returns a 500 Internal
+Server error page.
+
+Capacity issue -
+During busy periods, employees report long delays between the time they upload the receipt and when it appears in the web application.
+
+Log capacity issue -
+Developers report that the number of log messages in the trace output for the processor is too high, resulting in lost log messages.
+
+Application code -
+
+Processing.cs -
+
+
+Database.cs -
+
+
+ReceiptUploader.cs -
+
+
+ConfigureSSE.ps1 -
+
 
 DRAG DROP -
 You need to add code at line PC32 in Processing.cs to implement the GetCredentials method in the Processing class.
@@ -2392,6 +2541,8 @@ What should you use?
 	D. Azure AD ID token
 	E. Azure AD refresh token
 
+C
+
 Seems Correct as access is required to access for 3 months
 
 ---
@@ -2547,6 +2698,17 @@ Box 3: secret
 
 Reference:
 https://docs.microsoft.com/en-us/azure/container-instances/container-instances-volume-secret
+
+---
+
+You need to add code at line AM10 of the application manifest to ensure that the requirement for manually reviewing content can be met.
+How should you complete the code? To answer, select the appropriate options in the answer area.
+NOTE: Each correct selection is worth one point.
+Hot Area:
+
+![](./img2/11-5-1.jpg)
+
+![](./img2/11-5-2.jpg)
 
 ---
 
@@ -3264,12 +3426,19 @@ CD
 Check runs history: Each time that the trigger fires for an item or event, the Logic Apps engine creates and runs a separate workflow instance for each item or event. If a run fails, follow these steps to review what happened during that run, including the status for each step in the workflow plus the inputs and outputs for each step.
 Check the workflow's run status by checking the runs history. To view more information about a failed run, including all the steps in that run in their status, select the failed run.
 
+因为是看workflow，所以要看run和trigger正不正常，具体的activity log不用看
+
 ---
 
 359
 
 Question #: 2
 Topic #: 22
+
+Issues -
+Calls to the Printer API App fail periodically due to printer communication timeouts.
+Printer communication timeouts occur after 10 seconds. The label printer must only receive up to 5 attempts within one minute.
+The order workflow fails to run upon initial deployment to Azure.
 
 HOTSPOT -
 You need to update the order workflow to address the issue when calling the Printer API App.
@@ -3501,6 +3670,9 @@ Answer is correct : metadataVersion string Not required, but if included, must m
 
 Question #: 3
 Topic #: 25
+
+Log policy -
+All Azure App Service Web Apps must write logs to Azure Blob storage. All log files should be saved to a container named logdrop. Logs must remain in the container for 15 days.
 
 HOTSPOT -
 You need to implement the Log policy.
@@ -3812,6 +3984,7 @@ https://docs.microsoft.com/en-us/azure/container-instances/container-instances-r
 Question #: 1
 Topic #: 32
 [All AZ-204 Questions]
+Data must be replicated to a secondary region and three availability zones.
 Scenario: Azure Storage blob will be used (refer to the exhibit). Data storage costs must be minimized.
 HOTSPOT -
 You need to configure the Account Kind, Replication, and Access tier options for the corporate website's Azure Storage account.
